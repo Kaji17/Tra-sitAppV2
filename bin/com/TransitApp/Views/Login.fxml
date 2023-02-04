@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+
+   <children>
+      <VBox layoutX="-7.0" layoutY="-1.0" prefHeight="375.0" prefWidth="500.0">
+         <children>
+            <HBox prefHeight="448.0" prefWidth="493.0">
+               <children>
+                  <AnchorPane prefHeight="449.0" prefWidth="308.0" style="-fx-background-color: #FFFF;">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="459.0" prefWidth="228.0" style="-fx-background-color: red;">
+                     <children>
+                        <Arc fill="#3c3b3b" layoutX="9.0" layoutY="227.0" length="270.0" radiusX="94.0" radiusY="232.0" startAngle="45.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                        <VBox alignment="TOP_CENTER" prefHeight="459.0" prefWidth="274.0" style="-fx-background-color: #3C3B3B;">
+                           <children>
+                              <ImageView fitHeight="130.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Ressources/Images/icons8-user-90-red.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="19.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="102.0" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="Bodoni MT Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="21.0" prefWidth="246.0" text="Login" textFill="#cd2e2e">
+                                 <VBox.margin>
+                                    <Insets left="13.0" top="15.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField prefHeight="30.0" prefWidth="232.0">
+                                 <VBox.margin>
+                                    <Insets left="15.0" right="15.0" top="4.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label prefHeight="21.0" prefWidth="246.0" text="Password" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="13.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField prefHeight="30.0" prefWidth="232.0">
+                                 <VBox.margin>
+                                    <Insets left="15.0" right="15.0" top="4.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="207.0">
+                                 <children>
+                                    <Label text="Rôle" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="16.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ChoiceBox prefHeight="25.0" prefWidth="189.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </ChoiceBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="14.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" text="Ready" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <effect>
+                        <Lighting diffuseConstant="1.43" specularConstant="0.58" specularExponent="17.7">
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="36.0" prefWidth="99.0">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-filled-circle-yellow-90%20.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="14.5" radius="6.125" width="12.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets right="-9.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-filled-circle-red-90.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="17.0" radius="6.75" width="12.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -4,17 +4,37 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class Main extends Application {
+	private double x;
+	private double y;
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			Parent root = FXMLLoader.load(getClass().getResource("Views/Login.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("Ressources/Styles/styleRespoReapro.css").toExternalForm());
 			primaryStage.setScene(scene);
+			
+			//Permet de faire bouger la fenetre et d'éviter de la redimensionn cer 
+			root.setOnMousePressed((MouseEvent event)->{
+				x = event.getSceneX();
+				y= event.getSceneY();
+			});
+			
+			root.setOnMouseDragged((MouseEvent event)->{
+				primaryStage.setX(event.getScreenX() - x);
+				primaryStage.setY(event.getScreenY() - y);
+			});
+			
+			//Permet de faire disparatraire la barre du haut
+			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="979.0" style="-fx-background-color: #1b1a1a;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe3.TransitApp.Controllers.RespoReaproController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="979.0" style="-fx-background-color: #c6c4c4;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-filled-circle-yellow-90%20.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="14.0" radius="6.75" width="15.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-filled-circle-green-90%20.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="14.0" radius="6.75" width="15.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="41.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-filled-circle-red-90.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="14.0" radius="6.75" width="15.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <AnchorPane prefHeight="39.0" prefWidth="888.0">
+               <children>
+                  <HBox alignment="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="39.0" prefWidth="886.0">
+                     <children>
+                        <ImageView fitHeight="38.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Ressources/Images/icons8-container-truck-96.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="TransitApp">
+                           <font>
+                              <Font name="Vivaldi Italic" size="19.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="13.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </HBox>
+   </top>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="490.0" prefWidth="244.0" style="-fx-background-color: #3c3b3b;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="39.0" prefWidth="192.0" text="Welcome Back" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="6.0" />
+               </VBox.margin>
+            </Label>
+            <Label style="-fx-background-radius: 10;" text="Nom Respo" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Line endX="17.5" startX="-100.0" stroke="WHITE">
+               <VBox.margin>
+                  <Insets top="29.0" />
+               </VBox.margin>
+            </Line>
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="COMMANDE FOURNISSEUR" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="18.0" top="19.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-container-truck-96.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="65.0" layoutY="130.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="134.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="Button" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="19.0" />
+               </VBox.margin>
+            </Button>
+            <Button layoutX="65.0" layoutY="174.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="134.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="Button" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="19.0" />
+               </VBox.margin>
+            </Button>
+            <Button layoutX="65.0" layoutY="218.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="134.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="Button" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+</BorderPane>
