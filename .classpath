@@ -32,7 +32,7 @@
 	<classpathentry kind="lib" path="C:/Users/pevir/eclipse-workspace/PROJETS/TransitApp/libs/jfoenix-9.0.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pevir/eclipse-workspace/PROJETS/TransitApp/libs/jta-1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pevir/eclipse-workspace/PROJETS/TransitApp/libs/mail-1.4.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/pevir/eclipse-workspace/PROJETS/TransitApp/libs/mysql-connector-java-5.1.49-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pevir/eclipse-workspace/PROJETS/TransitApp/libs/mysql-connector-java-5.1.49-bin.jar" sourcepath="libs/mysql-connector-java-5.1.49-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pevir/eclipse-workspace/PROJETS/TransitApp/libs/poi-4.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pevir/Documents/env/java/javafx-sdk-18.0.1/lib/javafx.base.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pevir/Documents/env/java/javafx-sdk-18.0.1/lib/javafx.controls.jar"/>

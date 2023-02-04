@@ -109,7 +109,7 @@
                                     <Insets bottom="14.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button fx:id="ConnectBtn" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #FD4545;" text="Ready" textFill="WHITE">
+                              <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#loginAdmin" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #FD4545;" text="Ready" textFill="WHITE">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

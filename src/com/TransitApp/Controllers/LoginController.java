@@ -1,5 +1,6 @@
 package com.TransitApp.Controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +21,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -54,6 +57,10 @@ public class LoginController implements Initializable {
 	private ResultSet result;
 	
     private String[] Role = {"Manager", "Transporteur", "Respo_Reapro"};
+
+	private double x;
+
+	private double y;
 
 	/**
 	 * methode pour fermer la fenetre
@@ -97,62 +104,131 @@ public class LoginController implements Initializable {
 		
 	}
 	
+	
 	public void loginAdmin() {
-		String sql = "SELECT * FROM admin WHERE LOGIN=?, PASSWORD=?, ROLE=?";
-		
-		connect = Database.connectDb();
-		
-		try {
-			Alert alert;
-			
-			prepare = connect.prepareStatement(sql);
-			
-			prepare.setString(1, LoginTextfield.getText());
-			
-			prepare.setString(2, MotDePasseText.getText());
-			
-			prepare.setString(2, (String) RoleComboBox.getSelectionModel().getSelectedItem());
+//		String sql = "SELECT * FROM admin WHERE LOGIN=?, PASSWORD=?, ROLE=?";
+//		
+//		connect = Database.connectDb();
+//		
+//		try {
+//			Alert alert;
+//			
+//			prepare = connect.prepareStatement(sql);
+//			
+//			prepare.setString(1, LoginTextfield.getText());
+//			
+//			prepare.setString(2, MotDePasseText.getText());
+//			
+//			prepare.setString(2, (String) RoleComboBox.getSelectionModel().getSelectedItem());
+//
+//			result = prepare.executeQuery();
+//			
+//			if(LoginTextfield.getText().isEmpty() || MotDePasseText.getText().isEmpty()) {
+//				alert = new Alert(AlertType.ERROR);
+//				alert.setTitle("Error Message");
+//				alert.setHeaderText(null);
+//				alert.setContentText("Please fill all blank fields ");
+//				alert.showAndWait();
+//			}else if(result.next()){
+//				System.out.println("Succed connection");
+//				
+//				alert = new Alert(AlertType.INFORMATION);
+//
+//				alert.setTitle("INFORMATION MESSAGE");
+//
+//				alert.setHeaderText(null);
+//
+//				alert.setContentText("Successfull login!");
+//
+//				alert.showAndWait();
+//				
+//				ConnectBtn.getScene().getWindow().hide();
+//				
+//				if(RoleComboBox.getSelectionModel().getSelectedItem() == "Manager") {
+//					switchScene("../Views/Manager.fxml");
+//				}else if (RoleComboBox.getSelectionModel().getSelectedItem() == "Transporteur") {
+//					switchScene("../Views/Transporteur.fxml");
+//				}else if (RoleComboBox.getSelectionModel().getSelectedItem() == "Respo_Reapro") {
+//					switchScene("../Views/RespoReaproHome.fxml");
+//				}
+//			}else {
+//				alert = new Alert(AlertType.ERROR);
+//
+//				alert.setTitle("ERROR MESSAGE");
+//
+//				alert.setHeaderText(null);
+//
+//				alert.setContentText("WRONG LOGIN OR PASSWORD");
+//
+//				alert.showAndWait();
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}	
+		System.out.println("btnclick");
+		System.out.println((String) RoleComboBox.getSelectionModel().getSelectedItem());
+			try {
+				Parent root;
+				root = FXMLLoader.load(getClass().getResource("../Views/Manager.fxml"));
 
-			result = prepare.executeQuery();
-			
-			if(LoginTextfield.getText().isEmpty() || MotDePasseText.getText().isEmpty() || RoleComboBox.getSelectionModel().getSelectedItem() == null) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error Message");
-				alert.setHeaderText(null);
-				alert.setContentText("Please fill all blank fields ");
-				alert.showAndWait();
+				Stage stage = new Stage();
+
+				Scene scene = new Scene(root);
 				
-			}else if(result.next()){
-				System.out.println("Succed connection");
+				//Permet de faire bouger la fenetre et d'éviter de la redimensionner 
+				root.setOnMousePressed((MouseEvent event)->{
+					x = event.getSceneX();
+					y= event.getSceneY();
+				});
 				
-				alert = new Alert(AlertType.INFORMATION);
-
-				alert.setTitle("INFORMATION MESSAGE");
-
-				alert.setHeaderText(null);
-
-				alert.setContentText("Successfull login!");
-
-				alert.showAndWait();
+				root.setOnMouseDragged((MouseEvent event)->{
+					stage.setX(event.getScreenX() - x);
+					stage.setY(event.getScreenY() - y);
+				});
 				
-				ConnectBtn.getScene().getWindow().hide();
-				
-				if(RoleComboBox.getSelectionModel().getSelectedItem() == "Manager") {
-					Parent root = FXMLLoader.load(getClass().getResource("../Views/manager.fxml"));
 
-					Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.initStyle(StageStyle.TRANSPARENT);
 
-					Scene scene = new Scene(root);
-				}
-				
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+				stage.show(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+	
+	
+	/**
+	 * Méthode permettant de changer de scene en fonction du chemin du fichier fxml passer en paramètre
+	 * 
+	 * @param path le chemin du fichier .fxml
+	 * @throws IOException
+	 */
+	public void switchScene() throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("../Views/.fxml"));
+
+		Stage stage = new Stage();
+
+		Scene scene = new Scene(root);
 		
+		//Permet de faire bouger la fenetre et d'éviter de la redimensionner 
+		root.setOnMousePressed((MouseEvent event)->{
+			x = event.getSceneX();
+			y= event.getSceneY();
+		});
 		
+		root.setOnMouseDragged((MouseEvent event)->{
+			stage.setX(event.getScreenX() - x);
+			stage.setY(event.getScreenY() - y);
+		});
 		
+
+		stage.setScene(scene);
+		
+		stage.initStyle(StageStyle.TRANSPARENT);
+
+		stage.show();
+		System.out.println("le bosse ca passe");
 	}
 
 //	/**
