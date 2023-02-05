@@ -176,20 +176,19 @@ public class LoginController implements Initializable {
 
 				Scene scene = new Scene(root);
 				
-//				//Permet de faire bouger la fenetre et d'éviter de la redimensionner 
-//				root.setOnMousePressed((MouseEvent event)->{
-//					x = event.getSceneX();
-//					y= event.getSceneY();
-//				});
-//				
-//				root.setOnMouseDragged((MouseEvent event)->{
-//					stage.setX(event.getScreenX() - x);
-//					stage.setY(event.getScreenY() - y);
-//				});
-//				
-
+				//Permet de faire bouger la fenetre et d'éviter de la redimensionner 
+				root.setOnMousePressed((MouseEvent event)->{
+					x = event.getSceneX();
+					y= event.getSceneY();
+				});
+				
+				root.setOnMouseDragged((MouseEvent event)->{
+					stage.setX(event.getScreenX() - x);
+					stage.setY(event.getScreenY() - y);
+				});
+				
 				stage.setScene(scene);
-//				stage.initStyle(StageStyle.TRANSPARENT);
+				stage.initStyle(StageStyle.TRANSPARENT);
 
 				stage.show(); 
 			} catch (IOException e) {
