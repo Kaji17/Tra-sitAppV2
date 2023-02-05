@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="979.0" style="-fx-background-color: #1b1a1a;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe3.TransitApp.Controllers.RespoReaproController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1297.0" style="-fx-background-color: #000000D9;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.RespoReaproController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="979.0" style="-fx-background-color: #c6c4c4;" BorderPane.alignment="CENTER">
          <children>
@@ -42,7 +53,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="41.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: transparent;">
+            <Button layoutX="41.0" layoutY="10.0" mnemonicParsing="false" onAction="#close" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -54,9 +65,9 @@
                   </ImageView>
                </graphic>
             </Button>
-            <AnchorPane prefHeight="39.0" prefWidth="888.0">
+            <FlowPane prefHeight="39.0" prefWidth="887.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="39.0" prefWidth="886.0">
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="1143.0">
                      <children>
                         <ImageView fitHeight="38.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -74,7 +85,7 @@
                      </children>
                   </HBox>
                </children>
-            </AnchorPane>
+            </FlowPane>
          </children>
          <effect>
             <DropShadow />
@@ -102,7 +113,7 @@
                   <Insets top="29.0" />
                </VBox.margin>
             </Line>
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="COMMANDE FOURNISSEUR" textFill="WHITE">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" stylesheets="@../Ressources/Styles/NavigationButton.css" text="COMMANDE FOURNISSEUR" textFill="WHITE">
                <VBox.margin>
                   <Insets bottom="18.0" top="19.0" />
                </VBox.margin>
@@ -112,31 +123,86 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Ressources/Images/icons8-container-truck-96.png" />
+                        <Image url="@../Ressources/Images/icons8-delivery-48.png" />
                      </image>
                   </ImageView>
                </graphic>
+               <styleClass>
+                  <String fx:value="actived" />
+                  <String fx:value="ButtonNavigation" />
+               </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button layoutX="65.0" layoutY="130.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="134.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="Button" textFill="WHITE">
+            <Button alignment="TOP_LEFT" layoutX="18.0" layoutY="130.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/NavigationButton.css" text="AJOUTER COMMANDE FOURN" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-delivery-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                <VBox.margin>
-                  <Insets bottom="19.0" />
+                  <Insets bottom="18.0" />
                </VBox.margin>
             </Button>
-            <Button layoutX="65.0" layoutY="174.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="134.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="Button" textFill="WHITE">
+            <Button alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/NavigationButton.css" text="GESTION ARTICLE" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="19.0" />
-               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-package-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button layoutX="65.0" layoutY="218.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="134.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/styleRespoReapro.css" text="Button" textFill="WHITE">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/NavigationButton.css" text="GESTION ENTREPOT" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-department-store-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="18.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" styleClass="ButtonNavigation" stylesheets="@../Ressources/Styles/NavigationButton.css" text="GESTION FOURNISSEURS" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-supplier-100.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="16.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
          <BorderPane.margin>
@@ -144,4 +210,269 @@
          </BorderPane.margin>
       </VBox>
    </left>
+   <center>
+      <AnchorPane prefHeight="619.0" prefWidth="868.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="16.0" layoutY="15.0" prefHeight="618.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
+               <children>
+                  <AnchorPane layoutX="8.0" layoutY="11.0" prefHeight="342.0" prefWidth="939.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+                     <children>
+                        <TextField layoutX="26.0" layoutY="16.0" prefHeight="37.0" prefWidth="167.0" promptText="Search commande" style="-fx-background-color: #c6c4c4;" />
+                        <TableView layoutX="30.0" layoutY="71.0" prefHeight="259.0" prefWidth="906.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+                          <columns>
+                            <TableColumn prefWidth="105.0" text="IdCmdFourn" />
+                            <TableColumn prefWidth="113.0" text="NumCmd" />
+                              <TableColumn prefWidth="122.0" text="NomFournisseur" />
+                              <TableColumn prefWidth="120.0" text="NomRespoReapro" />
+                              <TableColumn prefWidth="134.0" text="IdLigneCommande" />
+                              <TableColumn prefWidth="108.0" text="Date Livraison" />
+                              <TableColumn prefWidth="104.0" text="Device" />
+                              <TableColumn prefWidth="98.0" text="Delivrer" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                  <GridPane layoutX="40.0" layoutY="359.0" prefHeight="187.0" prefWidth="891.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="213.0" text="Numéro commande" textAlignment="RIGHT" textFill="WHITE" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="220.0" text="Nom fournisseurs" textFill="WHITE" GridPane.rowIndex="1" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="220.0" text="Nom respo_réapro" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="263.0" text="Device" textFill="WHITE" GridPane.rowIndex="3" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="220.0" text="Last Name:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="218.0" text="Gender:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="225.0" text="Birth Date:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="322.0" text="Status:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <TextField fx:id="addStudent_txt_student" layoutX="16.0" layoutY="8.0" prefHeight="25.0" prefWidth="149.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <ComboBox fx:id="addStudent_choiceBox_year" layoutX="14.0" layoutY="8.0" onAction="#addStudentYearListChoicBox" prefWidth="150.0" promptText="Choose" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <ComboBox fx:id="addStudent_choiceBox_course" layoutX="14.0" layoutY="7.0" onAction="#addStudentCourseListChoicBox" prefWidth="150.0" promptText="Choose" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <children>
+                              <TextField fx:id="addStudent_txt_lastname" layoutX="14.0" layoutY="8.0" prefHeight="25.0" prefWidth="200.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <children>
+                              <ComboBox fx:id="addStudent_choiceBox_gender" layoutX="14.0" layoutY="7.0" onAction="#addStudentGenderListChoicBox" prefHeight="25.0" prefWidth="201.0" promptText="Choose" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <children>
+                              <DatePicker fx:id="addStudent_datePicker_birthdate" layoutX="14.0" layoutY="7.0" prefHeight="25.0" prefWidth="202.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <children>
+                              <ComboBox fx:id="addStudent_choiceBox_status" layoutX="19.0" layoutY="12.0" onAction="#addStudentStatusListChoicBox" prefWidth="150.0" promptText="Choose" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <ComboBox fx:id="addStudent_choiceBox_course1" layoutX="14.0" layoutY="11.0" onAction="#addStudentCourseListChoicBox" prefWidth="150.0" promptText="Choose" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </GridPane>
+                  <HBox alignment="CENTER" layoutX="8.0" layoutY="556.0" prefHeight="48.0" prefWidth="935.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #6e2275;;" text="CLEAR" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/ButtonAction.css" text="DELETE" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" style="-fx-background-radius: 30; -fx-background-color: #2d5278;;" text="MODIFY" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="16.0" layoutY="25.0" prefHeight="673.0" prefWidth="1026.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+               <children>
+                  <AnchorPane layoutX="16.0" layoutY="19.0" prefHeight="637.0" prefWidth="352.0" styleClass="bgBalckSecond" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+                     <children>
+                        <GridPane alignment="CENTER" layoutX="36.0" layoutY="114.0" prefHeight="285.0" prefWidth="283.0" vgap="11.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label contentDisplay="RIGHT" prefHeight="30.0" prefWidth="141.0" text="Nom produit: " textFill="WHITE" />
+                              <TextField GridPane.columnIndex="1" />
+                              <Label prefHeight="33.0" prefWidth="58.0" text="Poids" textFill="WHITE" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="33.0" prefWidth="58.0" text="Quantité" textFill="WHITE" GridPane.rowIndex="3" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label prefHeight="17.0" prefWidth="83.0" text="Prix Achat" textFill="WHITE" GridPane.rowIndex="4" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label layoutX="10.0" layoutY="57.0" prefHeight="33.0" prefWidth="205.0" text="Unité de mesure" textFill="WHITE" GridPane.rowIndex="2" />
+                              <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label layoutX="10.0" layoutY="219.0" prefHeight="17.0" prefWidth="83.0" text="Fournisseur" textFill="WHITE" GridPane.rowIndex="5" />
+                              <ComboBox layoutX="152.0" layoutY="117.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label layoutX="10.0" layoutY="229.0" prefHeight="17.0" prefWidth="83.0" text="Devise" textFill="WHITE" GridPane.rowIndex="6" />
+                              <ComboBox layoutX="152.0" layoutY="225.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           </children>
+                        </GridPane>
+                        <Button layoutX="219.0" layoutY="442.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button layoutX="29.0" layoutY="442.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/ButtonAction.css" text="DELETE" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button layoutX="35.0" layoutY="542.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="284.0" style="-fx-background-radius: 30; -fx-background-color: #2d5278;;" text="ENREGISTRER COMMANDE" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Label layoutX="61.0" layoutY="20.0" prefHeight="25.0" prefWidth="230.0" text="COMMANDE FOURNISSEUR" textFill="WHITE">
+                           <font>
+                              <Font name="HP Simplified" size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="18.0" layoutY="74.0" text="Date: " textFill="WHITE" />
+                        <Label layoutX="57.0" layoutY="74.0" text="01/01/2023" textFill="WHITE" />
+                        <Label layoutX="212.0" layoutY="74.0" text="IdRespoReapro:" textFill="WHITE" />
+                        <Label layoutX="302.0" layoutY="74.0" text="00012" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="404.0" layoutY="21.0" prefHeight="579.0" prefWidth="540.0" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+                     <children>
+                        <AnchorPane layoutY="1.0" prefHeight="635.0" prefWidth="610.0" styleClass="bgBalckSecond" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+                           <children>
+                              <TableView layoutX="17.0" layoutY="28.0" prefHeight="437.0" prefWidth="583.0">
+                                <columns>
+                                  <TableColumn prefWidth="108.0" text="Numero produit" />
+                                  <TableColumn minWidth="7.0" prefWidth="99.0" text="Designation" />
+                                    <TableColumn prefWidth="86.0" text="Poids" />
+                                    <TableColumn prefWidth="86.0" text="Quantité" />
+                                    <TableColumn prefWidth="90.0" text="Prix Unitaire" />
+                                    <TableColumn prefWidth="111.0" text="Total TTC" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="113.0" layoutY="543.0" text="TOTAL NET: " textFill="#da1a1a">
+                                 <font>
+                                    <Font name="Broadway" size="33.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="345.0" layoutY="548.0" text="00.00" textFill="WHITE">
+                                 <font>
+                                    <Font name="Broadway" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="431.0" layoutY="548.0" text="FCFA" textFill="WHITE">
+                                 <font>
+                                    <Font name="Broadway" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

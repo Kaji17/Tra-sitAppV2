@@ -170,26 +170,26 @@ public class LoginController implements Initializable {
 		System.out.println((String) RoleComboBox.getSelectionModel().getSelectedItem());
 			try {
 				Parent root;
-				root = FXMLLoader.load(getClass().getResource("../Views/Manager.fxml"));
+				root = FXMLLoader.load(getClass().getResource("../Views/RespoReaproHome.fxml"));
 
 				Stage stage = new Stage();
 
 				Scene scene = new Scene(root);
 				
-				//Permet de faire bouger la fenetre et d'éviter de la redimensionner 
-				root.setOnMousePressed((MouseEvent event)->{
-					x = event.getSceneX();
-					y= event.getSceneY();
-				});
-				
-				root.setOnMouseDragged((MouseEvent event)->{
-					stage.setX(event.getScreenX() - x);
-					stage.setY(event.getScreenY() - y);
-				});
-				
+//				//Permet de faire bouger la fenetre et d'éviter de la redimensionner 
+//				root.setOnMousePressed((MouseEvent event)->{
+//					x = event.getSceneX();
+//					y= event.getSceneY();
+//				});
+//				
+//				root.setOnMouseDragged((MouseEvent event)->{
+//					stage.setX(event.getScreenX() - x);
+//					stage.setY(event.getScreenY() - y);
+//				});
+//				
 
 				stage.setScene(scene);
-				stage.initStyle(StageStyle.TRANSPARENT);
+//				stage.initStyle(StageStyle.TRANSPARENT);
 
 				stage.show(); 
 			} catch (IOException e) {
@@ -205,7 +205,7 @@ public class LoginController implements Initializable {
 	 * @throws IOException
 	 */
 	public void switchScene() throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("../Views/.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("../Views/RespoReaproHome.fxml"));
 
 		Stage stage = new Stage();
 

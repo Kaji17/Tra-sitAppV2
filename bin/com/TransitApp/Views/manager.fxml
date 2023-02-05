@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="979.0" style="-fx-background-color: #1b1a1a;" stylesheets="@tableau.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="979.0" style="-fx-background-color: #1b1a1a;" stylesheets="@tableau.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.ManagerController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="979.0" style="-fx-background-color: #c6c4c4;" BorderPane.alignment="CENTER">
          <children>
@@ -46,7 +46,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="41.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <Button layoutX="41.0" layoutY="10.0" mnemonicParsing="false" onAction="#close" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
