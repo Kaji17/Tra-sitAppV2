@@ -75,6 +75,9 @@ public class ManagerController {
 
     @FXML
     private AnchorPane statistiques;
+    
+    @FXML
+    private AnchorPane suivi;
 
     @FXML
     private Button supprimer;
@@ -96,7 +99,7 @@ public class ManagerController {
 			page_ajout_commande.setVisible(true);
 			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(false);
-			boutton_suivi.setVisible(false);
+			suivi.setVisible(false);
 			
 		}
 //			
@@ -105,7 +108,7 @@ public class ManagerController {
 			page_ajout_commande.setVisible(false);
 			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(true);
-			boutton_suivi.setVisible(false);
+			suivi.setVisible(false);
 			
 		}
 		
@@ -113,7 +116,14 @@ public class ManagerController {
 			page_ajout_commande.setVisible(false);
 			statistiques.setVisible(true);
 			page_ajout_mission.setVisible(false);
-			boutton_suivi.setVisible(false);
+		    suivi.setVisible(false);
+//			
+	}
+		else if (event.getSource() == boutton_suivi ) {
+			page_ajout_commande.setVisible(false);
+			statistiques.setVisible(false);
+			page_ajout_mission.setVisible(false);
+			suivi.setVisible(true);
 //			
 	}
 	}
