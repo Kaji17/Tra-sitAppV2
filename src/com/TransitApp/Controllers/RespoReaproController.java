@@ -1,14 +1,25 @@
 package com.TransitApp.Controllers;
 
 import java.awt.Label;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
+import com.TransitApp.Dao.Database;
 import com.TransitApp.Dao.FournisseurDao;
 import com.TransitApp.Dao.IFournisseurDao;
 import com.TransitApp.Modeles.Fournisseur;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -17,9 +28,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-public class RespoReaproController {
+public class RespoReaproController implements Initializable {
 
 	@FXML
 	private Button ButtonAddCmdFourn;
@@ -139,7 +151,7 @@ public class RespoReaproController {
 	private TextField TXtEmailFourn;
 
 	@FXML
-	private TableView<?> TableListFourn;
+	private TableView<Fournisseur> TableListFourn;
 
 	@FXML
 	private TableView<?> TableViewComdFourn;
@@ -207,7 +219,15 @@ public class RespoReaproController {
 	@FXML
 	private Button buttonCommandeFourn;
 
+	private ObservableList<Fournisseur> addFournisseurList;
+
 	IFournisseurDao fournisseurDao = new FournisseurDao();
+
+	private Connection connect;
+
+	private PreparedStatement prepare;
+
+	private ResultSet result;
 
 	/**
 	 * methode pour fermer la fenetre
@@ -302,6 +322,7 @@ public class RespoReaproController {
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
 			removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionEntrepot);
+			FournisseurShowList();
 
 		}
 
@@ -334,7 +355,6 @@ public class RespoReaproController {
 		btn4.setStyle("-fx-background-color: transparent");
 	}
 
-	
 	public void addCommandeFournisseur() {
 		Alert alert;
 		Fournisseur fournisseur = new Fournisseur();
@@ -346,7 +366,7 @@ public class RespoReaproController {
 			alert.setHeaderText(null);
 			alert.setContentText("Please fill all blank fields ");
 			alert.showAndWait();
-		}else {
+		} else {
 			fournisseur.setNomfournisseur(TxtNomFourn.getText());
 			fournisseur.setAdressefournisseur(TxtAdresseFourn.getText());
 			fournisseur.setPaysfournisseur(TxtPaysFourn.getText());
@@ -354,19 +374,61 @@ public class RespoReaproController {
 			fournisseur.setCpfournisseur(TxtCPFourn.getText());
 			fournisseur.setEmailfournisseur(TXtEmailFourn.getText());
 			fournisseur.setTelephonefournisseur(TxtTelephone.getText());
-			
+
 			fournisseurDao.saveFournisseur(fournisseur);
 			System.out.println("===Enregistremment Effectuer");
-			
+
 			alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sucess Save");
 			alert.setHeaderText(null);
-			alert.setContentText("Fournisseur: "+TxtNomFourn.getText()+" enregistrer avec success");
-			alert.showAndWait();	
+			alert.setContentText("Fournisseur: " + TxtNomFourn.getText() + " enregistrer avec success");
+			alert.showAndWait();
 			clearFournisseur();
+			FournisseurShowList();
 		}
 	}
-	
+
+	public ObservableList<Fournisseur> addFournisseurList() {
+
+		ObservableList<Fournisseur> listFournisseurs = FXCollections.observableArrayList();
+
+		String sql = "SELECT * FROM fournisseur";
+
+		connect = Database.connectDb();
+
+		try {
+
+			Fournisseur fournisseur;
+
+			prepare = connect.prepareStatement(sql);
+
+			result = prepare.executeQuery();
+
+			while (result.next()) {
+				fournisseur = new Fournisseur(result.getInt("idfournisseur"), result.getString("nomfournisseur"), result.getString("adressefournisseur"), result.getString("villefournisseur"), result.getString("cpfournisseur"), result.getString("emailfournisseur"), result.getString("telephonefournisseur"), result.getString("paysfournisseur"));
+				listFournisseurs.add(fournisseur);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listFournisseurs;
+	}
+
+	public void FournisseurShowList() {
+		addFournisseurList = addFournisseurList();
+
+		ListFourn_col_IdFourn.setCellValueFactory(new PropertyValueFactory<>("idfournisseur"));
+		ListFourn_col_NomFourn.setCellValueFactory(new PropertyValueFactory<>("nomfournisseur"));
+		ListFourn_col_PaysFourn.setCellValueFactory(new PropertyValueFactory<>("paysfournisseur"));
+		ListFourn_col_EmailFourn.setCellValueFactory(new PropertyValueFactory<>("emailfournisseur"));
+		ListFourn_col_Telephone.setCellValueFactory(new PropertyValueFactory<>("telephonefournisseur"));
+		ListFourn_col_AdresFourn.setCellValueFactory(new PropertyValueFactory<>("adressefournisseur"));
+
+		TableListFourn.setItems(addFournisseurList);
+	}
+
 	public void clearFournisseur() {
 		TxtNomFourn.setText("");
 		TxtAdresseFourn.setText("");
@@ -375,6 +437,11 @@ public class RespoReaproController {
 		TxtCPFourn.setText("");
 		TXtEmailFourn.setText("");
 		TxtTelephone.setText("");
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		FournisseurShowList();
 	}
 
 }
