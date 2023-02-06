@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="979.0" style="-fx-background-color: #1b1a1a;" stylesheets="@tableau.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.ManagerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="979.0" style="-fx-background-color: #1b1a1a;" stylesheets="@tableau.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.ManagerController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="979.0" style="-fx-background-color: #c6c4c4;" BorderPane.alignment="CENTER">
          <children>
@@ -163,7 +163,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutY="7.0" prefHeight="496.0" prefWidth="747.0" visible="false">
+            <AnchorPane fx:id="page_ajout_commande" layoutY="7.0" prefHeight="496.0" prefWidth="747.0">
                <children>
                   <AnchorPane layoutX="6.0" layoutY="1.0" prefHeight="495.0" prefWidth="746.0">
                      <children>
@@ -202,7 +202,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="496.0" prefWidth="746.0" visible="false">
+            <AnchorPane fx:id="page_ajout_mission" layoutX="7.0" layoutY="7.0" prefHeight="496.0" prefWidth="746.0" visible="false">
                <children>
                   <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="272.0" prefWidth="737.0">
                      <children>
@@ -236,10 +236,7 @@
                   <Button layoutX="612.0" layoutY="448.0" mnemonicParsing="false" text="ajouter" textFill="#3203da" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="496.0" prefWidth="745.0">
-               <children>
-                  <AnchorPane layoutX="-1.0" layoutY="-2.0" prefHeight="497.0" prefWidth="549.0" />
-               </children></AnchorPane>
+            <AnchorPane fx:id="statistiques" layoutX="7.0" layoutY="7.0" prefHeight="496.0" prefWidth="745.0" visible="false" />
          </children>
       </AnchorPane>
    </center>
