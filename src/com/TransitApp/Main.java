@@ -16,7 +16,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("Views/Login.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("Views/LoginV2.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("Ressources/Styles/NavigationButton.css").toExternalForm());
 			primaryStage.setScene(scene);

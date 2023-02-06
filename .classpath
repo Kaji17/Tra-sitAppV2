@@ -42,5 +42,6 @@
 	<classpathentry kind="lib" path="C:/Users/pevir/Documents/env/java/javafx-sdk-18.0.1/lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pevir/Documents/env/java/javafx-sdk-18.0.1/lib/javafx.web.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pevir/Documents/env/java/javafx-sdk-18.0.1/lib/javafx-swt.jar"/>
+	<classpathentry kind="src" path="/HibernateCrud"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

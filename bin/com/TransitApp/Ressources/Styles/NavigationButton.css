@@ -8,3 +8,11 @@
 	-fx-background-color:  #cd2e2e;
 	-fx-background-radius: 10px;
 }
+.btn-close{
+	-fx-background-color: transparent;
+	-fx-cursor: hand
+}
+.btn-close:hover{
+	-fx-background-color: red;
+	-fx-fill: white
+}

@@ -35,15 +35,15 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="459.0" prefWidth="228.0" style="-fx-background-color: red;">
                      <children>
-                        <Arc fill="#3c3b3b" layoutX="9.0" layoutY="227.0" length="270.0" radiusX="94.0" radiusY="232.0" startAngle="45.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
-                        <VBox alignment="TOP_CENTER" prefHeight="459.0" prefWidth="274.0" style="-fx-background-color: #3C3B3B;">
+                        <Arc fill="#030303" layoutX="9.0" layoutY="227.0" length="270.0" radiusX="94.0" radiusY="232.0" startAngle="45.0" stroke="TRANSPARENT" strokeType="INSIDE" type="ROUND" />
+                        <VBox alignment="TOP_CENTER" prefHeight="459.0" prefWidth="274.0" style="-fx-background-color: #030303;">
                            <children>
-                              <ImageView fitHeight="130.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="99.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Ressources/Images/icons8-user-90-red.png" />
+                                    <Image url="@../Ressources/Images/icons8-user-90.png" />
                                  </image>
                                  <VBox.margin>
-                                    <Insets top="19.0" />
+                                    <Insets top="51.0" />
                                  </VBox.margin>
                               </ImageView>
                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="102.0" text="Sign Up" textAlignment="CENTER">
@@ -55,24 +55,26 @@
                                        <stops>
                                           <Stop>
                                              <color>
-                                                <Color red="0.9900000095367432" green="0.27720001339912415" blue="0.27720001339912415" />
+                                                <Color red="0.20392157137393951" green="0.6392157077789307" blue="0.6117647290229797" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="0.006711409395973154">
+                                             <color>
+                                                <Color red="0.20392157137393951" green="0.6392157077789307" blue="0.6117647290229797" />
                                              </color>
                                           </Stop>
                                           <Stop offset="1.0">
                                              <color>
-                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                                <Color red="0.20392157137393951" green="0.6392157077789307" blue="0.6117647290229797" />
                                              </color>
                                           </Stop>
                                        </stops>
                                     </LinearGradient>
                                  </textFill>
                               </Label>
-                              <Label prefHeight="21.0" prefWidth="246.0" text="Login" textFill="#fd4545" underline="true">
-                                 <VBox.margin>
-                                    <Insets left="13.0" top="15.0" />
-                                 </VBox.margin>
+                              <Label layoutX="31.0" layoutY="240.0" prefHeight="21.0" prefWidth="246.0" text="Login" textFill="#34a39c">
                                  <font>
-                                    <Font name="Broadway" size="18.0" />
+                                    <Font name="Arial Black" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="LoginTextfield" prefHeight="30.0" prefWidth="232.0">
@@ -80,36 +82,36 @@
                                     <Insets left="15.0" right="15.0" top="4.0" />
                                  </VBox.margin>
                               </TextField>
-                              <Label prefHeight="21.0" prefWidth="246.0" text="Password" textFill="#fd4545">
+                              <Label prefHeight="27.0" prefWidth="257.0" text="Password" textFill="#34a39c">
                                  <font>
-                                    <Font name="Broadway" size="18.0" />
+                                    <Font name="Arial Black" size="18.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets left="13.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <PasswordField fx:id="MotDePasseText" prefHeight="32.0" prefWidth="274.0">
+                              <PasswordField fx:id="MotDePasseText" prefHeight="32.0" prefWidth="221.0">
                                  <VBox.margin>
                                     <Insets left="15.0" right="15.0" top="4.0" />
                                  </VBox.margin>
                               </PasswordField>
                               <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="207.0">
                                  <children>
-                                    <Label text="Rôle" textFill="#fd4545">
+                                    <Label text="Rôle" textFill="#34a39c">
                                        <font>
-                                          <Font name="Broadway" size="18.0" />
+                                          <Font name="Arial Black" size="18.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="16.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <ComboBox fx:id="RoleComboBox" onAction="#addRoleComboBox" prefHeight="25.0" prefWidth="202.0" />
+                                    <ComboBox fx:id="RoleComboBox" onAction="#addRoleComboBox" prefHeight="25.0" prefWidth="197.0" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="14.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#loginAdmin" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #FD4545;" text="Ready" textFill="WHITE">
+                              <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#loginAdmin" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #34a39c;" text="Ready" textFill="WHITE">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -134,7 +136,7 @@
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER" prefHeight="36.0" prefWidth="99.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="493.0" style="-fx-background-color: #c6c4c4;">
          <children>
             <Button fx:id="btnMinimise" mnemonicParsing="false" style="-fx-background-color: transparent;">
                <graphic>
