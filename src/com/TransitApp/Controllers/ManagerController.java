@@ -16,73 +16,71 @@ import javafx.scene.layout.AnchorPane;
 
 public class ManagerController {
 
-	@FXML
-	private Button ajouter;
+    @FXML
+    private Button ajouter;
 
-	@FXML
-	private Button boutton_gestion_commandes;
+    @FXML
+    private Button boutton_gestion_commandes;
 
-	@FXML
-	private Button boutton_gestionmission;
+    @FXML
+    private Button boutton_gestionmission;
 
-	@FXML
-	private Button boutton_stat;
+  
 
-	@FXML
-	private Button boutton_suivi;
+    @FXML
+    private Button boutton_suivi;
 
-	@FXML
-	private AnchorPane choisir_nom;
+    @FXML
+    private AnchorPane choisir_nom;
 
-	@FXML
-	private ChoiceBox<?> choisirquantite;
+    @FXML
+    private ChoiceBox<?> choisirquantite;
 
-	@FXML
-	private TableColumn<?, ?> description;
+    @FXML
+    private TableColumn<?, ?> description;
 
-	@FXML
-	private TextArea entrerDescription;
+    @FXML
+    private TextArea entrerDescription;
 
-	@FXML
-	private TextField entrer_id;
+    @FXML
+    private TextField entrer_id;
 
-	@FXML
-	private TextField entrer_nom;
+    @FXML
+    private TextField entrer_nom;
 
-	@FXML
-	private TableColumn<?, ?> idcommande;
+    @FXML
+    private TableColumn<?, ?> idcommande;
 
-	@FXML
-	private Button modifier;
+    @FXML
+    private Button modifier;
 
-	@FXML
-	private TableColumn<?, ?> nomclient;
+    @FXML
+    private TableColumn<?, ?> nomclient;
 
-	@FXML
-	private TableColumn<?, ?> nomproduit;
+    @FXML
+    private TableColumn<?, ?> nomproduit;
 
-	@FXML
-	private AnchorPane page_ajout_commande;
+    @FXML
+    private AnchorPane page_ajout_commande;
 
-	@FXML
-	private AnchorPane page_ajout_mission;
+    @FXML
+    private AnchorPane page_ajout_mission;
 
-	@FXML
-	private TableColumn<?, ?> quantité;
+    @FXML
+    private TableColumn<?, ?> quantité;
 
-	@FXML
-	private TextField recherchecommande;
+    @FXML
+    private TextField recherchecommande;
 
-	@FXML
-	private AnchorPane statistiques;
+  
+    
+    @FXML
+    private AnchorPane suivi;
 
-	@FXML
-	private AnchorPane suivi;
+    @FXML
+    private Button supprimer;
 
-	@FXML
-	private Button supprimer;
-
-	public void close() {
+    public void close() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("CONFIRMATION MESSAGE");
 		alert.setHeaderText(null);
@@ -92,39 +90,50 @@ public class ManagerController {
 		if (option.get().equals(ButtonType.OK)) {
 			System.exit(0);
 		} else
-			return;
-	}
+			return;}
 
 	public void switchForm(ActionEvent event) {
 		if (event.getSource() == boutton_gestion_commandes) {
 			page_ajout_commande.setVisible(true);
-			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(false);
-
+			
+			addStyle(boutton_gestion_commandes, "#cd2e2e");
+			
+			removeStyleBtn(boutton_gestionmission, boutton_suivi);
 		}
-//			
-
+			
+	 
 		else if (event.getSource() == boutton_gestionmission) {
 			page_ajout_commande.setVisible(false);
-			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(true);
 			suivi.setVisible(false);
-
+			
+			addStyle(boutton_gestionmission, "#cd2e2e");
+			removeStyleBtn(boutton_gestion_commandes, boutton_suivi);
 		}
-
-		else if (event.getSource() == boutton_stat) {
-			page_ajout_commande.setVisible(false);
-			statistiques.setVisible(true);
-			page_ajout_mission.setVisible(false);
-			suivi.setVisible(false);
+		
+	
 //			
-		} else if (event.getSource() == boutton_suivi) {
+	
+		else if (event.getSource() == boutton_suivi ) {
 			page_ajout_commande.setVisible(false);
-			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(true);
-//			
-		}
+			
+			addStyle(boutton_suivi, "#cd2e2e");
+			removeStyleBtn(boutton_gestion_commandes,boutton_gestionmission );
+
+//			Ajouter un couleur transparent au backgroud des trois button passer en parametre
+			
+	}
+	}
+		private void addStyle(Button btn, String color) {
+			btn.setStyle("-fx-background-color:" + color);
+	}
+		private void removeStyleBtn(Button btn1, Button btn2) {
+			btn1.setStyle("-fx-background-color: transparent");
+			btn2.setStyle("-fx-background-color: transparent");
+			
 	}
 }
