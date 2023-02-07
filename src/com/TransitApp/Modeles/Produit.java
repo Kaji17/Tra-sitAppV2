@@ -33,7 +33,7 @@ public class Produit implements java.io.Serializable {
 	}
 
 	public Produit(String nomproduit, Float prixunitaire, Float poids, String poidunitemesurecode, String numeroproduit,
-			String description, int idcategorie) {
+			String description, int idcategorie, int idproduit) {
 		this.nomproduit = nomproduit;
 		this.prixunitaire = prixunitaire;
 		this.poids = poids;
@@ -41,6 +41,7 @@ public class Produit implements java.io.Serializable {
 		this.numeroproduit = numeroproduit;
 		this.description = description;
 		this.idcategorie = idcategorie;
+		this.idproduit =idproduit;
 	}
 
 	@Id

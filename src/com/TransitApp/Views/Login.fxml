@@ -26,9 +26,9 @@
    <children>
       <VBox layoutX="-7.0" layoutY="-1.0" prefHeight="375.0" prefWidth="500.0">
          <children>
-            <HBox prefHeight="448.0" prefWidth="493.0">
+            <HBox prefHeight="444.0" prefWidth="500.0">
                <children>
-                  <AnchorPane prefHeight="449.0" prefWidth="308.0" style="-fx-background-color: #FFFF;">
+                  <AnchorPane prefHeight="426.0" prefWidth="226.0" style="-fx-background-color: #FFFF;">
                      <effect>
                         <DropShadow />
                      </effect>
@@ -136,7 +136,7 @@
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="493.0" style="-fx-background-color: #c6c4c4;">
+      <HBox alignment="CENTER_RIGHT" layoutX="-1.0" prefHeight="36.0" prefWidth="493.0" style="-fx-background-color: white; -fx-border-width: 1;">
          <children>
             <Button fx:id="btnMinimise" mnemonicParsing="false" style="-fx-background-color: transparent;">
                <graphic>

@@ -1,5 +1,5 @@
 .button{
-	-fx-border-color:  #cd2e2e;
+	-fx-border-color:  #34a39c;
 	-fx-border-width:3;
 	-fx-border-radius:10;
 }
@@ -8,7 +8,7 @@
 	-fx-background-color: transparent;
 	-fx-padding:0px;
 	-fx-border-width: 2px;
-	-fx-border-color:   #cd2e2e;
+	-fx-border-color:  #34a39c;
 	-fx-border-radius: 8px;	
 }
 .table-view .table-column{
@@ -16,11 +16,23 @@
 	
 }
 .table-view .column-header-background{
-	-fx-background-color: #cd2e2e;
+	-fx-background-color: #34a39c;
 	-fx-background-radius: 8px 8px 0px 0px;
 	-fx-background-inset: 0 0 0 0;
 }
 .table-view .column-header, .filter{
 	-fx-background-color: transparent;
 	-fx-size: 40px
+}
+
+.boutton_supprimer{
+-fx-border-color:   #cd2e2e;
+}
+
+.boutton_modifier{
+-fx-border-color:   #a9cd27;
+}
+
+.boutton_ajouter{
+-fx-border-color:    #5db5e8;
 }

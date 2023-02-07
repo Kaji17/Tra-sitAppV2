@@ -151,7 +151,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="page_ajout_commande" layoutY="7.0" prefHeight="496.0" prefWidth="747.0">
+            <AnchorPane fx:id="page_ajout_commande" layoutY="7.0" prefHeight="496.0" prefWidth="747.0" visible="false">
                <children>
                   <AnchorPane fx:id="choisir_nom" layoutX="6.0" layoutY="1.0" prefHeight="495.0" prefWidth="746.0">
                      <children>
@@ -181,12 +181,12 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <Button layoutX="383.0" layoutY="458.0" mnemonicParsing="false" style="-fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/manager.css" text="supprimer" textFill="WHITE" />
+                  <Button fx:id="supprimer" layoutX="383.0" layoutY="458.0" mnemonicParsing="false" style="-fx-background-color: #cd2e2e;" styleClass="boutton_supprimer" stylesheets="@../Ressources/Styles/manager.css" text="supprimer" textFill="WHITE" />
                   <Button layoutX="497.0" layoutY="458.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: #a9cd27;" text="modifier" textFill="WHITE" />
                   <Button layoutX="610.0" layoutY="458.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: #5db5e8;" text="ajouter" textFill="WHITE" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="page_ajout_mission" layoutX="7.0" layoutY="7.0" prefHeight="496.0" prefWidth="746.0" visible="false">
+            <AnchorPane fx:id="page_ajout_mission" layoutX="7.0" layoutY="7.0" prefHeight="496.0" prefWidth="746.0">
                <children>
                   <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="272.0" prefWidth="737.0">
                      <children>
@@ -215,7 +215,7 @@
                   <ChoiceBox layoutX="117.0" layoutY="368.0" prefWidth="150.0" />
                   <ChoiceBox layoutX="612.0" layoutY="313.0" prefHeight="26.0" prefWidth="120.0" />
                   <TextField layoutX="612.0" layoutY="377.0" prefHeight="23.0" prefWidth="124.0" />
-                  <Button layoutX="373.0" layoutY="448.0" mnemonicParsing="false" style="-fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/manager.css" text="supprimer" textFill="WHITE" />
+                  <Button layoutX="373.0" layoutY="448.0" mnemonicParsing="false" style="-fx-background-color: #cd2e2e;" styleClass="boutton_supprimer" stylesheets="@../Ressources/Styles/manager.css" text="supprimer" textFill="WHITE" />
                   <Button layoutX="487.0" layoutY="448.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: #a9cd27;" text="modifier" textFill="WHITE" />
                   <Button layoutX="600.0" layoutY="448.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: #5db5e8;" text="ajouter" textFill="WHITE" />
                </children>

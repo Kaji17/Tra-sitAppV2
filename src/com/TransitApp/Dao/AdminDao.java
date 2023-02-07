@@ -1,5 +1,6 @@
 package com.TransitApp.Dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,21 +10,33 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.TransitApp.Modeles.Admin;
 import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Util.HibernateUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
-public class FournisseurDao implements IFournisseurDao {
+public class AdminDao implements IAdminDao {
 
 	private Connection connect;
 
 	private PreparedStatement prepare;
 
 	private ResultSet result;
+
+	private double x;
+
+	private double y;
 
     // save Student
     // get All Students
@@ -35,14 +48,14 @@ public class FournisseurDao implements IFournisseurDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#saveStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void saveFournisseur(Fournisseur fournisseur) {
+    public void saveAdmin(Admin admin) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.save(fournisseur);
+            session.save(admin);
 
             // commit the transaction
             transaction.commit();
@@ -57,14 +70,14 @@ public class FournisseurDao implements IFournisseurDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#updateStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void updateFournisseur(Fournisseur fournisseur) {
+    public void updateAdmin(Admin admin) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.saveOrUpdate(fournisseur);
+            session.saveOrUpdate(admin);
 
             // commit the transaction
             transaction.commit();
@@ -79,16 +92,16 @@ public class FournisseurDao implements IFournisseurDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#getStudentById(long)
      */
     @Override
-    public Fournisseur getFournisseurById(int id) {
+    public Admin getAdminById(int id) {
         Transaction transaction = null;
-        Fournisseur fournisseur = null;
+        Admin admin = null;
         try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			    // start the transaction
 			    transaction = session.beginTransaction();
 
 			    // get student object
-			    fournisseur = session.byId(Fournisseur.class).getReference(id);
+			    admin = session.byId(Admin.class).getReference(id);
 			     // or student = session.get(Student.class, id);
 			    //or student = session.load(Student.class, id);
 			   //or commit the transaction
@@ -101,7 +114,7 @@ public class FournisseurDao implements IFournisseurDao {
 		}
         
         
-        return fournisseur;
+        return admin;
     }
 
     /* (non-Javadoc)
@@ -109,40 +122,39 @@ public class FournisseurDao implements IFournisseurDao {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List < Fournisseur > getAllFournisseur() {
+    public List < Admin > getAllAdmin() {
         Transaction transaction = null;
-        List < Fournisseur > fournisseur = null;
+        List < Admin > admin = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            // get students
-            fournisseur = session.createQuery("from Fournisseur").list();
-            //student = session.load(Student.class, id);
-            // commit the transaction
+            // get admin
+            admin = session.createQuery("from Admin").list();
+           
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return fournisseur;
+        return admin;
     }
 
     /* (non-Javadoc)
      * @see net.javaguides.hibernate.dao.IStudentDao#deleteStudent(long)
      */
     @Override
-    public void deleteFournisseur(int id) {
+    public void deleteAdmin(int id) {
         Transaction transaction = null;
-        Fournisseur fournisseur = null;
+        Admin admin = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            fournisseur = session.get(Fournisseur.class, id);
+            admin = session.get(Admin.class, id);
             // get student object
-            session.delete(fournisseur);
+            session.delete(admin);
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -153,92 +165,39 @@ public class FournisseurDao implements IFournisseurDao {
         }
     }
 
-	@Override
-	public List< Fournisseur > rechercher(String nom) {
-		Transaction transaction = null;
-        List < Fournisseur > fournisseur = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start the transaction
-            transaction = session.beginTransaction();
+    
+    public void Login(String fxml, Button button) {
+    	try {
+			Parent root;
+			root = FXMLLoader.load(getClass().getResource(fxml));
 
-            // get students
-           // students = session.createQuery("from Student").list();
-            fournisseur = session.createSQLQuery(nom).addEntity(getClass()).list();
-            //student = session.load(Student.class, id);
-            // commit the transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
-		return null;
-	}
-	
-	/**
-	 * méthode permettant de donner une coleur transparente au background des
-	 * buttons passés en paramètre
-	 * 
-	 * @param btn1 Button
-	 * @param btn2 Button
-	 * @param btn3 button
-	 * @return void
-	 * @author pevir
-	 */
-	public void removeStyleBtn(Button btn1, Button btn2, Button btn3, Button btn4) {
-		btn1.setStyle("-fx-background-color: transparent");
-		btn2.setStyle("-fx-background-color: transparent");
-		btn3.setStyle("-fx-background-color: transparent");
-		btn4.setStyle("-fx-background-color: transparent");
-	}
-	
-	/**
-	 * méthode permettant d'ajouter une couleur au choix au background d'un boutton
-	 * 
-	 * @param btn   Button au quel on veut ajouter la couleur
-	 * @param color String couleur choisit en exadecimale ex: #34a39c
-	 * @author Kaji17
-	 */
-	public void addStyle(Button btn, String color) {
-		btn.setStyle("-fx-background-color:" + color);
-	}
-	
-	
-	/**
-	 * méthode permettant de recuperer les fournisseur dans la base de donnée 
-	 * @author Kaji17
-	 */
-	public ObservableList<Fournisseur> addFournisseurList() {
+			Stage stage = new Stage();
 
-		ObservableList<Fournisseur> listFournisseurs = FXCollections.observableArrayList();
+			Scene scene = new Scene(root);
 
-		String sql = "SELECT * FROM fournisseur";
+			button.getScene().getWindow().hide();
+			
+			
+			// Permet de faire bouger la fenetre et d'éviter de la redimensionner
+			root.setOnMousePressed((MouseEvent event) -> {
+				x = event.getSceneX();
+				y = event.getSceneY();
+			});
 
-		connect = Database.connectDb();
+			root.setOnMouseDragged((MouseEvent event) -> {
+				stage.setX(event.getScreenX() - x);
+				stage.setY(event.getScreenY() - y);
+			});
 
-		try {
+			stage.setScene(scene);
+			stage.initStyle(StageStyle.TRANSPARENT);
 
-			Fournisseur fournisseur;
-
-			prepare = connect.prepareStatement(sql);
-
-			result = prepare.executeQuery();
-
-			while (result.next()) {
-				fournisseur = new Fournisseur(result.getInt("idfournisseur"), result.getString("nomfournisseur"), result.getString("adressefournisseur"), result.getString("villefournisseur"), result.getString("cpfournisseur"), result.getString("emailfournisseur"), result.getString("telephonefournisseur"), result.getString("paysfournisseur"));
-				listFournisseurs.add(fournisseur);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+			stage.show();
+		} catch (IOException error) {
+			// TODO Auto-generated catch block
+			error.printStackTrace();
 		}
-
-		return listFournisseurs;
-	}
-	
-
-	
-	
+    }
 	
 	/*
 	 * public List<Student > recupererCommandeByDateAndMenu(String idMenu , Date

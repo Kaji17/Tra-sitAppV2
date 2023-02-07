@@ -38,6 +38,18 @@ public class Fournisseur implements java.io.Serializable {
 		this.paysfournisseur = paysfournisseur;
 	}
 
+	public Fournisseur(int idfournisseur, String nomfournisseur, String adressefournisseur, String villefournisseur,
+			String cpfournisseur, String emailfournisseur, String telephonefournisseur, String paysfournisseur) {
+		this.idfournisseur = idfournisseur;
+		this.nomfournisseur = nomfournisseur;
+		this.adressefournisseur = adressefournisseur;
+		this.villefournisseur = villefournisseur;
+		this.cpfournisseur = cpfournisseur;
+		this.emailfournisseur = emailfournisseur;
+		this.telephonefournisseur = telephonefournisseur;
+		this.paysfournisseur = paysfournisseur;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 

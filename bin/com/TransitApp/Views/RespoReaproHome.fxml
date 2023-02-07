@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -198,6 +199,25 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <AnchorPane prefHeight="290.0" prefWidth="244.0">
+               <children>
+                  <Button fx:id="logoutBtn" layoutX="22.0" layoutY="217.0" mnemonicParsing="false" onAction="#logout" prefHeight="48.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="DECONNEXION" textFill="#34a39c">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Ressources/Images/icons8-sign-out-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </AnchorPane>
          </children>
          <BorderPane.margin>
             <Insets />
@@ -238,7 +258,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="ButtonAddCmdFourn" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
+                        <Button fx:id="ButtonAddCmdFourn" mnemonicParsing="false" onAction="#switchForm" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -298,7 +318,7 @@
                               <Label layoutX="10.0" layoutY="57.0" prefHeight="33.0" prefWidth="205.0" text="Unité de mesure" textFill="WHITE" GridPane.rowIndex="2" />
                               <ComboBox fx:id="ComboBoxUniteMesure" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label layoutX="10.0" layoutY="219.0" prefHeight="17.0" prefWidth="83.0" text="Fournisseur" textFill="WHITE" GridPane.rowIndex="5" />
-                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="152.0" layoutY="117.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="152.0" layoutY="117.0" onAction="#addComboBoxFournisseur" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Label layoutX="10.0" layoutY="229.0" prefHeight="17.0" prefWidth="83.0" text="Devise" textFill="WHITE" GridPane.rowIndex="6" />
                               <ComboBox fx:id="ComboBoxDevise" layoutX="152.0" layoutY="225.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                            </children>
@@ -379,18 +399,87 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="10.0" prefHeight="663.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
+            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="10.0" prefHeight="663.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                <children>
                   <HBox alignment="CENTER" layoutY="601.0" prefHeight="48.0" prefWidth="935.0">
                      <effect>
                         <DropShadow />
                      </effect>
                   </HBox>
-                  <Label layoutX="249.0" layoutY="271.0" text="GESTION ARTICLE COMING SOON" textFill="WHITE">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <AnchorPane prefHeight="665.0" prefWidth="1012.0">
+                     <children>
+                        <AnchorPane layoutX="10.0" layoutY="1.0" prefHeight="661.0" prefWidth="1014.0">
+                           <children>
+                              <Label layoutX="29.0" layoutY="450.0" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #fffff;" text="#PRODUIT" textFill="WHITE" />
+                              <TextField fx:id="TxtNumeroProduit" layoutX="162.0" layoutY="450.0" style="-fx-background-color: #ffffff;" />
+                              <Label layoutX="29.0" layoutY="493.0" prefHeight="27.0" prefWidth="123.0" style="-fx-background-color: #fffff;" text="NOM DU PRODUIT :" textFill="WHITE" />
+                              <TextField fx:id="TxtNomProduit" layoutX="162.0" layoutY="493.0" style="-fx-background-color: #ffffff;" />
+                              <Label layoutX="423.0" layoutY="447.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="POIDS" textFill="WHITE" />
+                              <Label layoutX="423.0" layoutY="491.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="PRIX UNITAIRE" textFill="WHITE" />
+                              <Label layoutX="29.0" layoutY="543.0" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #fffff;" text="DESCRIPTION :" textFill="WHITE" />
+                              <TextArea fx:id="TxtDescriptionProduit" layoutX="162.0" layoutY="533.0" prefHeight="46.0" prefWidth="218.0" />
+                              <Button fx:id="ButtonDeleteProduit" layoutX="349.0" layoutY="596.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/ButtonAction.css" text="DELETE" textFill="WHITE">
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Broadway" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="ButtonModifyProduit" layoutX="502.0" layoutY="596.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" style="-fx-background-radius: 30; -fx-background-color: #2d5278;;" text="MODIFY" textFill="WHITE">
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Broadway" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="ButtonAddProduit" layoutX="654.0" layoutY="596.0" mnemonicParsing="false" onAction="#addProduit" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Broadway" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <TextField fx:id="TxtPoidProduit" layoutX="540.0" layoutY="446.0" style="-fx-background-color: #ffffff;" />
+                              <TextField fx:id="TxtPrixUnitaire" layoutX="540.0" layoutY="490.0" style="-fx-background-color: #ffffff;" />
+                              <Label layoutX="423.0" layoutY="540.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="QUANTITE" textFill="WHITE" />
+                              <TextField fx:id="TxtQuantiteProduit" layoutX="540.0" layoutY="541.0" style="-fx-background-color: #ffffff;" />
+                              <Label layoutX="723.0" layoutY="450.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="CATEGORIE" textFill="WHITE" />
+                              <ComboBox fx:id="ComboBoxCategorieProduit" layoutX="813.0" layoutY="446.0" onAction="#addComboBoxCategorie" prefWidth="150.0" />
+                              <Label layoutX="723.0" layoutY="502.0" prefHeight="26.0" prefWidth="92.0" style="-fx-background-color: #fffff;" text="UNITE MESURE " textFill="WHITE" />
+                              <TextField fx:id="TxtUniteMesure" layoutX="813.0" layoutY="503.0" style="-fx-background-color: #ffffff;" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="11.0" layoutY="11.0" prefHeight="249.0" prefWidth="746.0">
+                           <children>
+                              <TextField fx:id="searchProduit" layoutX="2.0" layoutY="10.0" prefHeight="37.0" prefWidth="327.0" promptText="chercher" style="-fx-background-color: white;" />
+                              <TableView fx:id="TableViewListProduit" layoutY="55.0" prefHeight="343.0" prefWidth="991.0">
+                                 <columns>
+                                    <TableColumn fx:id="ListProduit_col_IdProduit" prefWidth="70.0" text="IDPRODUIT" />
+                                    <TableColumn fx:id="ListProduit_col_NumeroProduit" prefWidth="89.0" text="#PRODUIT" />
+                                    <TableColumn fx:id="ListProduit_col_NomProduit" prefWidth="156.0" text="NOM DU PRODUIT" />
+                                    <TableColumn fx:id="ListProduit_col_PoidsProduit" prefWidth="101.0" text="POIDS" />
+                                    <TableColumn fx:id="ListProduit_col_DescriptionProduit" prefWidth="158.0" text="DESCRIPTION" />
+                                    <TableColumn fx:id="ListProduit_col_PrixUnitaireProduit" prefWidth="127.0" text="PRIX UNITAIRE" />
+                                    <TableColumn fx:id="ListProduit_col_QuantiteStock" prefWidth="147.0" text="QUANTITE EN STOCK" />
+                                    <TableColumn fx:id="ListProduit_col_Categorie" prefWidth="147.0" text="CATEGORIE" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="PageGestionEntrepot" layoutX="24.0" layoutY="10.0" prefHeight="663.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
@@ -407,7 +496,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PageGestionFournisseur" layoutX="24.0" layoutY="10.0" prefHeight="673.0" prefWidth="1026.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+            <AnchorPane fx:id="PageGestionFournisseur" layoutX="24.0" layoutY="10.0" prefHeight="673.0" prefWidth="1026.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
                <children>
                   <AnchorPane layoutX="16.0" layoutY="19.0" prefHeight="637.0" prefWidth="352.0" styleClass="bgBalckSecond" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                      <children>
@@ -442,7 +531,7 @@
                               <TextField fx:id="TxtTelephone" layoutX="152.0" layoutY="225.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                            </children>
                         </GridPane>
-                        <Button fx:id="ButtonAddFourn" layoutX="233.0" layoutY="432.0" mnemonicParsing="false" onAction="#addCommandeFournisseur" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
+                        <Button fx:id="ButtonAddFourn" layoutX="233.0" layoutY="432.0" mnemonicParsing="false" onAction="#addFournisseur" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -453,7 +542,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="ButtonDeleteFourn" layoutX="12.0" layoutY="432.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/ButtonAction.css" text="DELETE" textFill="WHITE">
+                        <Button fx:id="ButtonDeleteFourn" layoutX="12.0" layoutY="432.0" mnemonicParsing="false" onAction="#deleteFournisseur" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/ButtonAction.css" text="DELETE" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -469,7 +558,7 @@
                               <Font name="HP Simplified" size="21.0" />
                            </font>
                         </Label>
-                        <Button fx:id="ButtonModifyFourn" layoutX="120.0" layoutY="519.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="113.0" style="-fx-background-radius: 30; -fx-background-color: #6e2275;;" text="MODIFY" textFill="WHITE">
+                        <Button fx:id="ButtonModifyFourn" layoutX="120.0" layoutY="519.0" mnemonicParsing="false" onAction="#updateFournisseur" prefHeight="41.0" prefWidth="113.0" style="-fx-background-radius: 30; -fx-background-color: #6e2275;;" text="MODIFY" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -486,7 +575,7 @@
                      <children>
                         <AnchorPane layoutY="1.0" prefHeight="635.0" prefWidth="610.0" styleClass="bgBalckSecond" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                            <children>
-                              <TableView fx:id="TableListFourn" layoutX="17.0" layoutY="28.0" prefHeight="437.0" prefWidth="583.0">
+                              <TableView fx:id="TableListFourn" layoutX="17.0" layoutY="28.0" onMouseClicked="#fournisseurSelected" prefHeight="437.0" prefWidth="583.0">
                                  <columns>
                                     <TableColumn fx:id="ListFourn_col_IdFourn" prefWidth="108.0" text="IdFournisseur" />
                                     <TableColumn fx:id="ListFourn_col_NomFourn" minWidth="7.0" prefWidth="99.0" text="Nom" />
