@@ -531,7 +531,6 @@ public class RespoReaproController implements Initializable {
 	 */
 	public void updateFournisseur() {
 		Alert alert;
-		Fournisseur fournisseur = new Fournisseur();
 		if (TxtNomFourn.getText().isEmpty() || TxtAdresseFourn.getText().isEmpty() || TxtPaysFourn.getText().isEmpty()
 				|| TxtVilleFourn.getText().isEmpty() || TxtCPFourn.getText().isEmpty()
 				|| TXtEmailFourn.getText().isEmpty() || TxtTelephone.getText().isEmpty()) {
@@ -548,16 +547,18 @@ public class RespoReaproController implements Initializable {
 					+ TxtNomFourn.getText() + " ? Cette action est irreversible");
 			Optional<ButtonType> option = alert.showAndWait();
 			if (option.get().equals(ButtonType.OK)) {
-				fournisseur.setNomfournisseur(TxtNomFourn.getText());
-				fournisseur.setAdressefournisseur(TxtAdresseFourn.getText());
-				fournisseur.setPaysfournisseur(TxtPaysFourn.getText());
-				fournisseur.setVillefournisseur(TxtVilleFourn.getText());
-				fournisseur.setCpfournisseur(TxtCPFourn.getText());
-				fournisseur.setEmailfournisseur(TXtEmailFourn.getText());
-				fournisseur.setTelephonefournisseur(TxtTelephone.getText());
-				System.out.println("===Modification Effectuer");
-
-				fournisseurDao.updateFournisseur(fournisseur);
+				for (Fournisseur e : fournisseurDao.getAllFournisseur()) {
+					if (e.getNomfournisseur().equals(TxtNomFourn.getText())) {
+						e.setNomfournisseur(TxtNomFourn.getText());
+						e.setAdressefournisseur(TxtAdresseFourn.getText());
+						e.setPaysfournisseur(TxtPaysFourn.getText());
+						e.setVillefournisseur(TxtVilleFourn.getText());
+						e.setCpfournisseur(TxtCPFourn.getText());
+						e.setEmailfournisseur(TXtEmailFourn.getText());
+						e.setTelephonefournisseur(TxtTelephone.getText());
+						fournisseurDao.updateFournisseur(e);
+					}
+				}
 
 				alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Sucess Modification");
