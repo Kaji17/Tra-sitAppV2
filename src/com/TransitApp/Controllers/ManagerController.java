@@ -25,8 +25,7 @@ public class ManagerController {
     @FXML
     private Button boutton_gestionmission;
 
-    @FXML
-    private Button boutton_stat;
+  
 
     @FXML
     private Button boutton_suivi;
@@ -73,8 +72,7 @@ public class ManagerController {
     @FXML
     private TextField recherchecommande;
 
-    @FXML
-    private AnchorPane statistiques;
+  
     
     @FXML
     private AnchorPane suivi;
@@ -97,34 +95,45 @@ public class ManagerController {
 	public void switchForm(ActionEvent event) {
 		if (event.getSource() == boutton_gestion_commandes) {
 			page_ajout_commande.setVisible(true);
-			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(false);
 			
+			addStyle(boutton_gestion_commandes, "#cd2e2e");
+			
+			removeStyleBtn(boutton_gestionmission, boutton_suivi);
 		}
-//			
+			
 	 
 		else if (event.getSource() == boutton_gestionmission) {
 			page_ajout_commande.setVisible(false);
-			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(true);
 			suivi.setVisible(false);
 			
+			addStyle(boutton_gestionmission, "#cd2e2e");
+			removeStyleBtn(boutton_gestion_commandes, boutton_suivi);
 		}
 		
-		else if (event.getSource() == boutton_stat ) {
-			page_ajout_commande.setVisible(false);
-			statistiques.setVisible(true);
-			page_ajout_mission.setVisible(false);
-		    suivi.setVisible(false);
+	
 //			
-	}
+	
 		else if (event.getSource() == boutton_suivi ) {
 			page_ajout_commande.setVisible(false);
-			statistiques.setVisible(false);
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(true);
-//			
+			
+			addStyle(boutton_suivi, "#cd2e2e");
+			removeStyleBtn(boutton_gestion_commandes,boutton_gestionmission );
+
+//			Ajouter un couleur transparent au backgroud des trois button passer en parametre
+			
 	}
 	}
+		private void addStyle(Button btn, String color) {
+			btn.setStyle("-fx-background-color:" + color);
 	}
+		private void removeStyleBtn(Button btn1, Button btn2) {
+			btn1.setStyle("-fx-background-color: transparent");
+			btn2.setStyle("-fx-background-color: transparent");
+			
+	}
+}
