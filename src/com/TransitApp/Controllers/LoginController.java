@@ -127,13 +127,6 @@ public class LoginController implements Initializable {
 					} else if (val.equals("Transporteur")) {
 						adminDao.Login("../Views/Transportsuper.fxml", ConnectBtn);
 					}
-				}else {
-					verif = false;	
-					alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Error Message");
-					alert.setHeaderText(null);
-					alert.setContentText("Verifier les informations de connection");
-					alert.showAndWait();
 				}
 			}
 		}

@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 
 import com.TransitApp.Modeles.Admin;
 import com.TransitApp.Modeles.Fournisseur;
+import com.TransitApp.Modeles.Produit;
 import com.TransitApp.Util.HibernateUtil;
 
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
-public class AdminDao implements IAdminDao {
+public class ProduitDao implements IProduitDao {
 
 	private Connection connect;
 
@@ -48,14 +49,14 @@ public class AdminDao implements IAdminDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#saveStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void saveAdmin(Admin admin) {
+    public void saveProduit(Produit produit) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.save(admin);
+            session.save(produit);
 
             // commit the transaction
             transaction.commit();
@@ -70,14 +71,14 @@ public class AdminDao implements IAdminDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#updateStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void updateAdmin(Admin admin) {
+    public void updateProduit(Produit produit) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.saveOrUpdate(admin);
+            session.saveOrUpdate(produit);
 
             // commit the transaction
             transaction.commit();
@@ -92,16 +93,16 @@ public class AdminDao implements IAdminDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#getStudentById(long)
      */
     @Override
-    public Admin getAdminById(int id) {
+    public Produit getProduitById(int id) {
         Transaction transaction = null;
-        Admin admin = null;
+        Produit produit = null;
         try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			    // start the transaction
 			    transaction = session.beginTransaction();
 
 			    // get student object
-			    admin = session.byId(Admin.class).getReference(id);
+			    produit = session.byId(Produit.class).getReference(id);
 			     // or student = session.get(Student.class, id);
 			    //or student = session.load(Student.class, id);
 			   //or commit the transaction
@@ -114,7 +115,7 @@ public class AdminDao implements IAdminDao {
 		}
         
         
-        return admin;
+        return produit;
     }
 
     /* (non-Javadoc)
@@ -122,15 +123,15 @@ public class AdminDao implements IAdminDao {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List < Admin > getAllAdmin() {
+    public List < Produit > getAllProduit() {
         Transaction transaction = null;
-        List < Admin > admin = null;
+        List < Produit > produit = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            // get admin
-            admin = session.createQuery("from Admin").list();
+            // get produit
+            produit = session.createQuery("from Produit").list();
            
             transaction.commit();
         } catch (Exception e) {
@@ -138,23 +139,23 @@ public class AdminDao implements IAdminDao {
                 transaction.rollback();
             }
         }
-        return admin;
+        return produit;
     }
 
     /* (non-Javadoc)
      * @see net.javaguides.hibernate.dao.IStudentDao#deleteStudent(long)
      */
     @Override
-    public void deleteAdmin(int id) {
+    public void deleteProduit(int id) {
         Transaction transaction = null;
-        Admin admin = null;
+        Produit produit = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            admin = session.get(Admin.class, id);
+            produit = session.get(Produit.class, id);
             // get student object
-            session.delete(admin);
+            session.delete(produit);
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -164,40 +165,39 @@ public class AdminDao implements IAdminDao {
             }
         }
     }
-
     
-    public void Login(String fxml, Button button) {
-    	try {
-			Parent root;
-			root = FXMLLoader.load(getClass().getResource(fxml));
+    /**
+	 * méthode permettant de recuperer les Produit dans la base de donnée 
+	 * @author Kaji17
+	 */
+	public ObservableList<Produit> addProduitList() {
 
-			Stage stage = new Stage();
+		ObservableList<Produit> listProduit = FXCollections.observableArrayList();
 
-			Scene scene = new Scene(root);
+		String sql = "SELECT * FROM produit";
 
-			button.getScene().getWindow().hide();
-			
-			
-			// Permet de faire bouger la fenetre et d'éviter de la redimensionner
-			root.setOnMousePressed((MouseEvent event) -> {
-				x = event.getSceneX();
-				y = event.getSceneY();
-			});
+		connect = Database.connectDb();
 
-			root.setOnMouseDragged((MouseEvent event) -> {
-				stage.setX(event.getScreenX() - x);
-				stage.setY(event.getScreenY() - y);
-			});
+		try {
 
-			stage.setScene(scene);
-			stage.initStyle(StageStyle.TRANSPARENT);
+			Produit produit;
 
-			stage.show();
-		} catch (IOException error) {
-			// TODO Auto-generated catch block
-			error.printStackTrace();
+			prepare = connect.prepareStatement(sql);
+
+			result = prepare.executeQuery();
+
+			while (result.next()) {
+				produit = new Produit(result.getString("nomproduit"), result.getFloat("prixunitaire"), result.getFloat("poids"), result.getString("poidunitemesurecode"), result.getString("numeroproduit"), result.getString("description"), result.getInt("idcategorie"), result.getInt("idproduit"));
+				listProduit.add(produit);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-    }
+
+		return listProduit;
+	}
+	
 	
 	/*
 	 * public List<Student > recupererCommandeByDateAndMenu(String idMenu , Date

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,6 +21,9 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("Ressources/Styles/NavigationButton.css").toExternalForm());
 			primaryStage.setScene(scene);
+			
+			Image image = new Image("com/TransitApp/icons8-package-48.png");
+			primaryStage.getIcons().add(image);
 			
 			//Permet de faire bouger la fenetre et d'éviter de la redimensionn cer 
 			root.setOnMousePressed((MouseEvent event)->{
