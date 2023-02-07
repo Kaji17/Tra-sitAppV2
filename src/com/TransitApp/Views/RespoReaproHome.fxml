@@ -198,6 +198,25 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <AnchorPane prefHeight="290.0" prefWidth="244.0">
+               <children>
+                  <Button fx:id="logoutBtn" layoutX="22.0" layoutY="217.0" mnemonicParsing="false" onAction="#logout" prefHeight="48.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="DECONNEXION" textFill="#34a39c">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Ressources/Images/icons8-sign-out-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </AnchorPane>
          </children>
          <BorderPane.margin>
             <Insets />
@@ -207,7 +226,7 @@
    <center>
       <AnchorPane prefHeight="619.0" prefWidth="868.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="PageCommandeFourn" layoutX="16.0" layoutY="15.0" prefHeight="663.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+            <AnchorPane fx:id="PageCommandeFourn" layoutX="16.0" layoutY="15.0" prefHeight="663.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
                <children>
                   <HBox alignment="CENTER" layoutY="601.0" prefHeight="48.0" prefWidth="935.0">
                      <children>
@@ -268,7 +287,7 @@
                   <TextField fx:id="TxtSearch" layoutX="42.0" layoutY="30.0" prefHeight="37.0" prefWidth="167.0" promptText="Search commande" style="-fx-background-color: #c6c4c4;" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PageAjoutCommandeFourn" layoutX="16.0" layoutY="25.0" prefHeight="673.0" prefWidth="1026.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
+            <AnchorPane fx:id="PageAjoutCommandeFourn" layoutX="16.0" layoutY="25.0" prefHeight="673.0" prefWidth="1026.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                <children>
                   <AnchorPane layoutX="16.0" layoutY="19.0" prefHeight="637.0" prefWidth="352.0" styleClass="bgBalckSecond" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                      <children>

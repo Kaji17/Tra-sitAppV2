@@ -101,16 +101,12 @@ public class LoginController implements Initializable {
 		ObservableList oblist = FXCollections.observableArrayList(RoleList);
 		RoleComboBox.setItems(oblist);
 	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		addRoleComboBox();
-
-	}
-
+	
+	/**
+	 * Méthode appélé lors de la connexion
+	 */
 	public void loginAdmin() {
 		Alert alert;
-		Fournisseur fournisseur = new Fournisseur();
 		if (LoginTextfield.getText().isEmpty() || MotDePasseText.getText().isEmpty()
 				|| RoleComboBox.getSelectionModel().getSelectedItem() == null) {
 			alert = new Alert(AlertType.ERROR);
@@ -126,82 +122,30 @@ public class LoginController implements Initializable {
 					String val = (String) RoleComboBox.getSelectionModel().getSelectedItem();
 					if (val.equals("Manager")) {
 						adminDao.Login("../Views/manager.fxml", ConnectBtn);
-
-//						try {
-//							Parent root;
-//							root = FXMLLoader.load(getClass().getResource("../Views/manager.fxml"));
-//
-//							Stage stage = new Stage();
-//
-//							Scene scene = new Scene(root);
-//
-//							ConnectBtn.getScene().getWindow().hide();
-//							// Permet de faire bouger la fenetre et d'éviter de la redimensionner
-//							root.setOnMousePressed((MouseEvent event) -> {
-//								x = event.getSceneX();
-//								y = event.getSceneY();
-//							});
-//
-//							root.setOnMouseDragged((MouseEvent event) -> {
-//								stage.setX(event.getScreenX() - x);
-//								stage.setY(event.getScreenY() - y);
-//							});
-//
-//							stage.setScene(scene);
-//							stage.initStyle(StageStyle.TRANSPARENT);
-//
-//							stage.show();
-//						} catch (IOException error) {
-//							// TODO Auto-generated catch block
-//							error.printStackTrace();
-//						}
 					} else if (val.equals("Respo_Reapro")) {
 						adminDao.Login("../Views/RespoReaproHome.fxml", ConnectBtn);
 					} else if (val.equals("Transporteur")) {
 						adminDao.Login("../Views/Transportsuper.fxml", ConnectBtn);
 					}
+				}else {
+					verif = false;	
+					alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Message");
+					alert.setHeaderText(null);
+					alert.setContentText("Verifier les informations de connection");
+					alert.showAndWait();
 				}
 			}
-			if(verif = false) {
-				alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error Message");
-				alert.setHeaderText(null);
-				alert.setContentText("Verifier les informations de connection");
-				alert.showAndWait();
-			}
 		}
-
-//		System.out.println("btnclick");
-//		System.out.println((String) RoleComboBox.getSelectionModel().getSelectedItem());
-//		try {
-//			Parent root;
-//			root = FXMLLoader.load(getClass().getResource("../Views/RespoReaproHome.fxml"));
-//
-//			Stage stage = new Stage();
-//
-//			Scene scene = new Scene(root);
-//
-//			ConnectBtn.getScene().getWindow().hide();
-//			// Permet de faire bouger la fenetre et d'éviter de la redimensionner
-//			root.setOnMousePressed((MouseEvent event) -> {
-//				x = event.getSceneX();
-//				y = event.getSceneY();
-//			});
-//
-//			root.setOnMouseDragged((MouseEvent event) -> {
-//				stage.setX(event.getScreenX() - x);
-//				stage.setY(event.getScreenY() - y);
-//			});
-//
-//			stage.setScene(scene);
-//			stage.initStyle(StageStyle.TRANSPARENT);
-//
-//			stage.show();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		addRoleComboBox();
+
+	}
+	
+	
 
 //	/**
 //	 * méthode pour réduire une fénetre
