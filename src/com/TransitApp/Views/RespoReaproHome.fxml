@@ -298,7 +298,7 @@
                               <Label layoutX="10.0" layoutY="57.0" prefHeight="33.0" prefWidth="205.0" text="Unité de mesure" textFill="WHITE" GridPane.rowIndex="2" />
                               <ComboBox fx:id="ComboBoxUniteMesure" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label layoutX="10.0" layoutY="219.0" prefHeight="17.0" prefWidth="83.0" text="Fournisseur" textFill="WHITE" GridPane.rowIndex="5" />
-                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="152.0" layoutY="117.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="152.0" layoutY="117.0" onAction="#addComboBoxFournisseur" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <Label layoutX="10.0" layoutY="229.0" prefHeight="17.0" prefWidth="83.0" text="Devise" textFill="WHITE" GridPane.rowIndex="6" />
                               <ComboBox fx:id="ComboBoxDevise" layoutX="152.0" layoutY="225.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                            </children>
@@ -442,7 +442,7 @@
                               <TextField fx:id="TxtTelephone" layoutX="152.0" layoutY="225.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                            </children>
                         </GridPane>
-                        <Button fx:id="ButtonAddFourn" layoutX="233.0" layoutY="432.0" mnemonicParsing="false" onAction="#addCommandeFournisseur" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
+                        <Button fx:id="ButtonAddFourn" layoutX="233.0" layoutY="432.0" mnemonicParsing="false" onAction="#addFournisseur" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -486,7 +486,7 @@
                      <children>
                         <AnchorPane layoutY="1.0" prefHeight="635.0" prefWidth="610.0" styleClass="bgBalckSecond" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                            <children>
-                              <TableView fx:id="TableListFourn" layoutX="17.0" layoutY="28.0" prefHeight="437.0" prefWidth="583.0">
+                              <TableView fx:id="TableListFourn" layoutX="17.0" layoutY="28.0" onMouseClicked="#fournisseurSelected" prefHeight="437.0" prefWidth="583.0">
                                  <columns>
                                     <TableColumn fx:id="ListFourn_col_IdFourn" prefWidth="108.0" text="IdFournisseur" />
                                     <TableColumn fx:id="ListFourn_col_NomFourn" minWidth="7.0" prefWidth="99.0" text="Nom" />

@@ -1,17 +1,29 @@
 package com.TransitApp.Dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.TransitApp.Modeles.Commandefournisseur;
 import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Util.HibernateUtil;
-import com.sati.model.Student;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 
 
 public class FournisseurDao implements IFournisseurDao {
+
+	private Connection connect;
+
+	private PreparedStatement prepare;
+
+	private ResultSet result;
 
     // save Student
     // get All Students
@@ -162,6 +174,71 @@ public class FournisseurDao implements IFournisseurDao {
         }
 		return null;
 	}
+	
+	/**
+	 * méthode permettant de donner une coleur transparente au background des
+	 * buttons passés en paramètre
+	 * 
+	 * @param btn1 Button
+	 * @param btn2 Button
+	 * @param btn3 button
+	 * @return void
+	 * @author pevir
+	 */
+	public void removeStyleBtn(Button btn1, Button btn2, Button btn3, Button btn4) {
+		btn1.setStyle("-fx-background-color: transparent");
+		btn2.setStyle("-fx-background-color: transparent");
+		btn3.setStyle("-fx-background-color: transparent");
+		btn4.setStyle("-fx-background-color: transparent");
+	}
+	
+	/**
+	 * méthode permettant d'ajouter une couleur au choix au background d'un boutton
+	 * 
+	 * @param btn   Button au quel on veut ajouter la couleur
+	 * @param color String couleur choisit en exadecimale ex: #34a39c
+	 * @author Kaji17
+	 */
+	public void addStyle(Button btn, String color) {
+		btn.setStyle("-fx-background-color:" + color);
+	}
+	
+	
+	/**
+	 * méthode permettant de recuperer les fournisseur dans la base de donnée 
+	 * @author Kaji17
+	 */
+	public ObservableList<Fournisseur> addFournisseurList() {
+
+		ObservableList<Fournisseur> listFournisseurs = FXCollections.observableArrayList();
+
+		String sql = "SELECT * FROM fournisseur";
+
+		connect = Database.connectDb();
+
+		try {
+
+			Fournisseur fournisseur;
+
+			prepare = connect.prepareStatement(sql);
+
+			result = prepare.executeQuery();
+
+			while (result.next()) {
+				fournisseur = new Fournisseur(result.getInt("idfournisseur"), result.getString("nomfournisseur"), result.getString("adressefournisseur"), result.getString("villefournisseur"), result.getString("cpfournisseur"), result.getString("emailfournisseur"), result.getString("telephonefournisseur"), result.getString("paysfournisseur"));
+				listFournisseurs.add(fournisseur);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listFournisseurs;
+	}
+	
+
+	
+	
 	
 	/*
 	 * public List<Student > recupererCommandeByDateAndMenu(String idMenu , Date

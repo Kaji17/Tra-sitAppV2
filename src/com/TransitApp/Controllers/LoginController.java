@@ -174,6 +174,7 @@ public class LoginController implements Initializable {
 
 				Scene scene = new Scene(root);
 				
+				ConnectBtn.getScene().getWindow().hide();
 				//Permet de faire bouger la fenetre et d'éviter de la redimensionner 
 				root.setOnMousePressed((MouseEvent event)->{
 					x = event.getSceneX();

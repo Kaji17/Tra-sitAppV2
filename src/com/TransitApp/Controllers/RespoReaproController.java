@@ -5,12 +5,11 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.TransitApp.Dao.Database;
 import com.TransitApp.Dao.FournisseurDao;
 import com.TransitApp.Dao.IFournisseurDao;
 import com.TransitApp.Modeles.Fournisseur;
@@ -266,10 +265,11 @@ public class RespoReaproController implements Initializable {
 			PageGestionFournisseur.setVisible(false);
 
 //			Ajouter la coleur #34a39c au background du button passer en paramètre
-			addStyle(buttonCommandeFourn, "#cd2e2e");
+			fournisseurDao.addStyle(buttonCommandeFourn, "#cd2e2e");
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			removeStyleBtn(ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionEntrepot, ButtonGestionFourn);
+			fournisseurDao.removeStyleBtn(ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionEntrepot, ButtonGestionFourn);
+			
 
 		} else if (event.getSource() == ButtonAjouterComdFourn) {
 			PageAjoutCommandeFourn.setVisible(true);
@@ -277,12 +277,14 @@ public class RespoReaproController implements Initializable {
 			PageGestionArticle.setVisible(false);
 			PageGestionEntrepot.setVisible(false);
 			PageGestionFournisseur.setVisible(false);
+			
+			addComboBoxFournisseur();
 
 //			Ajouter la coleur #34a39c au background du button passer en paramètre
-			addStyle(ButtonAjouterComdFourn, "#cd2e2e");
+			fournisseurDao.addStyle(ButtonAjouterComdFourn, "#cd2e2e");
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			removeStyleBtn(buttonCommandeFourn, ButtonGestionArticle, ButtonGestionEntrepot, ButtonGestionFourn);
+			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonGestionArticle, ButtonGestionEntrepot, ButtonGestionFourn);
 
 		} else if (event.getSource() == ButtonGestionArticle) {
 			PageGestionArticle.setVisible(true);
@@ -292,10 +294,10 @@ public class RespoReaproController implements Initializable {
 			PageGestionFournisseur.setVisible(false);
 
 //			Ajouter la coleur #34a39c au background du button passer en paramètre
-			addStyle(ButtonGestionArticle, "#cd2e2e");
+			fournisseurDao.addStyle(ButtonGestionArticle, "#cd2e2e");
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionEntrepot, ButtonGestionFourn);
+			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionEntrepot, ButtonGestionFourn);
 
 		} else if (event.getSource() == ButtonGestionEntrepot) {
 			PageGestionEntrepot.setVisible(true);
@@ -305,10 +307,10 @@ public class RespoReaproController implements Initializable {
 			PageGestionFournisseur.setVisible(false);
 
 //			Ajouter la coleur #34a39c au background du button passer en paramètre
-			addStyle(ButtonGestionEntrepot, "#cd2e2e");
+			fournisseurDao.addStyle(ButtonGestionEntrepot, "#cd2e2e");
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionFourn);
+			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionFourn);
 
 		} else if (event.getSource() == ButtonGestionFourn) {
 			PageGestionFournisseur.setVisible(true);
@@ -318,10 +320,10 @@ public class RespoReaproController implements Initializable {
 			PageGestionEntrepot.setVisible(false);
 
 //			Ajouter la coleur #34a39c au background du button passer en paramètre
-			addStyle(ButtonGestionFourn, "#cd2e2e");
+			fournisseurDao.addStyle(ButtonGestionFourn, "#cd2e2e");
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionEntrepot);
+			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionEntrepot);
 			FournisseurShowList();
 
 		}
@@ -329,33 +331,14 @@ public class RespoReaproController implements Initializable {
 	}
 
 	/**
-	 * méthode permettant d'ajouter une couleur au choix au background d'un boutton
 	 * 
-	 * @param btn   Button au quel on veut ajouter la couleur
-	 * @param color String couleur choisit en exadecimale ex: #34a39c
-	 */
-	private void addStyle(Button btn, String color) {
-		btn.setStyle("-fx-background-color:" + color);
-	}
-
-	/**
-	 * méthode permettant de donner une coleur transparente au background des
-	 * buttons passés en paramètre
+	 * Méthode permettant d'ajouter les fournisseur en BD
 	 * 
-	 * @param btn1 Button
-	 * @param btn2 Button
-	 * @param btn3 button
+	 * @param event ActionEvent
 	 * @return void
-	 * @author pevir
+	 * @author kaji17
 	 */
-	private void removeStyleBtn(Button btn1, Button btn2, Button btn3, Button btn4) {
-		btn1.setStyle("-fx-background-color: transparent");
-		btn2.setStyle("-fx-background-color: transparent");
-		btn3.setStyle("-fx-background-color: transparent");
-		btn4.setStyle("-fx-background-color: transparent");
-	}
-
-	public void addCommandeFournisseur() {
+	public void addFournisseur() {
 		Alert alert;
 		Fournisseur fournisseur = new Fournisseur();
 		if (TxtNomFourn.getText().isEmpty() || TxtAdresseFourn.getText().isEmpty() || TxtPaysFourn.getText().isEmpty()
@@ -367,57 +350,72 @@ public class RespoReaproController implements Initializable {
 			alert.setContentText("Please fill all blank fields ");
 			alert.showAndWait();
 		} else {
-			fournisseur.setNomfournisseur(TxtNomFourn.getText());
-			fournisseur.setAdressefournisseur(TxtAdresseFourn.getText());
-			fournisseur.setPaysfournisseur(TxtPaysFourn.getText());
-			fournisseur.setVillefournisseur(TxtVilleFourn.getText());
-			fournisseur.setCpfournisseur(TxtCPFourn.getText());
-			fournisseur.setEmailfournisseur(TXtEmailFourn.getText());
-			fournisseur.setTelephonefournisseur(TxtTelephone.getText());
-
-			fournisseurDao.saveFournisseur(fournisseur);
-			System.out.println("===Enregistremment Effectuer");
-
-			alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Sucess Save");
-			alert.setHeaderText(null);
-			alert.setContentText("Fournisseur: " + TxtNomFourn.getText() + " enregistrer avec success");
-			alert.showAndWait();
-			clearFournisseur();
-			FournisseurShowList();
-		}
-	}
-
-	public ObservableList<Fournisseur> addFournisseurList() {
-
-		ObservableList<Fournisseur> listFournisseurs = FXCollections.observableArrayList();
-
-		String sql = "SELECT * FROM fournisseur";
-
-		connect = Database.connectDb();
-
-		try {
-
-			Fournisseur fournisseur;
-
-			prepare = connect.prepareStatement(sql);
-
-			result = prepare.executeQuery();
-
-			while (result.next()) {
-				fournisseur = new Fournisseur(result.getInt("idfournisseur"), result.getString("nomfournisseur"), result.getString("adressefournisseur"), result.getString("villefournisseur"), result.getString("cpfournisseur"), result.getString("emailfournisseur"), result.getString("telephonefournisseur"), result.getString("paysfournisseur"));
-				listFournisseurs.add(fournisseur);
+			Boolean verif = false;
+			for(Fournisseur e : fournisseurDao.getAllFournisseur()) {
+				if(e.getNomfournisseur().equalsIgnoreCase(TxtNomFourn.getText())) {
+					verif = true;
+				}
 			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+			if(verif==true) {
+				alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Message");
+				alert.setHeaderText(null);
+				alert.setContentText("Le Fournisseur: "+TxtNomFourn.getText()+" exite déja. Entrer un autre nom Fournisseur");
+				alert.showAndWait();
+			}else {
+				fournisseur.setNomfournisseur(TxtNomFourn.getText());
+				fournisseur.setAdressefournisseur(TxtAdresseFourn.getText());
+				fournisseur.setPaysfournisseur(TxtPaysFourn.getText());
+				fournisseur.setVillefournisseur(TxtVilleFourn.getText());
+				fournisseur.setCpfournisseur(TxtCPFourn.getText());
+				fournisseur.setEmailfournisseur(TXtEmailFourn.getText());
+				fournisseur.setTelephonefournisseur(TxtTelephone.getText());
+				
+				fournisseurDao.saveFournisseur(fournisseur);
+				System.out.println("===Enregistremment Effectuer");
+				
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Sucess Save");
+				alert.setHeaderText(null);
+				alert.setContentText("Fournisseur: " + TxtNomFourn.getText() + " enregistrer avec success");
+				alert.showAndWait();
+				clearFournisseur();	
+				addComboBoxFournisseur();
+			}
+			FournisseurShowList();
+			System.out.println(verif);
 		}
-
-		return listFournisseurs;
+		
 	}
 
+	
+	public void deleteFournisseur() {
+		Alert alert;
+		if (TxtNomFourn.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Selectionner ou entrer un nom de fournisseur");
+			alert.showAndWait();
+		} else {
+			//Vérifie l'existance d'un fournisseur 
+			Boolean verif = false;
+			for(Fournisseur e : fournisseurDao.getAllFournisseur()) {
+				if(e.getNomfournisseur().equalsIgnoreCase(TxtNomFourn.getText())) {
+					verif = true;
+				}
+			}
+		}
+		
+		
+	}
+	
+	/**
+	 * Méthode permettant ajouter les fournisseurs dans le tableau 
+	 * 
+	 */
 	public void FournisseurShowList() {
-		addFournisseurList = addFournisseurList();
+		addFournisseurList = fournisseurDao.addFournisseurList();
 
 		ListFourn_col_IdFourn.setCellValueFactory(new PropertyValueFactory<>("idfournisseur"));
 		ListFourn_col_NomFourn.setCellValueFactory(new PropertyValueFactory<>("nomfournisseur"));
@@ -429,9 +427,16 @@ public class RespoReaproController implements Initializable {
 		TableListFourn.setItems(addFournisseurList);
 	}
 
+	
+	/**
+	 * Méthode permettant de remettre à zero tout les champs d'enregistrement fournisseur
+	 * @author pevir
+	 */
 	public void clearFournisseur() {
 		TxtNomFourn.setText("");
+		TxtNomFourn.setText("");
 		TxtAdresseFourn.setText("");
+		TxtPaysFourn.setText("");
 		TxtPaysFourn.setText("");
 		TxtVilleFourn.setText("");
 		TxtCPFourn.setText("");
@@ -439,9 +444,53 @@ public class RespoReaproController implements Initializable {
 		TxtTelephone.setText("");
 	}
 
+
+	/** methode pour remplir la combobox des différents fournisseur
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+	public void addComboBoxFournisseur() {
+		List<String> FournisseurList = new ArrayList<>();
+		
+		for (Fournisseur data : fournisseurDao.getAllFournisseur()) {
+			FournisseurList.add(data.getNomfournisseur());
+		}
+		
+		ObservableList oblist = FXCollections.observableArrayList(FournisseurList);
+		ComboBoxFournisseur.setItems(oblist);
+	}
+	
+	
+	/**
+	 * méthode permetant de remplir les différent champs d'enregistrment fournisseur
+	 *  lorsque un champs du table views est selectionner
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+ 	public void fournisseurSelected() {
+		Fournisseur fournisseur = TableListFourn.getSelectionModel().getSelectedItem();
+
+		Integer num = TableListFourn.getSelectionModel().getSelectedIndex();
+
+		if (num - 1 < -1) {
+			return;
+		}
+		TxtNomFourn.setText(fournisseur.getNomfournisseur());
+		TxtAdresseFourn.setText(fournisseur.getAdressefournisseur());
+		TxtPaysFourn.setText(fournisseur.getPaysfournisseur());
+		TxtVilleFourn.setText(fournisseur.getVillefournisseur());
+		TxtCPFourn.setText(fournisseur.getCpfournisseur());
+		TXtEmailFourn.setText(fournisseur.getEmailfournisseur());
+		TxtTelephone.setText(fournisseur.getTelephonefournisseur());	
+
+	}
+ 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		FournisseurShowList();
+		addComboBoxFournisseur();
 	}
 
 }
