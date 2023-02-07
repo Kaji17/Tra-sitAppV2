@@ -271,7 +271,7 @@ public class RespoReaproController implements Initializable {
 			fournisseurDao.removeStyleBtn(ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionEntrepot, ButtonGestionFourn);
 			
 
-		} else if (event.getSource() == ButtonAjouterComdFourn) {
+		} else if (event.getSource() == ButtonAjouterComdFourn || event.getSource()==ButtonAddCmdFourn) {
 			PageAjoutCommandeFourn.setVisible(true);
 			PageCommandeFourn.setVisible(false);
 			PageGestionArticle.setVisible(false);
@@ -347,7 +347,7 @@ public class RespoReaproController implements Initializable {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
-			alert.setContentText("Please fill all blank fields ");
+			alert.setContentText("Remplissez tous les champs s'il vous plait ");
 			alert.showAndWait();
 		} else {
 			Boolean verif = false;
@@ -388,7 +388,64 @@ public class RespoReaproController implements Initializable {
 		
 	}
 
+	/**
+	 * 
+	 * Méthode permettant de modifier les fournisseur en BD
+	 * 
+	 * @param event ActionEvent
+	 * @return void
+	 * @author kaji17
+	 */
+	public void updateFournisseur() {
+		Alert alert;
+		Fournisseur fournisseur = new Fournisseur();
+		if (TxtNomFourn.getText().isEmpty() || TxtAdresseFourn.getText().isEmpty() || TxtPaysFourn.getText().isEmpty()
+				|| TxtVilleFourn.getText().isEmpty() || TxtCPFourn.getText().isEmpty()
+				|| TXtEmailFourn.getText().isEmpty() || TxtTelephone.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Remplissez tous les champs s'il vous plait ");
+			alert.showAndWait();
+		} else {
+			alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("CONFIRMATION MESSAGE");
+			alert.setHeaderText(null);
+			alert.setContentText("Êtes vous sures de vouloir modifier les Informations fournisseur: "+TxtNomFourn.getText()+" ? Cette action est irreversible");
+			Optional<ButtonType> option = alert.showAndWait();
+			if(option.get().equals(ButtonType.OK)) {
+				fournisseur.setNomfournisseur(TxtNomFourn.getText());
+				fournisseur.setAdressefournisseur(TxtAdresseFourn.getText());
+				fournisseur.setPaysfournisseur(TxtPaysFourn.getText());
+				fournisseur.setVillefournisseur(TxtVilleFourn.getText());
+				fournisseur.setCpfournisseur(TxtCPFourn.getText());
+				fournisseur.setEmailfournisseur(TXtEmailFourn.getText());
+				fournisseur.setTelephonefournisseur(TxtTelephone.getText());
+				System.out.println("===Modification Effectuer");
+				
+				fournisseurDao.updateFournisseur(fournisseur);
+				
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Sucess Modification");
+				alert.setHeaderText(null);
+				alert.setContentText("Fournisseur: " + TxtNomFourn.getText() + " enregistrer avec success");
+				alert.showAndWait();
+				clearFournisseur();	
+				addComboBoxFournisseur();
+				FournisseurShowList();
+			}
+		}
+		
+	}
 	
+	/**
+	 * 
+	 * Méthode permettant de supprimer un fournisseur par son id
+	 * 
+	 * @param event ActionEvent
+	 * @return void
+	 * @author kaji17
+	 */
 	public void deleteFournisseur() {
 		Alert alert;
 		if (TxtNomFourn.getText().isEmpty()) {
@@ -396,14 +453,35 @@ public class RespoReaproController implements Initializable {
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
 			alert.setContentText("Selectionner ou entrer un nom de fournisseur");
-			alert.showAndWait();
+			Optional<ButtonType> option = alert.showAndWait();
 		} else {
 			//Vérifie l'existance d'un fournisseur 
 			Boolean verif = false;
+			int id = 0;
 			for(Fournisseur e : fournisseurDao.getAllFournisseur()) {
 				if(e.getNomfournisseur().equalsIgnoreCase(TxtNomFourn.getText())) {
 					verif = true;
+					id = e.getIdfournisseur();
 				}
+			}
+			if(verif==true) {
+				alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("CONFIRMATION MESSAGE");
+				alert.setHeaderText(null);
+				alert.setContentText("Êtes vous sures de vouloir supprimer le fournisseur: "+TxtNomFourn.getText()+" ? Cette action est irreversible");
+				Optional<ButtonType> option = alert.showAndWait();
+				if(option.get().equals(ButtonType.OK)) {
+					fournisseurDao.deleteFournisseur(id);
+					clearFournisseur();
+					FournisseurShowList();
+				}	
+			}else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Message");
+				alert.setHeaderText(null);
+				alert.setContentText("Le fournisseur: " + TxtNomFourn.getText() + " n'existe pas ");
+				alert.showAndWait();
+				return;
 			}
 		}
 		
