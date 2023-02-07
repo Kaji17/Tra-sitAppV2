@@ -46,247 +46,247 @@ import javafx.stage.StageStyle;
 
 public class RespoReaproController implements Initializable {
 
+	@FXML
+	private Button ButtonAddCmdFourn;
 
-    @FXML
-    private Button ButtonAddCmdFourn;
+	@FXML
+	private Button ButtonAddFourn;
 
-    @FXML
-    private Button ButtonAddFourn;
+	@FXML
+	private Button ButtonAddProduit;
 
-    @FXML
-    private Button ButtonAddProduit;
+	@FXML
+	private Button ButtonAgrandissement;
 
-    @FXML
-    private Button ButtonAgrandissement;
+	@FXML
+	private Button ButtonAjouterCmdFourn;
 
-    @FXML
-    private Button ButtonAjouterCmdFourn;
+	@FXML
+	private Button ButtonAjouterComdFourn;
 
-    @FXML
-    private Button ButtonAjouterComdFourn;
+	@FXML
+	private Button ButtonDeleteCmdFourn;
 
-    @FXML
-    private Button ButtonDeleteCmdFourn;
+	@FXML
+	private Button ButtonDeleteFourn;
 
-    @FXML
-    private Button ButtonDeleteFourn;
+	@FXML
+	private Button ButtonDeleteProduit;
 
-    @FXML
-    private Button ButtonDeleteProduit;
+	@FXML
+	private Button ButtonEnregistrerCmd;
 
-    @FXML
-    private Button ButtonEnregistrerCmd;
+	@FXML
+	private Button ButtonGestionArticle;
 
-    @FXML
-    private Button ButtonGestionArticle;
+	@FXML
+	private Button ButtonGestionEntrepot;
 
-    @FXML
-    private Button ButtonGestionEntrepot;
+	@FXML
+	private Button ButtonGestionFourn;
 
-    @FXML
-    private Button ButtonGestionFourn;
+	@FXML
+	private Button ButtonMinimisize;
 
-    @FXML
-    private Button ButtonMinimisize;
+	@FXML
+	private Button ButtonModifyCmdFourn;
 
-    @FXML
-    private Button ButtonModifyCmdFourn;
+	@FXML
+	private Button ButtonModifyFourn;
 
-    @FXML
-    private Button ButtonModifyFourn;
+	@FXML
+	private Button ButtonModifyProduit;
 
-    @FXML
-    private Button ButtonModifyProduit;
+	@FXML
+	private Button ButtonSupressionCmdFOurn;
 
-    @FXML
-    private Button ButtonSupressionCmdFOurn;
+	@FXML
+	private ComboBox<?> ComboBoxCategorieProduit;
 
-    @FXML
-    private ComboBox<?> ComboBoxCategorieProduit;
+	@FXML
+	private ComboBox<?> ComboBoxDevise;
 
-    @FXML
-    private ComboBox<?> ComboBoxDevise;
+	@FXML
+	private ComboBox<?> ComboBoxFournisseur;
 
-    @FXML
-    private ComboBox<?> ComboBoxFournisseur;
+	@FXML
+	private ComboBox<?> ComboBoxUniteMesure;
 
-    @FXML
-    private ComboBox<?> ComboBoxUniteMesure;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_Designation;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Designation;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_NumeroProduit;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_NumeroProduit;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_PU;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_PU;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_Poids;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Poids;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_Quantite;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Quantite;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_Total;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Total;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_AdresFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_AdresFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_EmailFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_EmailFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_IdFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_IdFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_NomFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_NomFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_PaysFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_PaysFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_Telephone;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_Telephone;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_Categorie;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_Categorie;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_DescriptionProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_DescriptionProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_IdProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_IdProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_NomProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_NomProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_NumeroProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_NumeroProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_PoidsProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_PoidsProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_PrixUnitaireProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_PrixUnitaireProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_QuantiteStock;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_QuantiteStock;
+	@FXML
+	private AnchorPane PageAjoutCommandeFourn;
 
-    @FXML
-    private AnchorPane PageAjoutCommandeFourn;
+	@FXML
+	private AnchorPane PageCommandeFourn;
 
-    @FXML
-    private AnchorPane PageCommandeFourn;
+	@FXML
+	private AnchorPane PageGestionArticle;
 
-    @FXML
-    private AnchorPane PageGestionArticle;
+	@FXML
+	private AnchorPane PageGestionEntrepot;
 
-    @FXML
-    private AnchorPane PageGestionEntrepot;
+	@FXML
+	private AnchorPane PageGestionFournisseur;
 
-    @FXML
-    private AnchorPane PageGestionFournisseur;
+	@FXML
+	private TextField PrixAchat;
 
-    @FXML
-    private TextField PrixAchat;
+	@FXML
+	private TextField TXtEmailFourn;
 
-    @FXML
-    private TextField TXtEmailFourn;
+	@FXML
+	private TableView<?> TableViewComdFourn;
 
-    @FXML
-    private TableView<?> TableViewComdFourn;
+	@FXML
+	private TableView<?> TableViewLigneCmd;
 
-    @FXML
-    private TableView<?> TableViewLigneCmd;
+	@FXML
+	private TableView<Produit> TableViewListProduit;
 
-    @FXML
-    private TableView<Produit> TableViewListProduit;
+	@FXML
+	private TextField TxtAdresseFourn;
 
-    @FXML
-    private TextField TxtAdresseFourn;
+	@FXML
+	private TextField TxtCPFourn;
 
-    @FXML
-    private TextField TxtCPFourn;
+	@FXML
+	private TextArea TxtDescriptionProduit;
 
-    @FXML
-    private TextArea TxtDescriptionProduit;
+	@FXML
+	private TextField TxtNomFourn;
 
-    @FXML
-    private TextField TxtNomFourn;
+	@FXML
+	private TextField TxtNomProduit;
 
-    @FXML
-    private TextField TxtNomProduit;
+	@FXML
+	private TextField TxtNomproduit;
 
-    @FXML
-    private TextField TxtNomproduit;
+	@FXML
+	private TextField TxtNumeroProduit;
 
-    @FXML
-    private TextField TxtNumeroProduit;
+	@FXML
+	private TextField TxtPaysFourn;
 
-    @FXML
-    private TextField TxtPaysFourn;
+	@FXML
+	private TextField TxtPoidProduit;
 
-    @FXML
-    private TextField TxtPoidProduit;
+	@FXML
+	private TextField TxtPoidsProduit;
 
-    @FXML
-    private TextField TxtPoidsProduit;
+	@FXML
+	private TextField TxtPrixUnitaire;
 
-    @FXML
-    private TextField TxtPrixUnitaire;
+	@FXML
+	private TextField TxtQuantiteProduit;
 
-    @FXML
-    private TextField TxtQuantiteProduit;
+	@FXML
+	private TextField TxtSearch;
 
-    @FXML
-    private TextField TxtSearch;
+	@FXML
+	private TextField TxtTelephone;
 
-    @FXML
-    private TextField TxtTelephone;
+	@FXML
+	private TextField TxtVilleFourn;
 
-    @FXML
-    private TextField TxtVilleFourn;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_DateCmd;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_DateCmd;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_DateLivraison;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_DateLivraison;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_NomFourn;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_NomFourn;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_NumCmd;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_NumCmd;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_NumRespoReapro;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_NumRespoReapro;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_Total;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_Total;
-    
-    @FXML
-    private TextField TxtUniteMesure;
+	@FXML
+	private TextField TxtUniteMesure;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_idLigneCmd;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_idLigneCmd;
 
-    @FXML
-    private Button buttonCommandeFourn;
+	@FXML
+	private Button buttonCommandeFourn;
 
-    @FXML
-    private Button logoutBtn;
+	@FXML
+	private Button logoutBtn;
 
-    @FXML
-    private TextField searchProduit;
+	@FXML
+	private TextField searchProduit;
 
 	private ObservableList<Fournisseur> addFournisseurList;
+	private ObservableList<Fournisseur> addFournisseurListV2;
 
 	IFournisseurDao fournisseurDao = new FournisseurDao();
-	
+
 	ICategorieDao categorieDao = new CategorieDao();
-	
+
 	IProduitDao produitDao = new ProduitDao();
 
 	private Connection connect;
@@ -294,10 +294,9 @@ public class RespoReaproController implements Initializable {
 	private PreparedStatement prepare;
 
 	private ResultSet result;
-	
+
 	@FXML
 	private TableView<Fournisseur> TableListFourn;
-
 
 	private double x;
 
@@ -455,13 +454,11 @@ public class RespoReaproController implements Initializable {
 
 	}
 
-	
-
-	//______________________________
+	// ______________________________
 	//
-	//FOURNISSEUR
-	//______________________________
-		
+	// FOURNISSEUR
+	// ______________________________
+
 	/**
 	 * 
 	 * Méthode permettant d'ajouter les fournisseur en BD
@@ -575,7 +572,7 @@ public class RespoReaproController implements Initializable {
 
 	/**
 	 * 
-	 * Méthode permettant de supprimer  un fournisseur par son id
+	 * Méthode permettant de supprimer un fournisseur par son id
 	 * 
 	 * @param event ActionEvent
 	 * @return void
@@ -628,6 +625,10 @@ public class RespoReaproController implements Initializable {
 	 * 
 	 */
 	public void FournisseurShowList() {
+		Fournisseur fournisseur;
+		for (Fournisseur e : fournisseurDao.getAllFournisseur()) {
+			addFournisseurListV2.add(e);
+		}
 		addFournisseurList = fournisseurDao.addFournisseurList();
 
 		ListFourn_col_IdFourn.setCellValueFactory(new PropertyValueFactory<>("idfournisseur"));
@@ -637,7 +638,7 @@ public class RespoReaproController implements Initializable {
 		ListFourn_col_Telephone.setCellValueFactory(new PropertyValueFactory<>("telephonefournisseur"));
 		ListFourn_col_AdresFourn.setCellValueFactory(new PropertyValueFactory<>("adressefournisseur"));
 
-		TableListFourn.setItems(addFournisseurList);
+		TableListFourn.setItems(addFournisseurListV2);
 	}
 
 	/**
@@ -704,7 +705,7 @@ public class RespoReaproController implements Initializable {
 //
 //PRODUIT
 //______________________________
-	
+
 	/**
 	 * 
 	 * Méthode permettant d'ajouter les Produit en BD
@@ -716,9 +717,10 @@ public class RespoReaproController implements Initializable {
 	public void addProduit() {
 		Alert alert;
 		Produit produit = new Produit();
-		if (TxtNumeroProduit.getText().isEmpty() || TxtNomProduit.getText().isEmpty() || TxtPoidProduit.getText().isEmpty()
-				|| TxtPrixUnitaire.getText().isEmpty() || TxtQuantiteProduit.getText().isEmpty()
-				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem()==null) {
+		if (TxtNumeroProduit.getText().isEmpty() || TxtNomProduit.getText().isEmpty()
+				|| TxtPoidProduit.getText().isEmpty() || TxtPrixUnitaire.getText().isEmpty()
+				|| TxtQuantiteProduit.getText().isEmpty()
+				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem() == null) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -745,9 +747,9 @@ public class RespoReaproController implements Initializable {
 				produit.setPrixunitaire(Float.parseFloat(TxtPrixUnitaire.getText()));
 				produit.setDescription(TxtDescriptionProduit.getText());
 				produit.setPoidunitemesurecode(TxtUniteMesure.getText());
-				
+
 				int id = 0;
-				String val = (String)ComboBoxCategorieProduit.getSelectionModel().getSelectedItem();
+				String val = (String) ComboBoxCategorieProduit.getSelectionModel().getSelectedItem();
 				for (Categorie e : categorieDao.getAllCategorie()) {
 					if (e.getLibelecategorie().equalsIgnoreCase(val)) {
 						id = e.getIdcategorie();
@@ -892,7 +894,6 @@ public class RespoReaproController implements Initializable {
 		TableViewListProduit.setItems(addproduitrList);
 	}
 
-	
 	/**
 	 * Méthode permettant de remettre à zero tout les champs d'enregistrement
 	 * Produit
@@ -910,7 +911,6 @@ public class RespoReaproController implements Initializable {
 //		ComboBoxCategorieProduit.set;
 	}
 
-	
 	/**
 	 * methode pour remplir la combobox des différents categorie
 	 * 
@@ -927,8 +927,6 @@ public class RespoReaproController implements Initializable {
 		ObservableList oblist = FXCollections.observableArrayList(CategorieList);
 		ComboBoxCategorieProduit.setItems(oblist);
 	}
-
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

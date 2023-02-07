@@ -1,5 +1,5 @@
 package com.TransitApp.Modeles;
-// Generated 4 févr. 2023, 18:30:13 by Hibernate Tools 4.3.6.Final
+// Generated 7 févr. 2023, 23:03:37 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
