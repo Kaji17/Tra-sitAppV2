@@ -1,5 +1,5 @@
 package com.TransitApp.Modeles;
-// Generated 4 févr. 2023, 18:30:13 by Hibernate Tools 4.3.6.Final
+// Generated 7 févr. 2023, 23:03:37 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +49,6 @@ public class Fournisseur implements java.io.Serializable {
 		this.telephonefournisseur = telephonefournisseur;
 		this.paysfournisseur = paysfournisseur;
 	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 

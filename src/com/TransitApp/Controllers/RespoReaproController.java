@@ -46,247 +46,253 @@ import javafx.stage.StageStyle;
 
 public class RespoReaproController implements Initializable {
 
+	@FXML
+	private Button ButtonAddCmdFourn;
 
-    @FXML
-    private Button ButtonAddCmdFourn;
+	@FXML
+	private Button ButtonAddFourn;
 
-    @FXML
-    private Button ButtonAddFourn;
+	@FXML
+	private Button ButtonAddProduit;
 
-    @FXML
-    private Button ButtonAddProduit;
+	@FXML
+	private Button ButtonAgrandissement;
 
-    @FXML
-    private Button ButtonAgrandissement;
+	@FXML
+	private Button ButtonAjouterCmdFourn;
 
-    @FXML
-    private Button ButtonAjouterCmdFourn;
+	@FXML
+	private Button ButtonAjouterComdFourn;
 
-    @FXML
-    private Button ButtonAjouterComdFourn;
+	@FXML
+	private Button ButtonDeleteCmdFourn;
 
-    @FXML
-    private Button ButtonDeleteCmdFourn;
+	@FXML
+	private Button ButtonDeleteFourn;
 
-    @FXML
-    private Button ButtonDeleteFourn;
+	@FXML
+	private Button ButtonDeleteProduit;
 
-    @FXML
-    private Button ButtonDeleteProduit;
+	@FXML
+	private Button ButtonEnregistrerCmd;
 
-    @FXML
-    private Button ButtonEnregistrerCmd;
+	@FXML
+	private Button ButtonGestionArticle;
 
-    @FXML
-    private Button ButtonGestionArticle;
+	@FXML
+	private Button ButtonGestionEntrepot;
 
-    @FXML
-    private Button ButtonGestionEntrepot;
+	@FXML
+	private Button ButtonGestionFourn;
 
-    @FXML
-    private Button ButtonGestionFourn;
+	@FXML
+	private Button ButtonMinimisize;
 
-    @FXML
-    private Button ButtonMinimisize;
+	@FXML
+	private Button ButtonModifyCmdFourn;
 
-    @FXML
-    private Button ButtonModifyCmdFourn;
+	@FXML
+	private Button ButtonModifyFourn;
 
-    @FXML
-    private Button ButtonModifyFourn;
+	@FXML
+	private Button ButtonModifyProduit;
 
-    @FXML
-    private Button ButtonModifyProduit;
+	@FXML
+	private Button ButtonSupressionCmdFOurn;
 
-    @FXML
-    private Button ButtonSupressionCmdFOurn;
+	@FXML
+	private ComboBox<?> ComboBoxCategorieProduit;
 
-    @FXML
-    private ComboBox<?> ComboBoxCategorieProduit;
+	@FXML
+	private ComboBox<?> ComboBoxDevise;
 
-    @FXML
-    private ComboBox<?> ComboBoxDevise;
+	@FXML
+	private ComboBox<?> ComboBoxFournisseur;
 
-    @FXML
-    private ComboBox<?> ComboBoxFournisseur;
+	@FXML
+	private ComboBox<?> ComboBoxUniteMesure;
 
-    @FXML
-    private ComboBox<?> ComboBoxUniteMesure;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_NomFournisseur;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Designation;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_NumeroCommande;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_NumeroProduit;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_NumeroProduit;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_PU;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_PU;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Poids;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_Quantite;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Quantite;
+	@FXML
+	private TableColumn<?, ?> LigneCmd_col_Total;
 
-    @FXML
-    private TableColumn<?, ?> LigneCmd_col_Total;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_AdresFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_AdresFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_EmailFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_EmailFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_IdFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_IdFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_NomFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_NomFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_PaysFourn;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_PaysFourn;
+	@FXML
+	private TableColumn<?, ?> ListFourn_col_Telephone;
 
-    @FXML
-    private TableColumn<?, ?> ListFourn_col_Telephone;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_Categorie;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_Categorie;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_DescriptionProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_DescriptionProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_IdProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_IdProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_NomProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_NomProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_NumeroProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_NumeroProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_PoidsProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_PoidsProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_PrixUnitaireProduit;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_PrixUnitaireProduit;
+	@FXML
+	private TableColumn<?, ?> ListProduit_col_QuantiteStock;
 
-    @FXML
-    private TableColumn<?, ?> ListProduit_col_QuantiteStock;
+	@FXML
+	private AnchorPane PageAjoutCommandeFourn;
 
-    @FXML
-    private AnchorPane PageAjoutCommandeFourn;
+	@FXML
+	private AnchorPane PageCommandeFourn;
 
-    @FXML
-    private AnchorPane PageCommandeFourn;
+	@FXML
+	private AnchorPane PageGestionArticle;
 
-    @FXML
-    private AnchorPane PageGestionArticle;
+	@FXML
+	private AnchorPane PageGestionEntrepot;
 
-    @FXML
-    private AnchorPane PageGestionEntrepot;
+	@FXML
+	private AnchorPane PageGestionFournisseur;
 
-    @FXML
-    private AnchorPane PageGestionFournisseur;
+	@FXML
+	private TextField PrixAchat;
 
-    @FXML
-    private TextField PrixAchat;
+	@FXML
+	private TextField TXtEmailFourn;
 
-    @FXML
-    private TextField TXtEmailFourn;
+	@FXML
+	private TableView<?> TableViewComdFourn;
 
-    @FXML
-    private TableView<?> TableViewComdFourn;
+	@FXML
+	private TableView<?> TableViewLigneCmd;
 
-    @FXML
-    private TableView<?> TableViewLigneCmd;
+	@FXML
+	private TableView<Produit> TableViewListProduit;
 
-    @FXML
-    private TableView<Produit> TableViewListProduit;
+	@FXML
+	private TextField TxtAdresseFourn;
 
-    @FXML
-    private TextField TxtAdresseFourn;
+	@FXML
+	private TextField TxtNumeroCmdFournisseur;
 
-    @FXML
-    private TextField TxtCPFourn;
+	@FXML
+	private TextField TxtCPFourn;
 
-    @FXML
-    private TextArea TxtDescriptionProduit;
+	@FXML
+	private TextArea TxtDescriptionProduit;
 
-    @FXML
-    private TextField TxtNomFourn;
+	@FXML
+	private TextField TxtNomFourn;
 
-    @FXML
-    private TextField TxtNomProduit;
+	@FXML
+	private TextField TxtNomProduit;
 
-    @FXML
-    private TextField TxtNomproduit;
+	@FXML
+	private TextField TxtNomproduit;
 
-    @FXML
-    private TextField TxtNumeroProduit;
+	@FXML
+	private TextField TxtNumeroProduit;
 
-    @FXML
-    private TextField TxtPaysFourn;
+	@FXML
+	private TextField TxtPaysFourn;
 
-    @FXML
-    private TextField TxtPoidProduit;
+	@FXML
+	private TextField TxtPoidProduit;
 
-    @FXML
-    private TextField TxtPoidsProduit;
+	@FXML
+	private TextField TxtPoidsProduit;
 
-    @FXML
-    private TextField TxtPrixUnitaire;
+	@FXML
+	private TextField TxtPrixUnitaire;
 
-    @FXML
-    private TextField TxtQuantiteProduit;
+	@FXML
+	private TextField TxtQuantiteProduit;
 
-    @FXML
-    private TextField TxtSearch;
+	@FXML
+	private TextField TxtSearch;
 
-    @FXML
-    private TextField TxtTelephone;
+	@FXML
+	private TextField TxtTelephone;
 
-    @FXML
-    private TextField TxtVilleFourn;
+	@FXML
+	private TextField TxtVilleFourn;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_DateCmd;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_DateCmd;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_DateLivraison;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_DateLivraison;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_NomFourn;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_NomFourn;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_NumCmd;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_NumCmd;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_NumRespoReapro;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_NumRespoReapro;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_Total;
-    
-    @FXML
-    private TextField TxtUniteMesure;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_Total;
 
-    @FXML
-    private TableColumn<?, ?> ViewCmdFourn_col_idLigneCmd;
+	@FXML
+	private TextField TxtUniteMesure;
 
-    @FXML
-    private Button buttonCommandeFourn;
+	@FXML
+	private TableColumn<?, ?> ViewCmdFourn_col_idLigneCmd;
 
-    @FXML
-    private Button logoutBtn;
+	@FXML
+	private Button buttonCommandeFourn;
 
-    @FXML
-    private TextField searchProduit;
+	@FXML
+	private Button logoutBtn;
+
+	@FXML
+	private ComboBox<?> ComboBoxNomproduit;
+
+	@FXML
+	private TextField searchProduit;
 
 	private ObservableList<Fournisseur> addFournisseurList;
+	private ObservableList<Fournisseur> addFournisseurListV2;
 
 	IFournisseurDao fournisseurDao = new FournisseurDao();
-	
+
 	ICategorieDao categorieDao = new CategorieDao();
-	
+
 	IProduitDao produitDao = new ProduitDao();
 
 	private Connection connect;
@@ -294,16 +300,19 @@ public class RespoReaproController implements Initializable {
 	private PreparedStatement prepare;
 
 	private ResultSet result;
-	
+
 	@FXML
 	private TableView<Fournisseur> TableListFourn;
-
 
 	private double x;
 
 	private double y;
 
 	private ObservableList<Produit> addproduitrList;
+
+	private String[] UniteMesure = { "T", "Kg", "G" };
+
+	private String[] Device = { "EUR", "FCFA", "USD" };
 
 	/**
 	 * methode pour fermer la fenetre
@@ -398,6 +407,7 @@ public class RespoReaproController implements Initializable {
 			PageGestionFournisseur.setVisible(false);
 
 			addComboBoxFournisseur();
+			addComboBoxProduit();
 
 //			Ajouter la coleur #34a39c au background du button passer en paramètre
 			fournisseurDao.addStyle(ButtonAjouterComdFourn, "#cd2e2e");
@@ -417,6 +427,7 @@ public class RespoReaproController implements Initializable {
 			fournisseurDao.addStyle(ButtonGestionArticle, "#cd2e2e");
 			addComboBoxCategorie();
 			ProduitShowList();
+			addComboBoxProduit();
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
 			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionEntrepot,
@@ -455,13 +466,11 @@ public class RespoReaproController implements Initializable {
 
 	}
 
-	
-
-	//______________________________
+	// ______________________________
 	//
-	//FOURNISSEUR
-	//______________________________
-		
+	// FOURNISSEUR
+	// ______________________________
+
 	/**
 	 * 
 	 * Méthode permettant d'ajouter les fournisseur en BD
@@ -575,7 +584,7 @@ public class RespoReaproController implements Initializable {
 
 	/**
 	 * 
-	 * Méthode permettant de supprimer  un fournisseur par son id
+	 * Méthode permettant de supprimer un fournisseur par son id
 	 * 
 	 * @param event ActionEvent
 	 * @return void
@@ -700,11 +709,11 @@ public class RespoReaproController implements Initializable {
 
 	}
 
-//______________________________
-//
-//PRODUIT
-//______________________________
-	
+	// ______________________________
+	//
+	// PRODUIT
+	// ______________________________
+
 	/**
 	 * 
 	 * Méthode permettant d'ajouter les Produit en BD
@@ -716,9 +725,10 @@ public class RespoReaproController implements Initializable {
 	public void addProduit() {
 		Alert alert;
 		Produit produit = new Produit();
-		if (TxtNumeroProduit.getText().isEmpty() || TxtNomProduit.getText().isEmpty() || TxtPoidProduit.getText().isEmpty()
-				|| TxtPrixUnitaire.getText().isEmpty() || TxtQuantiteProduit.getText().isEmpty()
-				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem()==null) {
+		if (TxtNumeroProduit.getText().isEmpty() || TxtNomProduit.getText().isEmpty()
+				|| TxtPoidProduit.getText().isEmpty() || TxtPrixUnitaire.getText().isEmpty()
+				|| TxtQuantiteProduit.getText().isEmpty()
+				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem() == null) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -745,9 +755,9 @@ public class RespoReaproController implements Initializable {
 				produit.setPrixunitaire(Float.parseFloat(TxtPrixUnitaire.getText()));
 				produit.setDescription(TxtDescriptionProduit.getText());
 				produit.setPoidunitemesurecode(TxtUniteMesure.getText());
-				
+
 				int id = 0;
-				String val = (String)ComboBoxCategorieProduit.getSelectionModel().getSelectedItem();
+				String val = (String) ComboBoxCategorieProduit.getSelectionModel().getSelectedItem();
 				for (Categorie e : categorieDao.getAllCategorie()) {
 					if (e.getLibelecategorie().equalsIgnoreCase(val)) {
 						id = e.getIdcategorie();
@@ -765,6 +775,7 @@ public class RespoReaproController implements Initializable {
 				alert.showAndWait();
 				clearProduit();
 				ProduitShowList();
+				addComboBoxProduit();
 			}
 			FournisseurShowList();
 			System.out.println(verif);
@@ -782,10 +793,10 @@ public class RespoReaproController implements Initializable {
 	 */
 	public void updateProduit() {
 		Alert alert;
-		Fournisseur fournisseur = new Fournisseur();
-		if (TxtNomFourn.getText().isEmpty() || TxtAdresseFourn.getText().isEmpty() || TxtPaysFourn.getText().isEmpty()
-				|| TxtVilleFourn.getText().isEmpty() || TxtCPFourn.getText().isEmpty()
-				|| TXtEmailFourn.getText().isEmpty() || TxtTelephone.getText().isEmpty()) {
+		if (TxtNumeroProduit.getText().isEmpty() || TxtNomProduit.getText().isEmpty()
+				|| TxtPoidProduit.getText().isEmpty() || TxtPrixUnitaire.getText().isEmpty()
+				|| TxtUniteMesure.getText().isEmpty()
+				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem() == null) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -795,29 +806,37 @@ public class RespoReaproController implements Initializable {
 			alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("CONFIRMATION MESSAGE");
 			alert.setHeaderText(null);
-			alert.setContentText("Êtes vous sures de vouloir modifier les Informations fournisseur: "
-					+ TxtNomFourn.getText() + " ? Cette action est irreversible");
+			alert.setContentText("Êtes vous sures de vouloir modifier les Informations du produit: "
+					+ TxtNumeroProduit.getText() + " ? Cette action est irreversible");
 			Optional<ButtonType> option = alert.showAndWait();
 			if (option.get().equals(ButtonType.OK)) {
-				fournisseur.setNomfournisseur(TxtNomFourn.getText());
-				fournisseur.setAdressefournisseur(TxtAdresseFourn.getText());
-				fournisseur.setPaysfournisseur(TxtPaysFourn.getText());
-				fournisseur.setVillefournisseur(TxtVilleFourn.getText());
-				fournisseur.setCpfournisseur(TxtCPFourn.getText());
-				fournisseur.setEmailfournisseur(TXtEmailFourn.getText());
-				fournisseur.setTelephonefournisseur(TxtTelephone.getText());
-				System.out.println("===Modification Effectuer");
-
-				fournisseurDao.updateFournisseur(fournisseur);
+				for (Produit e : produitDao.getAllProduit()) {
+					if (e.getNumeroproduit().equals(TxtNumeroProduit.getText())) {
+						e.setNomproduit(TxtNomProduit.getText());
+						e.setPoids(Float.parseFloat(TxtPoidProduit.getText()));
+						e.setDescription(TxtDescriptionProduit.getText());
+						e.setPrixunitaire(Float.parseFloat(TxtPrixUnitaire.getText()));
+						int id = 0;
+						String val = (String) ComboBoxCategorieProduit.getSelectionModel().getSelectedItem();
+						for (Categorie ex : categorieDao.getAllCategorie()) {
+							if (ex.getLibelecategorie().equalsIgnoreCase(val)) {
+								id = ex.getIdcategorie();
+							}
+						}
+						e.setIdcategorie(id);
+						e.setPoidunitemesurecode(TxtUniteMesure.getText());
+						produitDao.updateProduit(e);
+					}
+				}
 
 				alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Sucess Modification");
 				alert.setHeaderText(null);
-				alert.setContentText("Fournisseur: " + TxtNomFourn.getText() + " enregistrer avec success");
+				alert.setContentText("Produit: " + TxtNomProduit.getText() + " enregistrer avec success");
 				alert.showAndWait();
-				clearFournisseur();
-				addComboBoxFournisseur();
-				FournisseurShowList();
+				clearProduit();
+
+				ProduitShowList();
 			}
 		}
 
@@ -833,39 +852,39 @@ public class RespoReaproController implements Initializable {
 	 */
 	public void deleteProduit() {
 		Alert alert;
-		if (TxtNomFourn.getText().isEmpty()) {
+		if (TxtNumeroProduit.getText().isEmpty()) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
-			alert.setContentText("Selectionner ou entrer un nom de fournisseur");
+			alert.setContentText("Selectionner ou entrer un nom de Numero Produit");
 			Optional<ButtonType> option = alert.showAndWait();
 		} else {
 			// Vérifie l'existance d'un fournisseur
 			Boolean verif = false;
 			int id = 0;
-			for (Fournisseur e : fournisseurDao.getAllFournisseur()) {
-				if (e.getNomfournisseur().equalsIgnoreCase(TxtNomFourn.getText())) {
+			for (Produit e : produitDao.getAllProduit()) {
+				if (e.getNumeroproduit().equals(TxtNumeroProduit.getText())) {
 					verif = true;
-					id = e.getIdfournisseur();
+					id = e.getIdproduit();
 				}
 			}
 			if (verif == true) {
 				alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("CONFIRMATION MESSAGE");
 				alert.setHeaderText(null);
-				alert.setContentText("Êtes vous sures de vouloir supprimer le fournisseur: " + TxtNomFourn.getText()
+				alert.setContentText("Êtes vous sures de vouloir supprimer le produit: " + TxtNumeroProduit.getText()
 						+ " ? Cette action est irreversible");
 				Optional<ButtonType> option = alert.showAndWait();
 				if (option.get().equals(ButtonType.OK)) {
-					fournisseurDao.deleteFournisseur(id);
-					clearFournisseur();
-					FournisseurShowList();
+					produitDao.deleteProduit(id);
+					clearProduit();
+					ProduitShowList();
 				}
 			} else {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
 				alert.setHeaderText(null);
-				alert.setContentText("Le fournisseur: " + TxtNomFourn.getText() + " n'existe pas ");
+				alert.setContentText("Le produit: " + TxtNumeroProduit.getText() + " n'existe pas ");
 				alert.showAndWait();
 				return;
 			}
@@ -892,7 +911,6 @@ public class RespoReaproController implements Initializable {
 		TableViewListProduit.setItems(addproduitrList);
 	}
 
-	
 	/**
 	 * Méthode permettant de remettre à zero tout les champs d'enregistrement
 	 * Produit
@@ -910,7 +928,6 @@ public class RespoReaproController implements Initializable {
 //		ComboBoxCategorieProduit.set;
 	}
 
-	
 	/**
 	 * methode pour remplir la combobox des différents categorie
 	 * 
@@ -928,7 +945,85 @@ public class RespoReaproController implements Initializable {
 		ComboBoxCategorieProduit.setItems(oblist);
 	}
 
-	
+	/**
+	 * methode pour remplir la combobox des différents produit
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+	public void addComboBoxProduit() {
+		List<String> ProduitList = new ArrayList<>();
+
+		for (Produit data : produitDao.getAllProduit()) {
+			ProduitList.add(data.getNomproduit());
+		}
+
+		ObservableList oblist = FXCollections.observableArrayList(ProduitList);
+		ComboBoxNomproduit.setItems(oblist);
+	}
+
+	/**
+	 * methode pour remplir la combobox des différents Unite de Mesure
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+	public void addComboBoxUniteMesure() {
+		List<String> UniteMesureList = new ArrayList<>();
+
+		for (String data : UniteMesure) {
+			UniteMesureList.add(data);
+		}
+
+		ObservableList oblist = FXCollections.observableArrayList(UniteMesureList);
+		ComboBoxUniteMesure.setItems(oblist);
+	}
+
+	/**
+	 * methode pour remplir la combobox des différents device
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+	public void addComboBoxDevice() {
+		List<String> DeviceList = new ArrayList<>();
+
+		for (String data : Device) {
+			DeviceList.add(data);
+		}
+
+		ObservableList oblist = FXCollections.observableArrayList(DeviceList);
+		ComboBoxDevise.setItems(oblist);
+	}
+
+	/**
+	 * méthode permetant de remplir les différent champs d'enregistrment produit
+	 * lorsque un champs du table views est selectionner
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+	public void produitSelected() {
+		Produit produit = TableViewListProduit.getSelectionModel().getSelectedItem();
+
+		Integer num = TableViewListProduit.getSelectionModel().getSelectedIndex();
+
+		if (num - 1 < -1) {
+			return;
+		}
+		TxtNomProduit.setText(produit.getNomproduit());
+		TxtNumeroProduit.setText(produit.getNumeroproduit());
+		TxtDescriptionProduit.setText(produit.getDescription());
+		TxtPoidProduit.setText(String.valueOf(produit.getPoids()));
+		TxtPrixUnitaire.setText(String.valueOf(produit.getPrixunitaire()));
+		TxtUniteMesure.setText(produit.getPoidunitemesurecode());
+
+	}
+
+	// ______________________________
+	//
+	// COMMANDE FOURNISSEUR
+	// ______________________________
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -936,6 +1031,9 @@ public class RespoReaproController implements Initializable {
 		addComboBoxFournisseur();
 		addComboBoxCategorie();
 		ProduitShowList();
+		addComboBoxProduit();
+		addComboBoxUniteMesure();
+		addComboBoxDevice();
 	}
 
 }

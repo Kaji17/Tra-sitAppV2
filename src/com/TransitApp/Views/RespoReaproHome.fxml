@@ -274,7 +274,7 @@
                         <DropShadow />
                      </effect>
                   </HBox>
-                  <TableView fx:id="TableViewComdFourn" layoutX="42.0" layoutY="102.0" prefHeight="455.0" prefWidth="900.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+                  <TableView fx:id="TableViewComdFourn" layoutX="42.0" layoutY="102.0" onMouseClicked="#produitSelected" prefHeight="455.0" prefWidth="900.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                     <columns>
                       <TableColumn fx:id="ViewCmdFourn_col_NumCmd" prefWidth="105.0" text="NumCmd" />
                       <TableColumn fx:id="ViewCmdFourn_col_NomFourn" prefWidth="113.0" text="NomFournisseur" />
@@ -288,7 +288,7 @@
                   <TextField fx:id="TxtSearch" layoutX="42.0" layoutY="30.0" prefHeight="37.0" prefWidth="167.0" promptText="Search commande" style="-fx-background-color: #c6c4c4;" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PageAjoutCommandeFourn" layoutX="16.0" layoutY="25.0" prefHeight="673.0" prefWidth="1026.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
+            <AnchorPane fx:id="PageAjoutCommandeFourn" layoutX="16.0" layoutY="25.0" prefHeight="673.0" prefWidth="1026.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                <children>
                   <AnchorPane layoutX="16.0" layoutY="19.0" prefHeight="637.0" prefWidth="352.0" styleClass="bgBalckSecond" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                      <children>
@@ -298,6 +298,7 @@
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -307,20 +308,23 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label contentDisplay="RIGHT" prefHeight="30.0" prefWidth="141.0" text="Nom produit: " textFill="WHITE" />
-                              <TextField fx:id="TxtNomproduit" GridPane.columnIndex="1" />
-                              <Label prefHeight="33.0" prefWidth="58.0" text="Poids" textFill="WHITE" GridPane.rowIndex="1" />
-                              <TextField fx:id="TxtPoidsProduit" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="33.0" prefWidth="58.0" text="Quantité" textFill="WHITE" GridPane.rowIndex="3" />
-                              <TextField fx:id="TxtQuantiteProduit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label prefHeight="17.0" prefWidth="83.0" text="Prix Achat" textFill="WHITE" GridPane.rowIndex="4" />
-                              <TextField fx:id="PrixAchat" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label layoutX="10.0" layoutY="57.0" prefHeight="33.0" prefWidth="205.0" text="Unité de mesure" textFill="WHITE" GridPane.rowIndex="2" />
-                              <ComboBox fx:id="ComboBoxUniteMesure" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label layoutX="10.0" layoutY="219.0" prefHeight="17.0" prefWidth="83.0" text="Fournisseur" textFill="WHITE" GridPane.rowIndex="5" />
-                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="152.0" layoutY="117.0" onAction="#addComboBoxFournisseur" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label layoutX="10.0" layoutY="229.0" prefHeight="17.0" prefWidth="83.0" text="Devise" textFill="WHITE" GridPane.rowIndex="6" />
-                              <ComboBox fx:id="ComboBoxDevise" layoutX="152.0" layoutY="225.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label contentDisplay="RIGHT" prefHeight="30.0" prefWidth="141.0" text="Nom produit: " textFill="WHITE" GridPane.rowIndex="1" />
+                              <Label prefHeight="33.0" prefWidth="58.0" text="Poids" textFill="WHITE" GridPane.rowIndex="2" />
+                              <TextField fx:id="TxtPoidsProduit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label prefHeight="33.0" prefWidth="58.0" text="Quantité" textFill="WHITE" GridPane.rowIndex="4" />
+                              <TextField fx:id="TxtQuantiteProduit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label prefHeight="17.0" prefWidth="83.0" text="Prix Achat" textFill="WHITE" GridPane.rowIndex="5" />
+                              <TextField fx:id="PrixAchat" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label layoutX="10.0" layoutY="57.0" prefHeight="33.0" prefWidth="205.0" text="Unité de mesure" textFill="WHITE" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="ComboBoxUniteMesure" onAction="#addComboBoxUniteMesure" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label layoutX="10.0" layoutY="219.0" prefHeight="17.0" prefWidth="83.0" text="Fournisseur" textFill="WHITE" GridPane.rowIndex="6" />
+                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="152.0" layoutY="117.0" onAction="#addComboBoxFournisseur" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label layoutX="10.0" layoutY="229.0" prefHeight="17.0" prefWidth="83.0" text="Devise" textFill="WHITE" GridPane.rowIndex="7" />
+                              <ComboBox fx:id="ComboBoxDevise" layoutX="152.0" layoutY="225.0" onAction="#addComboBoxDevice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <ComboBox fx:id="ComboBoxNomproduit" onAction="#addComboBoxProduit" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label contentDisplay="RIGHT" layoutX="10.0" layoutY="11.0" prefHeight="30.0" prefWidth="141.0" text="Nom produit: " textFill="WHITE" GridPane.rowIndex="1" />
+                              <Label contentDisplay="RIGHT" layoutX="10.0" layoutY="47.0" prefHeight="30.0" prefWidth="141.0" text="#Cmd Fournisseur" textFill="WHITE" />
+                              <TextField fx:id="TxtNumeroCmdFournisseur" layoutX="152.0" layoutY="85.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <Button fx:id="ButtonAjouterCmdFourn" layoutX="219.0" layoutY="442.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #2d7755;;" text="ADD" textFill="WHITE">
@@ -371,9 +375,9 @@
                            <children>
                               <TableView fx:id="TableViewLigneCmd" layoutX="17.0" layoutY="28.0" prefHeight="437.0" prefWidth="583.0">
                                 <columns>
-                                  <TableColumn fx:id="LigneCmd_col_NumeroProduit" prefWidth="108.0" text="Numero produit" />
-                                  <TableColumn fx:id="LigneCmd_col_Designation" minWidth="7.0" prefWidth="99.0" text="Designation" />
-                                    <TableColumn fx:id="LigneCmd_col_Poids" prefWidth="86.0" text="Poids" />
+                                  <TableColumn fx:id="LigneCmd_col_NumeroCommande" prefWidth="108.0" text="#Commande " />
+                                  <TableColumn fx:id="LigneCmd_col_NomFournisseur" minWidth="7.0" prefWidth="99.0" text="Fournisseur" />
+                                    <TableColumn fx:id="LigneCmd_col_NumeroProduit" prefWidth="86.0" text="# Produit" />
                                     <TableColumn fx:id="LigneCmd_col_Quantite" prefWidth="86.0" text="Quantité" />
                                     <TableColumn fx:id="LigneCmd_col_PU" prefWidth="90.0" text="Prix Unitaire" />
                                     <TableColumn fx:id="LigneCmd_col_Total" prefWidth="111.0" text="Total TTC" />
@@ -399,7 +403,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="10.0" prefHeight="663.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="10.0" prefHeight="663.0" prefWidth="960.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
                <children>
                   <HBox alignment="CENTER" layoutY="601.0" prefHeight="48.0" prefWidth="935.0">
                      <effect>
@@ -418,7 +422,7 @@
                               <Label layoutX="423.0" layoutY="491.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="PRIX UNITAIRE" textFill="WHITE" />
                               <Label layoutX="29.0" layoutY="543.0" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #fffff;" text="DESCRIPTION :" textFill="WHITE" />
                               <TextArea fx:id="TxtDescriptionProduit" layoutX="162.0" layoutY="533.0" prefHeight="46.0" prefWidth="218.0" />
-                              <Button fx:id="ButtonDeleteProduit" layoutX="349.0" layoutY="596.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/ButtonAction.css" text="DELETE" textFill="WHITE">
+                              <Button fx:id="ButtonDeleteProduit" layoutX="349.0" layoutY="596.0" mnemonicParsing="false" onAction="#deleteProduit" prefHeight="41.0" prefWidth="99.0" style="-fx-background-radius: 30; -fx-background-color: #cd2e2e;" stylesheets="@../Ressources/Styles/ButtonAction.css" text="DELETE" textFill="WHITE">
                                  <effect>
                                     <InnerShadow />
                                  </effect>
@@ -429,7 +433,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="ButtonModifyProduit" layoutX="502.0" layoutY="596.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" style="-fx-background-radius: 30; -fx-background-color: #2d5278;;" text="MODIFY" textFill="WHITE">
+                              <Button fx:id="ButtonModifyProduit" layoutX="502.0" layoutY="596.0" mnemonicParsing="false" onAction="#updateProduit" prefHeight="41.0" prefWidth="107.0" style="-fx-background-radius: 30; -fx-background-color: #2d5278;;" text="MODIFY" textFill="WHITE">
                                  <effect>
                                     <InnerShadow />
                                  </effect>
@@ -464,7 +468,7 @@
                         <AnchorPane layoutX="11.0" layoutY="11.0" prefHeight="249.0" prefWidth="746.0">
                            <children>
                               <TextField fx:id="searchProduit" layoutX="2.0" layoutY="10.0" prefHeight="37.0" prefWidth="327.0" promptText="chercher" style="-fx-background-color: white;" />
-                              <TableView fx:id="TableViewListProduit" layoutY="55.0" prefHeight="343.0" prefWidth="991.0">
+                              <TableView fx:id="TableViewListProduit" layoutY="55.0" onMouseClicked="#produitSelected" prefHeight="343.0" prefWidth="991.0">
                                  <columns>
                                     <TableColumn fx:id="ListProduit_col_IdProduit" prefWidth="70.0" text="IDPRODUIT" />
                                     <TableColumn fx:id="ListProduit_col_NumeroProduit" prefWidth="89.0" text="#PRODUIT" />

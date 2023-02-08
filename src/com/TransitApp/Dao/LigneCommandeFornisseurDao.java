@@ -1,37 +1,30 @@
 package com.TransitApp.Dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.TransitApp.Modeles.Admin;
+import com.TransitApp.Modeles.Contenir1;
+import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Util.HibernateUtil;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 
-public class AdminDao implements IAdminDao {
+public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
 
 	private Connection connect;
 
 	private PreparedStatement prepare;
 
 	private ResultSet result;
-
-	private double x;
-
-	private double y;
 
     // save Student
     // get All Students
@@ -43,14 +36,14 @@ public class AdminDao implements IAdminDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#saveStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void saveAdmin(Admin admin) {
+    public void saveLigneCommandeFornisseur(Contenir1 ligneCmdFourn) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.save(admin);
+            session.save(ligneCmdFourn);
 
             // commit the transaction
             transaction.commit();
@@ -65,14 +58,14 @@ public class AdminDao implements IAdminDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#updateStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void updateAdmin(Admin admin) {
+    public void updateLigneCommandeFornisseur(Contenir1 ligneCmdFourn) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.saveOrUpdate(admin);
+            session.saveOrUpdate(ligneCmdFourn);
 
             // commit the transaction
             transaction.commit();
@@ -87,16 +80,16 @@ public class AdminDao implements IAdminDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#getStudentById(long)
      */
     @Override
-    public Admin getAdminById(int id) {
+    public Contenir1 getLigneCommandeFornisseurById(int id) {
         Transaction transaction = null;
-        Admin admin = null;
+        Contenir1 ligneCmdFourn = null;
         try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			    // start the transaction
 			    transaction = session.beginTransaction();
 
 			    // get student object
-			    admin = session.byId(Admin.class).getReference(id);
+			    ligneCmdFourn = session.byId(Contenir1.class).getReference(id);
 			     // or student = session.get(Student.class, id);
 			    //or student = session.load(Student.class, id);
 			   //or commit the transaction
@@ -109,7 +102,7 @@ public class AdminDao implements IAdminDao {
 		}
         
         
-        return admin;
+        return ligneCmdFourn;
     }
 
     /* (non-Javadoc)
@@ -117,39 +110,40 @@ public class AdminDao implements IAdminDao {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List < Admin > getAllAdmin() {
+    public List < Contenir1 > getLigneCommandeFornisseur() {
         Transaction transaction = null;
-        List < Admin > admin = null;
+        List < Contenir1 > ligneCmdFourn = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            // get admin
-            admin = session.createQuery("from Admin").list();
-           
+            // get students
+            ligneCmdFourn = session.createQuery("from Contenir1").list();
+            //student = session.load(Student.class, id);
+            // commit the transaction
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return admin;
+        return ligneCmdFourn;
     }
 
     /* (non-Javadoc)
      * @see net.javaguides.hibernate.dao.IStudentDao#deleteStudent(long)
      */
     @Override
-    public void deleteAdmin(int id) {
+    public void deleteLigneCommandeFornisseur(int id) {
         Transaction transaction = null;
-        Admin admin = null;
+        Contenir1 ligneCmdFourn = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            admin = session.get(Admin.class, id);
+            ligneCmdFourn = session.get(Contenir1.class, id);
             // get student object
-            session.delete(admin);
+            session.delete(ligneCmdFourn);
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -159,40 +153,43 @@ public class AdminDao implements IAdminDao {
             }
         }
     }
+	
+	
+	/**
+	 * méthode permettant de recuperer les fournisseur dans la base de donnée 
+	 * @author Kaji17
+	 */
+	public ObservableList<Contenir1> addFournisseurList() {
 
-    
-    public void Login(String fxml, Button button) {
-    	try {
-			Parent root;
-			root = FXMLLoader.load(getClass().getResource(fxml));
+		ObservableList<Contenir1> listligneCmdFourn = FXCollections.observableArrayList();
 
-			Stage stage = new Stage();
+		String sql = "SELECT * FROM contenir1";
 
-			Scene scene = new Scene(root);
+		connect = Database.connectDb();
 
-			button.getScene().getWindow().hide();
-			
-			
-			// Permet de faire bouger la fenetre et d'éviter de la redimensionner
-			root.setOnMousePressed((MouseEvent event) -> {
-				x = event.getSceneX();
-				y = event.getSceneY();
-			});
+		try {
 
-			root.setOnMouseDragged((MouseEvent event) -> {
-				stage.setX(event.getScreenX() - x);
-				stage.setY(event.getScreenY() - y);
-			});
+			Contenir1 ligneCmdFourn;
 
-			stage.setScene(scene);
-			stage.initStyle(StageStyle.TRANSPARENT);
+			prepare = connect.prepareStatement(sql);
 
-			stage.show();
-		} catch (IOException error) {
-			// TODO Auto-generated catch block
-			error.printStackTrace();
+			result = prepare.executeQuery();
+
+//			while (result.next()) {
+//				ligneCmdFourn = new Contenir1(null, sql, null, null);
+//				listFournisseurs.add(fournisseur);
+//			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-    }
+
+		return listligneCmdFourn;
+	}
+	
+
+	
+	
 	
 	/*
 	 * public List<Student > recupererCommandeByDateAndMenu(String idMenu , Date
