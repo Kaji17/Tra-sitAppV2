@@ -9,7 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.TransitApp.Modeles.Contenir1;
+import com.TransitApp.Modeles.Entrepot;
 import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Util.HibernateUtil;
 
@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
 
-public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
+public class EntrepotDao implements IEntrepotDao {
 
 	private Connection connect;
 
@@ -36,14 +36,14 @@ public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#saveStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void saveLigneCommandeFornisseur(Contenir1 ligneCmdFourn) {
+    public void saveEntrepot(Entrepot entrepot) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.save(ligneCmdFourn);
+            session.save(entrepot);
 
             // commit the transaction
             transaction.commit();
@@ -58,14 +58,14 @@ public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#updateStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void updateLigneCommandeFornisseur(Contenir1 ligneCmdFourn) {
+    public void updateEntrepot(Entrepot entrepot) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.saveOrUpdate(ligneCmdFourn);
+            session.saveOrUpdate(entrepot);
 
             // commit the transaction
             transaction.commit();
@@ -80,16 +80,16 @@ public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
      * @see net.javaguides.hibernate.dao.IStudentDao#getStudentById(long)
      */
     @Override
-    public Contenir1 getLigneCommandeFornisseurById(int id) {
+    public Entrepot getEntrepotById(int id) {
         Transaction transaction = null;
-        Contenir1 ligneCmdFourn = null;
+        Entrepot entrepot = null;
         try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			    // start the transaction
 			    transaction = session.beginTransaction();
 
 			    // get student object
-			    ligneCmdFourn = session.byId(Contenir1.class).getReference(id);
+			    entrepot = session.byId(Entrepot.class).getReference(id);
 			     // or student = session.get(Student.class, id);
 			    //or student = session.load(Student.class, id);
 			   //or commit the transaction
@@ -102,7 +102,7 @@ public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
 		}
         
         
-        return ligneCmdFourn;
+        return entrepot;
     }
 
     /* (non-Javadoc)
@@ -110,15 +110,15 @@ public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List < Contenir1 > getLigneCommandeFornisseur() {
+    public List < Entrepot > getAllEntrepot() {
         Transaction transaction = null;
-        List < Contenir1 > ligneCmdFourn = null;
+        List < Entrepot > entrepot = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // get students
-            ligneCmdFourn = session.createQuery("from Contenir1").list();
+            entrepot = session.createQuery("from Entrepot").list();
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -127,23 +127,23 @@ public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
                 transaction.rollback();
             }
         }
-        return ligneCmdFourn;
+        return entrepot;
     }
 
     /* (non-Javadoc)
      * @see net.javaguides.hibernate.dao.IStudentDao#deleteStudent(long)
      */
     @Override
-    public void deleteLigneCommandeFornisseur(int id) {
+    public void deleteEntrepot(int id) {
         Transaction transaction = null;
-        Contenir1 ligneCmdFourn = null;
+        Entrepot entrepot = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            ligneCmdFourn = session.get(Contenir1.class, id);
+            entrepot = session.get(Entrepot.class, id);
             // get student object
-            session.delete(ligneCmdFourn);
+            session.delete(entrepot);
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -153,59 +153,39 @@ public class LigneCommandeFornisseurDao implements ILigneCommandeFornisseurDao {
             }
         }
     }
-	
-	
+
+
 	/**
 	 * méthode permettant de recuperer les fournisseur dans la base de donnée 
 	 * @author Kaji17
 	 */
-	public ObservableList<Contenir1> addFournisseurList() {
+	public ObservableList<Entrepot> addEntrepotList() {
 
-		ObservableList<Contenir1> listligneCmdFourn = FXCollections.observableArrayList();
+	ObservableList<Entrepot> listEntrepot = FXCollections.observableArrayList();
 
-		String sql = "SELECT * FROM contenir1";
+		String sql = "SELECT * FROM entrepot";
 
 		connect = Database.connectDb();
 
 		try {
 
-			Contenir1 ligneCmdFourn;
+			Entrepot entrepot;
 
 			prepare = connect.prepareStatement(sql);
 
 			result = prepare.executeQuery();
 
-//			while (result.next()) {
-//				ligneCmdFourn = new Contenir1(null, sql, null, null);
-//				listFournisseurs.add(fournisseur);
-//			}
+			while (result.next()) {
+				entrepot = new Entrepot(result.getInt("identrepot"),result.getString("nomentrepot"), result.getString("numeroentrepot"), result.getFloat("capacitstockage"), result.getString("unitemesurcapacite"));
+				listEntrepot.add(entrepot);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return listligneCmdFourn;
+		return listEntrepot;
 	}
-	
-
-	
-	
-	
-	/*
-	 * public List<Student > recupererCommandeByDateAndMenu(String idMenu , Date
-	 * dateCommande){ String query =
-	 * "SELECT `commande`.`DATECOMMANDE` FROM `commande` WHERE ((`commande`.`ID_MENU` = "
-	 * +idMenu+") AND (`commande`.`DATECOMMANDE` ='"+dateCommande+"'))"; //String
-	 * query = "SELECT * FROM `` WHERE ((`CODETYPE_LOGEMENT`='"
-	 * +typeLogement+"') AND (`CODE_TYPENATIONALITE` ='"
-	 * +typeNationalite+"') AND (`CODE_ANNEES`='"+codeAnne+"'))";
-	 * 
-	 * Commande commande = session.createSQLQuery().addEntity(getClass()).list();
-	 * (TypeLogementNationalite)
-	 * getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(
-	 * TypeLogementNationalite.class).uniqueResult(); return object; }
-	 */
-    
     
     
 }

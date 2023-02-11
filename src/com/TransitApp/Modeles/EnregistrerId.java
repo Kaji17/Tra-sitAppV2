@@ -1,5 +1,5 @@
 package com.TransitApp.Modeles;
-// Generated 7 févr. 2023, 23:03:37 by Hibernate Tools 4.3.6.Final
+// Generated 11 févr. 2023, 19:25:20 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

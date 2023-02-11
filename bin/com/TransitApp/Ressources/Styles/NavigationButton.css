@@ -1,8 +1,5 @@
 .ButtonNavigation{
 	-fx-background-color:  transparent;
-	-fx-border-color:  #cd2e2e;
-	-fx-border-width:  3;
-	-fx-border-radius:  10px;
 }
 .actived{
 	-fx-background-color:  #cd2e2e;

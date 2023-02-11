@@ -1,22 +1,31 @@
 package com.TransitApp.Controllers;
 
-import java.awt.Label;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.TransitApp.Dao.CategorieDao;
+import com.TransitApp.Dao.CommandeFournisseurDao;
+import com.TransitApp.Dao.EntrepotDao;
 import com.TransitApp.Dao.FournisseurDao;
 import com.TransitApp.Dao.ICategorieDao;
+import com.TransitApp.Dao.ICommandeFournisseurDao;
+import com.TransitApp.Dao.IEntrepotDao;
 import com.TransitApp.Dao.IFournisseurDao;
+import com.TransitApp.Dao.IMouvementProduitDao;
 import com.TransitApp.Dao.IProduitDao;
+import com.TransitApp.Dao.MouvementProduitDao;
 import com.TransitApp.Dao.ProduitDao;
 import com.TransitApp.Modeles.Categorie;
+import com.TransitApp.Modeles.Contenir;
+import com.TransitApp.Modeles.ContenirId;
+import com.TransitApp.Modeles.Entrepot;
 import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Modeles.Produit;
 
@@ -33,6 +42,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -194,12 +204,6 @@ public class RespoReaproController implements Initializable {
 	private TextField TXtEmailFourn;
 
 	@FXML
-	private TableView<?> TableViewComdFourn;
-
-	@FXML
-	private TableView<?> TableViewLigneCmd;
-
-	@FXML
 	private TableView<Produit> TableViewListProduit;
 
 	@FXML
@@ -207,6 +211,9 @@ public class RespoReaproController implements Initializable {
 
 	@FXML
 	private TextField TxtNumeroCmdFournisseur;
+
+	@FXML
+	private TextField TxtUniteMesure;
 
 	@FXML
 	private TextField TxtCPFourn;
@@ -251,30 +258,6 @@ public class RespoReaproController implements Initializable {
 	private TextField TxtVilleFourn;
 
 	@FXML
-	private TableColumn<?, ?> ViewCmdFourn_col_DateCmd;
-
-	@FXML
-	private TableColumn<?, ?> ViewCmdFourn_col_DateLivraison;
-
-	@FXML
-	private TableColumn<?, ?> ViewCmdFourn_col_NomFourn;
-
-	@FXML
-	private TableColumn<?, ?> ViewCmdFourn_col_NumCmd;
-
-	@FXML
-	private TableColumn<?, ?> ViewCmdFourn_col_NumRespoReapro;
-
-	@FXML
-	private TableColumn<?, ?> ViewCmdFourn_col_Total;
-
-	@FXML
-	private TextField TxtUniteMesure;
-
-	@FXML
-	private TableColumn<?, ?> ViewCmdFourn_col_idLigneCmd;
-
-	@FXML
 	private Button buttonCommandeFourn;
 
 	@FXML
@@ -287,13 +270,20 @@ public class RespoReaproController implements Initializable {
 	private TextField searchProduit;
 
 	private ObservableList<Fournisseur> addFournisseurList;
-	private ObservableList<Fournisseur> addFournisseurListV2;
 
 	IFournisseurDao fournisseurDao = new FournisseurDao();
 
 	ICategorieDao categorieDao = new CategorieDao();
 
 	IProduitDao produitDao = new ProduitDao();
+
+	IMouvementProduitDao ligneCmdFournDao = new MouvementProduitDao();
+
+	ICommandeFournisseurDao cmdFournDao = new CommandeFournisseurDao();
+
+	IMouvementProduitDao mouvProdDao = new MouvementProduitDao();
+
+	IEntrepotDao entrepotDao = new EntrepotDao();
 
 	private Connection connect;
 
@@ -313,6 +303,62 @@ public class RespoReaproController implements Initializable {
 	private String[] UniteMesure = { "T", "Kg", "G" };
 
 	private String[] Device = { "EUR", "FCFA", "USD" };
+
+	@FXML
+	private Button ButtonAddEntrepot;
+
+	@FXML
+	private Button ButtonDeleteEntrepot;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_CapaciteStock;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_DateEntree;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_DateSortie;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_IdEntrepot;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_IdEntrepot1ProdS;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_NomEntrepot;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_NomProd;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_Quantite;
+
+	@FXML
+	private TableColumn<?, ?> ListEntrepot_col_UniteMesureStcok;
+	@FXML
+	private Label NomEntrepotSelect;
+
+	@FXML
+	private TableView<?> TableListEntrepot;
+
+	@FXML
+	private TableView<?> TableListProdInEntrepot;
+
+	@FXML
+	private TextField TxtCapaciteStockage;
+
+	@FXML
+	private TextField TxtNomEntrepot;
+
+	@FXML
+	private TextField TxtNumeroEntrepot;
+
+	@FXML
+	private Button addComboBoxFournisseur;
+
+	@FXML
+	private TextField TxtUniteMesurePoid;
 
 	/**
 	 * methode pour fermer la fenetre
@@ -385,83 +431,23 @@ public class RespoReaproController implements Initializable {
 	 * 
 	 */
 	public void switchForm(ActionEvent event) {
-		if (event.getSource() == buttonCommandeFourn) {
-			PageCommandeFourn.setVisible(true);
-			PageAjoutCommandeFourn.setVisible(false);
-			PageGestionArticle.setVisible(false);
-			PageGestionEntrepot.setVisible(false);
-			PageGestionFournisseur.setVisible(false);
-
-//			Ajouter la coleur #34a39c au background du button passer en paramètre
-			fournisseurDao.addStyle(buttonCommandeFourn, "#cd2e2e");
-
-//			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			fournisseurDao.removeStyleBtn(ButtonAjouterComdFourn, ButtonGestionArticle, ButtonGestionEntrepot,
-					ButtonGestionFourn);
-
-		} else if (event.getSource() == ButtonAjouterComdFourn || event.getSource() == ButtonAddCmdFourn) {
-			PageAjoutCommandeFourn.setVisible(true);
-			PageCommandeFourn.setVisible(false);
-			PageGestionArticle.setVisible(false);
-			PageGestionEntrepot.setVisible(false);
-			PageGestionFournisseur.setVisible(false);
-
-			addComboBoxFournisseur();
-			addComboBoxProduit();
-
-//			Ajouter la coleur #34a39c au background du button passer en paramètre
-			fournisseurDao.addStyle(ButtonAjouterComdFourn, "#cd2e2e");
-
-//			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonGestionArticle, ButtonGestionEntrepot,
-					ButtonGestionFourn);
-
-		} else if (event.getSource() == ButtonGestionArticle) {
+		if (event.getSource() == ButtonGestionArticle) {
 			PageGestionArticle.setVisible(true);
-			PageCommandeFourn.setVisible(false);
-			PageAjoutCommandeFourn.setVisible(false);
 			PageGestionEntrepot.setVisible(false);
 			PageGestionFournisseur.setVisible(false);
-
-//			Ajouter la coleur #34a39c au background du button passer en paramètre
-			fournisseurDao.addStyle(ButtonGestionArticle, "#cd2e2e");
 			addComboBoxCategorie();
 			ProduitShowList();
 			addComboBoxProduit();
 
-//			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionEntrepot,
-					ButtonGestionFourn);
-
 		} else if (event.getSource() == ButtonGestionEntrepot) {
 			PageGestionEntrepot.setVisible(true);
-			PageCommandeFourn.setVisible(false);
-			PageAjoutCommandeFourn.setVisible(false);
 			PageGestionArticle.setVisible(false);
 			PageGestionFournisseur.setVisible(false);
 
-//			Ajouter la coleur #34a39c au background du button passer en paramètre
-			fournisseurDao.addStyle(ButtonGestionEntrepot, "#cd2e2e");
-
-//			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionArticle,
-					ButtonGestionFourn);
-
 		} else if (event.getSource() == ButtonGestionFourn) {
 			PageGestionFournisseur.setVisible(true);
-			PageCommandeFourn.setVisible(false);
-			PageAjoutCommandeFourn.setVisible(false);
 			PageGestionArticle.setVisible(false);
 			PageGestionEntrepot.setVisible(false);
-
-//			Ajouter la coleur #34a39c au background du button passer en paramètre
-			fournisseurDao.addStyle(ButtonGestionFourn, "#cd2e2e");
-
-//			Ajouter un couleur transparent au backgroud des trois button passer en parametre
-			fournisseurDao.removeStyleBtn(buttonCommandeFourn, ButtonAjouterComdFourn, ButtonGestionArticle,
-					ButtonGestionEntrepot);
-			FournisseurShowList();
-
 		}
 
 	}
@@ -471,6 +457,9 @@ public class RespoReaproController implements Initializable {
 	// FOURNISSEUR
 	// ______________________________
 
+	//
+	// ***********FOURNISSEUR***********
+	//
 	/**
 	 * 
 	 * Méthode permettant d'ajouter les fournisseur en BD
@@ -714,8 +703,10 @@ public class RespoReaproController implements Initializable {
 	// PRODUIT
 	// ______________________________
 
+	//
+	// ***********PRODUIT***********
+	//
 	/**
-	 * 
 	 * Méthode permettant d'ajouter les Produit en BD
 	 * 
 	 * @param event ActionEvent
@@ -728,7 +719,8 @@ public class RespoReaproController implements Initializable {
 		if (TxtNumeroProduit.getText().isEmpty() || TxtNomProduit.getText().isEmpty()
 				|| TxtPoidProduit.getText().isEmpty() || TxtPrixUnitaire.getText().isEmpty()
 				|| TxtQuantiteProduit.getText().isEmpty()
-				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem() == null) {
+				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem() == null
+				|| ComboBoxFournisseur.getSelectionModel().getSelectedItem() == null) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -754,8 +746,15 @@ public class RespoReaproController implements Initializable {
 				produit.setPoids(Float.parseFloat(TxtPoidProduit.getText()));
 				produit.setPrixunitaire(Float.parseFloat(TxtPrixUnitaire.getText()));
 				produit.setDescription(TxtDescriptionProduit.getText());
-				produit.setPoidunitemesurecode(TxtUniteMesure.getText());
+				produit.setPoidunitemesurecode(TxtUniteMesurePoid.getText());
+				produit.setQuantite(Integer.parseInt(TxtQuantiteProduit.getText()));
 
+				Date date = new Date();
+				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+				produit.setDateajout(sqlDate);
+
+				// Récuperer l'id de la categorie selectionner
 				int id = 0;
 				String val = (String) ComboBoxCategorieProduit.getSelectionModel().getSelectedItem();
 				for (Categorie e : categorieDao.getAllCategorie()) {
@@ -765,13 +764,30 @@ public class RespoReaproController implements Initializable {
 				}
 				produit.setIdcategorie(id);
 
+				// Récuperer l'id du fournisseur selectionner
+				int id1 = 0;
+				String val1 = (String) ComboBoxFournisseur.getSelectionModel().getSelectedItem();
+				for (Fournisseur e : fournisseurDao.getAllFournisseur()) {
+					if (e.getNomfournisseur().equalsIgnoreCase(val1)) {
+						id1 = e.getIdfournisseur();
+					}
+				}
+				produit.setIdfournisseur(id1);
 				produitDao.saveProduit(produit);
-				System.out.println("===Enregistremment Effectuer");
 
+				int idProd = produit.getIdproduit();
+
+				Contenir mouvProd = new Contenir();
+
+				mouvProd = addMouvProdAdd(idProd, id1, produit.getDateajout());
+
+				mouvProdDao.saveMouvementProduit(mouvProd);
+
+				System.out.println("===Enregistremment Effectuer");
 				alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Sucess Save");
 				alert.setHeaderText(null);
-				alert.setContentText("Produit: " + TxtNomproduit.getText() + " enregistrer avec success");
+				alert.setContentText("Produit: " + TxtNomProduit.getText() + " enregistrer avec success");
 				alert.showAndWait();
 				clearProduit();
 				ProduitShowList();
@@ -784,7 +800,6 @@ public class RespoReaproController implements Initializable {
 	}
 
 	/**
-	 * 
 	 * Méthode permettant de modifier les Produit en BD
 	 * 
 	 * @param event ActionEvent
@@ -824,7 +839,7 @@ public class RespoReaproController implements Initializable {
 							}
 						}
 						e.setIdcategorie(id);
-						e.setPoidunitemesurecode(TxtUniteMesure.getText());
+						e.setPoidunitemesurecode(TxtUniteMesurePoid.getText());
 						produitDao.updateProduit(e);
 					}
 				}
@@ -877,8 +892,8 @@ public class RespoReaproController implements Initializable {
 				Optional<ButtonType> option = alert.showAndWait();
 				if (option.get().equals(ButtonType.OK)) {
 					produitDao.deleteProduit(id);
-					clearProduit();
 					ProduitShowList();
+					clearProduit();
 				}
 			} else {
 				alert = new Alert(AlertType.ERROR);
@@ -889,6 +904,8 @@ public class RespoReaproController implements Initializable {
 				return;
 			}
 		}
+		ProduitShowList();
+		clearProduit();
 
 	}
 
@@ -903,9 +920,9 @@ public class RespoReaproController implements Initializable {
 		ListProduit_col_NumeroProduit.setCellValueFactory(new PropertyValueFactory<>("numeroproduit"));
 		ListProduit_col_NomProduit.setCellValueFactory(new PropertyValueFactory<>("nomproduit"));
 		ListProduit_col_PoidsProduit.setCellValueFactory(new PropertyValueFactory<>("poids"));
-		ListProduit_col_DescriptionProduit.setCellValueFactory(new PropertyValueFactory<>("description"));
+		ListProduit_col_DescriptionProduit.setCellValueFactory(new PropertyValueFactory<>("idfournisseur"));
 		ListProduit_col_PrixUnitaireProduit.setCellValueFactory(new PropertyValueFactory<>("prixunitaire"));
-		ListProduit_col_QuantiteStock.setCellValueFactory(new PropertyValueFactory<>("null"));
+		ListProduit_col_QuantiteStock.setCellValueFactory(new PropertyValueFactory<>("quantite"));
 		ListProduit_col_Categorie.setCellValueFactory(new PropertyValueFactory<>("idcategorie"));
 
 		TableViewListProduit.setItems(addproduitrList);
@@ -1016,13 +1033,261 @@ public class RespoReaproController implements Initializable {
 		TxtDescriptionProduit.setText(produit.getDescription());
 		TxtPoidProduit.setText(String.valueOf(produit.getPoids()));
 		TxtPrixUnitaire.setText(String.valueOf(produit.getPrixunitaire()));
-		TxtUniteMesure.setText(produit.getPoidunitemesurecode());
+		TxtUniteMesurePoid.setText(produit.getPoidunitemesurecode());
+
+	}
+
+	/**
+	 * Méthode permettant de creer un historique d'enregistrement des produits dans
+	 * un entrepot
+	 * 
+	 * @param idProd     Id du produit ajouter
+	 * @param idEntrepot Id de l'entrepot selectionner
+	 * @param dateEntrer La date d'ajout du produit
+	 * @return
+	 * 
+	 * @author Kaji17
+	 */
+	public Contenir addMouvProdAdd(int idProd, int idEntrepot, Date dateEntrer) {
+		ContenirId id = new ContenirId(idProd, idEntrepot);
+
+		Contenir mouvProd = new Contenir(id, dateEntrer, null);
+
+		return mouvProd;
+
+	}
+
+	//
+	// ***********ENTREPOT***********
+	//
+
+	/**
+	 * Méthode permettant d'ajouter les entrepot en BD
+	 * @return void
+	 * @author kaji17
+	 */
+	public void addEntrepot() {
+		Alert alert;
+		Entrepot entrepot = new Entrepot();
+		if (TxtNomEntrepot.getText().isEmpty() || TxtNumeroEntrepot.getText().isEmpty() || TxtCapaciteStockage.getText().isEmpty()
+				|| TxtUniteMesure.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Remplissez tous les champs s'il vous plait ");
+			alert.showAndWait();
+		} else {
+			Boolean verif = false;
+			for (Entrepot e : entrepotDao.getAllEntrepot()) {
+				if (e.getNomentrepot().equalsIgnoreCase(TxtNomEntrepot.getText())) {
+					verif = true;
+				}
+			}
+			if (verif == true) {
+				alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Message");
+				alert.setHeaderText(null);
+				alert.setContentText(
+						"L'entrepot : " + TxtNomEntrepot.getText() + " exite déja. Entrer un autre nom d'Entrepot");
+				alert.showAndWait();
+			} else {
+				entrepot.setNomentrepot(TxtNomEntrepot.getText());
+				entrepot.setNumeroentrepot(TxtNumeroEntrepot.getText());
+				entrepot.setUnitemesurcapacite(TxtUniteMesure.getText());
+				entrepot.setCapacitstockage(Float.parseFloat(TxtCapaciteStockage.getText()));
+
+				entrepotDao.saveEntrepot(entrepot);
+				System.out.println("===Enregistremment Effectuer");
+
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Sucess Save");
+				alert.setHeaderText(null);
+				alert.setContentText("Entrepot: " + TxtNomEntrepot.getText() + " enregistrer avec success");
+				alert.showAndWait();
+				clearEntrepot();
+				addComboBoxEntrepot();
+			}
+			FournisseurShowList();
+			System.out.println(verif);
+		}
+
+	}
+
+	/**
+	 * 
+	 * Méthode permettant de modifier les Entrepots en BD
+	 * @return void
+	 * @author kaji17
+	 */
+	public void updateEntrepot() {
+		Alert alert;
+		if (TxtNomEntrepot.getText().isEmpty() || TxtNumeroEntrepot.getText().isEmpty() || TxtCapaciteStockage.getText().isEmpty()
+				|| TxtUniteMesure.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Remplissez tous les champs s'il vous plait ");
+			alert.showAndWait();
+		} else {
+			alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("CONFIRMATION MESSAGE");
+			alert.setHeaderText(null);
+			alert.setContentText("Êtes vous sures de vouloir modifier les Informations entrepot : "
+					+ TxtNomEntrepot.getText() + " ? Cette action est irreversible");
+			Optional<ButtonType> option = alert.showAndWait();
+			if (option.get().equals(ButtonType.OK)) {
+				for (Entrepot e : entrepotDao.getAllEntrepot()) {
+					if (e.getNomentrepot().equals(TxtNomEntrepot.getText())) {
+						e.setNumeroentrepot(TxtNumeroEntrepot.getText());
+						e.setCapacitstockage(Float.parseFloat(TxtCapaciteStockage.getText()));
+						e.setUnitemesurcapacite(TxtUniteMesure.getText());
+						entrepotDao.saveEntrepot(e);
+					}
+				}
+
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Sucess Modification");
+				alert.setHeaderText(null);
+				alert.setContentText("Entrepot: " + TxtNomEntrepot.getText() + " enregistrer avec success");
+				alert.showAndWait();
+				clearEntrepot();
+				addComboBoxEntrepot();
+				EntrepotShowList();
+			}
+		}
+
+	}
+
+	/**
+	 * 
+	 * Méthode permettant de supprimer un Entrepot par son id
+	 * 
+	 * @param event ActionEvent
+	 * @return void
+	 * @author kaji17
+	 */
+	public void deleteEntrepot() {
+		Alert alert;
+		if (TxtNomFourn.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Selectionner ou entrer un nom de fournisseur");
+			Optional<ButtonType> option = alert.showAndWait();
+		} else {
+			// Vérifie l'existance d'un fournisseur
+			Boolean verif = false;
+			int id = 0;
+			for (Fournisseur e : fournisseurDao.getAllFournisseur()) {
+				if (e.getNomfournisseur().equalsIgnoreCase(TxtNomFourn.getText())) {
+					verif = true;
+					id = e.getIdfournisseur();
+				}
+			}
+			if (verif == true) {
+				alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("CONFIRMATION MESSAGE");
+				alert.setHeaderText(null);
+				alert.setContentText("Êtes vous sures de vouloir supprimer le fournisseur: " + TxtNomFourn.getText()
+						+ " ? Cette action est irreversible");
+				Optional<ButtonType> option = alert.showAndWait();
+				if (option.get().equals(ButtonType.OK)) {
+					fournisseurDao.deleteFournisseur(id);
+					clearFournisseur();
+					FournisseurShowList();
+				}
+			} else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Message");
+				alert.setHeaderText(null);
+				alert.setContentText("Le fournisseur: " + TxtNomFourn.getText() + " n'existe pas ");
+				alert.showAndWait();
+				return;
+			}
+		}
+
+	}
+
+	/**
+	 * Méthode permettant ajouter les Entrepot dans le tableau
+	 * 
+	 */
+	public void EntrepotShowList() {
+		addFournisseurList = fournisseurDao.addFournisseurList();
+
+		ListFourn_col_IdFourn.setCellValueFactory(new PropertyValueFactory<>("idfournisseur"));
+		ListFourn_col_NomFourn.setCellValueFactory(new PropertyValueFactory<>("nomfournisseur"));
+		ListFourn_col_PaysFourn.setCellValueFactory(new PropertyValueFactory<>("paysfournisseur"));
+		ListFourn_col_EmailFourn.setCellValueFactory(new PropertyValueFactory<>("emailfournisseur"));
+		ListFourn_col_Telephone.setCellValueFactory(new PropertyValueFactory<>("telephonefournisseur"));
+		ListFourn_col_AdresFourn.setCellValueFactory(new PropertyValueFactory<>("adressefournisseur"));
+
+		TableListFourn.setItems(addFournisseurList);
+	}
+
+	/**
+	 * Méthode permettant de remettre à zero tout les champs d'enregistrement
+	 * Entrepot
+	 * 
+	 * @author pevir
+	 */
+	public void clearEntrepot() {
+		TxtNomFourn.setText("");
+		TxtNomFourn.setText("");
+		TxtAdresseFourn.setText("");
+		TxtPaysFourn.setText("");
+		TxtPaysFourn.setText("");
+		TxtVilleFourn.setText("");
+		TxtCPFourn.setText("");
+		TXtEmailFourn.setText("");
+		TxtTelephone.setText("");
+	}
+
+	/**
+	 * methode pour remplir la combobox des différents Entrepot
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+	public void addComboBoxEntrepot() {
+		List<String> FournisseurList = new ArrayList<>();
+
+		for (Fournisseur data : fournisseurDao.getAllFournisseur()) {
+			FournisseurList.add(data.getNomfournisseur());
+		}
+
+		ObservableList oblist = FXCollections.observableArrayList(FournisseurList);
+		ComboBoxFournisseur.setItems(oblist);
+	}
+
+	/**
+	 * méthode permetant de remplir les différent champs d'enregistrment Entrepot
+	 * lorsque un champs du table views est selectionner
+	 * 
+	 * @return void
+	 * @author Kaji17
+	 */
+	public void entrepotSelected() {
+		Fournisseur fournisseur = TableListFourn.getSelectionModel().getSelectedItem();
+
+		Integer num = TableListFourn.getSelectionModel().getSelectedIndex();
+
+		if (num - 1 < -1) {
+			return;
+		}
+		TxtNomFourn.setText(fournisseur.getNomfournisseur());
+		TxtAdresseFourn.setText(fournisseur.getAdressefournisseur());
+		TxtPaysFourn.setText(fournisseur.getPaysfournisseur());
+		TxtVilleFourn.setText(fournisseur.getVillefournisseur());
+		TxtCPFourn.setText(fournisseur.getCpfournisseur());
+		TXtEmailFourn.setText(fournisseur.getEmailfournisseur());
+		TxtTelephone.setText(fournisseur.getTelephonefournisseur());
 
 	}
 
 	// ______________________________
 	//
-	// COMMANDE FOURNISSEUR
+	// PRODUIT
 	// ______________________________
 
 	@Override
@@ -1031,9 +1296,9 @@ public class RespoReaproController implements Initializable {
 		addComboBoxFournisseur();
 		addComboBoxCategorie();
 		ProduitShowList();
-		addComboBoxProduit();
-		addComboBoxUniteMesure();
-		addComboBoxDevice();
+//		addComboBoxProduit();
+//		addComboBoxUniteMesure();
+//		addComboBoxDevice();
 	}
 
 }

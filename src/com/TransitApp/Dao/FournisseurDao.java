@@ -235,26 +235,6 @@ public class FournisseurDao implements IFournisseurDao {
 
 		return listFournisseurs;
 	}
-	
-
-	
-	
-	
-	/*
-	 * public List<Student > recupererCommandeByDateAndMenu(String idMenu , Date
-	 * dateCommande){ String query =
-	 * "SELECT `commande`.`DATECOMMANDE` FROM `commande` WHERE ((`commande`.`ID_MENU` = "
-	 * +idMenu+") AND (`commande`.`DATECOMMANDE` ='"+dateCommande+"'))"; //String
-	 * query = "SELECT * FROM `` WHERE ((`CODETYPE_LOGEMENT`='"
-	 * +typeLogement+"') AND (`CODE_TYPENATIONALITE` ='"
-	 * +typeNationalite+"') AND (`CODE_ANNEES`='"+codeAnne+"'))";
-	 * 
-	 * Commande commande = session.createSQLQuery().addEntity(getClass()).list();
-	 * (TypeLogementNationalite)
-	 * getSessionFactory().getCurrentSession().createSQLQuery(query).addEntity(
-	 * TypeLogementNationalite.class).uniqueResult(); return object; }
-	 */
-    
     
     
 }
