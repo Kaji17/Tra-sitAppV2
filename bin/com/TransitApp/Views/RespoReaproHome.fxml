@@ -199,7 +199,7 @@
    <center>
       <AnchorPane prefHeight="660.0" prefWidth="1050.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
+            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                <children>
                   <AnchorPane layoutY="-15.0" prefHeight="598.0" prefWidth="1024.0">
                      <children>
@@ -273,17 +273,23 @@
                                     <Font name="MS Reference Sans Serif" size="12.0" />
                                  </font></Label>
                               <ComboBox fx:id="ComboBoxCategorieProduit" layoutX="833.0" layoutY="380.0" onAction="#addComboBoxCategorie" prefWidth="150.0" />
-                              <Label layoutX="724.0" layoutY="436.0" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #fffff;" text="UNITE MESURE ">
+                              <Label layoutX="724.0" layoutY="411.0" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #fffff;" text="UNITE MESURE ">
                                  <font>
                                     <Font name="MS Reference Sans Serif" size="12.0" />
                                  </font></Label>
-                              <TextField fx:id="TxtUniteMesurePoid" layoutX="834.0" layoutY="437.0" />
-                              <Label layoutX="724.0" layoutY="476.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="FOURNISSEUR">
+                              <TextField fx:id="TxtUniteMesurePoid" layoutX="834.0" layoutY="412.0" />
+                              <Label layoutX="724.0" layoutY="442.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="FOURNISSEUR">
                                  <font>
                                     <Font name="MS Reference Sans Serif" size="12.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="835.0" layoutY="475.0" onAction="#addComboBoxFournisseur" prefWidth="150.0" />
+                              <ComboBox fx:id="ComboBoxFournisseur" layoutX="833.0" layoutY="442.0" onAction="#addComboBoxFournisseur" prefWidth="150.0" />
+                              <Label layoutX="724.0" layoutY="478.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="ENTREPOT">
+                                 <font>
+                                    <Font name="MS Reference Sans Serif" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="ComboBoxEntrepot" layoutX="833.0" layoutY="478.0" prefWidth="150.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="11.0" layoutY="54.0" prefHeight="330.0" prefWidth="991.0" AnchorPane.topAnchor="11.0">
@@ -307,7 +313,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PageGestionEntrepot" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+            <AnchorPane fx:id="PageGestionEntrepot" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
                <children>
                   <AnchorPane prefHeight="552.0" prefWidth="352.0" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                      <children>
@@ -356,7 +362,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="ButtonDeleteEntrepot" layoutX="12.0" layoutY="432.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                        <Button fx:id="ButtonDeleteEntrepot" layoutX="12.0" layoutY="432.0" mnemonicParsing="false" onAction="#deleteEntrepot" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -372,7 +378,7 @@
                               <Font name="MS Reference Sans Serif" size="26.0" />
                            </font>
                         </Label>
-                        <Button fx:id="ButtonModifyEntrepot" layoutX="120.0" layoutY="484.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="113.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
+                        <Button fx:id="ButtonModifyEntrepot" layoutX="120.0" layoutY="484.0" mnemonicParsing="false" onAction="#updateEntrepot" prefHeight="41.0" prefWidth="113.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -387,7 +393,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="389.0" layoutY="2.0" prefHeight="576.0" prefWidth="610.0" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                      <children>
-                        <TableView fx:id="TableListEntrepot" layoutX="17.0" layoutY="28.0" prefHeight="231.0" prefWidth="583.0">
+                        <TableView fx:id="TableListEntrepot" layoutX="17.0" layoutY="28.0" onMouseClicked="#entrepotSelected" prefHeight="231.0" prefWidth="583.0">
                            <columns>
                               <TableColumn fx:id="ListEntrepot_col_IdEntrepot" prefWidth="108.0" text="IdEntrepot" />
                               <TableColumn fx:id="ListEntrepot_col_NomEntrepot" minWidth="7.0" prefWidth="137.0" text="Nom Entrepot" />

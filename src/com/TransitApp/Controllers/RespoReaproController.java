@@ -111,7 +111,7 @@ public class RespoReaproController implements Initializable {
 	private Button ButtonSupressionCmdFOurn;
 
 	@FXML
-	private ComboBox<?> ComboBoxCategorieProduit;
+	private ComboBox<String> ComboBoxCategorieProduit;
 
 	@FXML
 	private ComboBox<?> ComboBoxDevise;
@@ -338,9 +338,13 @@ public class RespoReaproController implements Initializable {
 	private TableColumn<?, ?> ListEntrepot_col_UniteMesureStcok;
 	@FXML
 	private Label NomEntrepotSelect;
+	
+
+    @FXML
+    private ComboBox<?> ComboBoxEntrepot;
 
 	@FXML
-	private TableView<?> TableListEntrepot;
+	private TableView<Entrepot> TableListEntrepot;
 
 	@FXML
 	private TableView<?> TableListProdInEntrepot;
@@ -359,6 +363,8 @@ public class RespoReaproController implements Initializable {
 
 	@FXML
 	private TextField TxtUniteMesurePoid;
+
+	private  ObservableList<Entrepot> addEntrepotList;
 
 	/**
 	 * methode pour fermer la fenetre
@@ -394,7 +400,7 @@ public class RespoReaproController implements Initializable {
 
 //				Permet de cacher la fenetre du dashboard
 				logoutBtn.getScene().getWindow().hide();
-				Parent root = FXMLLoader.load(getClass().getResource("../Views/LoginV2.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("../Views/Login.fxml"));
 				Stage stage = new Stage();
 				Scene scene = new Scene(root);
 				stage.setScene(scene);
@@ -766,10 +772,10 @@ public class RespoReaproController implements Initializable {
 
 				// Récuperer l'id du fournisseur selectionner
 				int id1 = 0;
-				String val1 = (String) ComboBoxFournisseur.getSelectionModel().getSelectedItem();
-				for (Fournisseur e : fournisseurDao.getAllFournisseur()) {
-					if (e.getNomfournisseur().equalsIgnoreCase(val1)) {
-						id1 = e.getIdfournisseur();
+				String val1 = (String) ComboBoxEntrepot.getSelectionModel().getSelectedItem();
+				for (Entrepot e : entrepotDao.getAllEntrepot()) {
+					if (e.getNomentrepot().equalsIgnoreCase(val1)) {
+						id1 = e.getIdentrepot();
 					}
 				}
 				produit.setIdfournisseur(id1);
@@ -792,6 +798,7 @@ public class RespoReaproController implements Initializable {
 				clearProduit();
 				ProduitShowList();
 				addComboBoxProduit();
+				addComboBoxEntrepot();
 			}
 			FournisseurShowList();
 			System.out.println(verif);
@@ -810,8 +817,9 @@ public class RespoReaproController implements Initializable {
 		Alert alert;
 		if (TxtNumeroProduit.getText().isEmpty() || TxtNomProduit.getText().isEmpty()
 				|| TxtPoidProduit.getText().isEmpty() || TxtPrixUnitaire.getText().isEmpty()
-				|| TxtUniteMesure.getText().isEmpty()
-				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem() == null) {
+				|| TxtUniteMesurePoid.getText().isEmpty()
+				|| ComboBoxCategorieProduit.getSelectionModel().getSelectedItem() == null
+				|| ComboBoxEntrepot.getSelectionModel().getSelectedItem() == null) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -942,7 +950,9 @@ public class RespoReaproController implements Initializable {
 		TxtPrixUnitaire.setText("");
 		TxtQuantiteProduit.setText("");
 		TxtUniteMesure.setText("");
-//		ComboBoxCategorieProduit.set;
+		ComboBoxCategorieProduit.setSelectionModel(null);
+		ComboBoxEntrepot.setSelectionModel(null);
+		ComboBoxFournisseur.setSelectionModel(null);
 	}
 
 	/**
@@ -1034,6 +1044,8 @@ public class RespoReaproController implements Initializable {
 		TxtPoidProduit.setText(String.valueOf(produit.getPoids()));
 		TxtPrixUnitaire.setText(String.valueOf(produit.getPrixunitaire()));
 		TxtUniteMesurePoid.setText(produit.getPoidunitemesurecode());
+		TxtQuantiteProduit.setText(String.valueOf(produit.getQuantite()));
+		
 
 	}
 
@@ -1106,6 +1118,7 @@ public class RespoReaproController implements Initializable {
 				alert.showAndWait();
 				clearEntrepot();
 				addComboBoxEntrepot();
+				EntrepotShowList();
 			}
 			FournisseurShowList();
 			System.out.println(verif);
@@ -1141,7 +1154,7 @@ public class RespoReaproController implements Initializable {
 						e.setNumeroentrepot(TxtNumeroEntrepot.getText());
 						e.setCapacitstockage(Float.parseFloat(TxtCapaciteStockage.getText()));
 						e.setUnitemesurcapacite(TxtUniteMesure.getText());
-						entrepotDao.saveEntrepot(e);
+						entrepotDao.updateEntrepot(e);
 					}
 				}
 
@@ -1168,39 +1181,39 @@ public class RespoReaproController implements Initializable {
 	 */
 	public void deleteEntrepot() {
 		Alert alert;
-		if (TxtNomFourn.getText().isEmpty()) {
+		if (TxtNomEntrepot.getText().isEmpty()) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
-			alert.setContentText("Selectionner ou entrer un nom de fournisseur");
+			alert.setContentText("Selectionner ou entrer un nom d' entrepot");
 			Optional<ButtonType> option = alert.showAndWait();
 		} else {
 			// Vérifie l'existance d'un fournisseur
 			Boolean verif = false;
 			int id = 0;
-			for (Fournisseur e : fournisseurDao.getAllFournisseur()) {
-				if (e.getNomfournisseur().equalsIgnoreCase(TxtNomFourn.getText())) {
+			for (Entrepot e : entrepotDao.getAllEntrepot()) {
+				if (e.getNomentrepot().equalsIgnoreCase(TxtNomEntrepot.getText())) {
 					verif = true;
-					id = e.getIdfournisseur();
+					id = e.getIdentrepot();
 				}
 			}
 			if (verif == true) {
 				alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("CONFIRMATION MESSAGE");
 				alert.setHeaderText(null);
-				alert.setContentText("Êtes vous sures de vouloir supprimer le fournisseur: " + TxtNomFourn.getText()
+				alert.setContentText("Êtes vous sures de vouloir supprimer l'entrepot: " + TxtNomEntrepot.getText()
 						+ " ? Cette action est irreversible");
 				Optional<ButtonType> option = alert.showAndWait();
 				if (option.get().equals(ButtonType.OK)) {
-					fournisseurDao.deleteFournisseur(id);
-					clearFournisseur();
-					FournisseurShowList();
+					entrepotDao.deleteEntrepot(id);
+					clearEntrepot();
+					EntrepotShowList();
 				}
 			} else {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
 				alert.setHeaderText(null);
-				alert.setContentText("Le fournisseur: " + TxtNomFourn.getText() + " n'existe pas ");
+				alert.setContentText("L'entrepot : " + TxtNomEntrepot.getText() + " n'existe pas ");
 				alert.showAndWait();
 				return;
 			}
@@ -1213,16 +1226,14 @@ public class RespoReaproController implements Initializable {
 	 * 
 	 */
 	public void EntrepotShowList() {
-		addFournisseurList = fournisseurDao.addFournisseurList();
+		addEntrepotList = entrepotDao.addEntrepotList();
 
-		ListFourn_col_IdFourn.setCellValueFactory(new PropertyValueFactory<>("idfournisseur"));
-		ListFourn_col_NomFourn.setCellValueFactory(new PropertyValueFactory<>("nomfournisseur"));
-		ListFourn_col_PaysFourn.setCellValueFactory(new PropertyValueFactory<>("paysfournisseur"));
-		ListFourn_col_EmailFourn.setCellValueFactory(new PropertyValueFactory<>("emailfournisseur"));
-		ListFourn_col_Telephone.setCellValueFactory(new PropertyValueFactory<>("telephonefournisseur"));
-		ListFourn_col_AdresFourn.setCellValueFactory(new PropertyValueFactory<>("adressefournisseur"));
-
-		TableListFourn.setItems(addFournisseurList);
+		ListEntrepot_col_IdEntrepot.setCellValueFactory(new PropertyValueFactory<>("identrepot"));
+		ListEntrepot_col_NomEntrepot.setCellValueFactory(new PropertyValueFactory<>("nomentrepot"));
+		ListEntrepot_col_CapaciteStock.setCellValueFactory(new PropertyValueFactory<>("capacitstockage"));
+		ListEntrepot_col_UniteMesureStcok.setCellValueFactory(new PropertyValueFactory<>("unitemesurcapacite"));
+		
+		TableListEntrepot.setItems(addEntrepotList);
 	}
 
 	/**
@@ -1232,15 +1243,10 @@ public class RespoReaproController implements Initializable {
 	 * @author pevir
 	 */
 	public void clearEntrepot() {
-		TxtNomFourn.setText("");
-		TxtNomFourn.setText("");
-		TxtAdresseFourn.setText("");
-		TxtPaysFourn.setText("");
-		TxtPaysFourn.setText("");
-		TxtVilleFourn.setText("");
-		TxtCPFourn.setText("");
-		TXtEmailFourn.setText("");
-		TxtTelephone.setText("");
+		TxtNomEntrepot.setText("");
+		TxtNumeroEntrepot.setText("");
+		TxtCapaciteStockage.setText("");
+		TxtUniteMesure.setText("");
 	}
 
 	/**
@@ -1250,14 +1256,14 @@ public class RespoReaproController implements Initializable {
 	 * @author Kaji17
 	 */
 	public void addComboBoxEntrepot() {
-		List<String> FournisseurList = new ArrayList<>();
+		List<String> EntrepotList = new ArrayList<>();
 
-		for (Fournisseur data : fournisseurDao.getAllFournisseur()) {
-			FournisseurList.add(data.getNomfournisseur());
+		for (Entrepot data : entrepotDao.getAllEntrepot()) {
+			EntrepotList.add(data.getNomentrepot());
 		}
 
-		ObservableList oblist = FXCollections.observableArrayList(FournisseurList);
-		ComboBoxFournisseur.setItems(oblist);
+		ObservableList oblist = FXCollections.observableArrayList(EntrepotList);
+		ComboBoxEntrepot.setItems(oblist);
 	}
 
 	/**
@@ -1268,34 +1274,29 @@ public class RespoReaproController implements Initializable {
 	 * @author Kaji17
 	 */
 	public void entrepotSelected() {
-		Fournisseur fournisseur = TableListFourn.getSelectionModel().getSelectedItem();
+		Entrepot entrepot= TableListEntrepot.getSelectionModel().getSelectedItem();
 
-		Integer num = TableListFourn.getSelectionModel().getSelectedIndex();
+		Integer num = TableListEntrepot.getSelectionModel().getSelectedIndex();
 
 		if (num - 1 < -1) {
 			return;
 		}
-		TxtNomFourn.setText(fournisseur.getNomfournisseur());
-		TxtAdresseFourn.setText(fournisseur.getAdressefournisseur());
-		TxtPaysFourn.setText(fournisseur.getPaysfournisseur());
-		TxtVilleFourn.setText(fournisseur.getVillefournisseur());
-		TxtCPFourn.setText(fournisseur.getCpfournisseur());
-		TXtEmailFourn.setText(fournisseur.getEmailfournisseur());
-		TxtTelephone.setText(fournisseur.getTelephonefournisseur());
-
+		TxtNomEntrepot.setText(entrepot.getNomentrepot());
+		TxtNumeroEntrepot.setText(entrepot.getNumeroentrepot());
+		TxtCapaciteStockage.setText(String.valueOf(entrepot.getCapacitstockage()));
+		TxtUniteMesure.setText(entrepot.getUnitemesurcapacite());
 	}
 
-	// ______________________________
-	//
-	// PRODUIT
-	// ______________________________
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		FournisseurShowList();
 		addComboBoxFournisseur();
 		addComboBoxCategorie();
+		addComboBoxEntrepot();
 		ProduitShowList();
+		EntrepotShowList();
 //		addComboBoxProduit();
 //		addComboBoxUniteMesure();
 //		addComboBoxDevice();

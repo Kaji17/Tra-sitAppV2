@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.TransitApp.Modeles.Entrepot;
 
+import javafx.collections.ObservableList;
+
 public interface IEntrepotDao {
 
 	void saveEntrepot(Entrepot entrepot);
@@ -15,5 +17,7 @@ public interface IEntrepotDao {
 	List<Entrepot> getAllEntrepot();
 
 	Entrepot getEntrepotById(int id);
+
+	ObservableList<Entrepot> addEntrepotList();
 
 }

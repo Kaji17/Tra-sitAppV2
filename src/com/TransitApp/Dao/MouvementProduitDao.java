@@ -11,10 +11,14 @@ import org.hibernate.Transaction;
 
 import com.TransitApp.Modeles.Contenir;
 import com.TransitApp.Modeles.Contenir1;
+import com.TransitApp.Modeles.ContenirId;
 import com.TransitApp.Util.HibernateUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class MouvementProduitDao implements IMouvementProduitDao {
@@ -130,40 +134,42 @@ public class MouvementProduitDao implements IMouvementProduitDao {
         }
         return mvnProd;
     }
-}
 	
 	
 //	/**
-//	 * méthode permettant de recuperer les fournisseur dans la base de donnée 
+//	 * méthode permettant de recuperer la liste des mouvemnt de produit dans la base de donnée 
 //	 * @author Kaji17
 //	 */
-//	public ObservableList<Contenir1> addFournisseurList() {
+//	public ObservableList<Contenir> addtProduitEntrepotList( TextField textfiel) {
 //
-//		ObservableList<Contenir1> listligneCmdFourn = FXCollections.observableArrayList();
+//		ObservableList<Contenir> listlProdEntrepot= FXCollections.observableArrayList();
 //
-//		String sql = "SELECT * FROM contenir1";
+//		String sql = "SELECT * FROM contenir WHERE IDPRODUIT = ? ";
 //
 //		connect = Database.connectDb();
 //
 //		try {
 //
-//			Contenir1 ligneCmdFourn;
+//			Contenir mvnProd;
 //
 //			prepare = connect.prepareStatement(sql);
+//			
+//			prepare.setString(1, textfiel.getText());
 //
 //			result = prepare.executeQuery();
-//
-////			while (result.next()) {
-////				ligneCmdFourn = new Contenir1(null, sql, null, null);
-////				listFournisseurs.add(fournisseur);
-////			}
+//			
+//			while (result.next()) {
+//				mvnProd = new Contenir(result.getObject(0), sql, null, null);
+//				listlProdEntrepot.add(mvnProd);
+//			}
 //
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
 //
-//		return listligneCmdFourn;
+//		return listlProdEntrepot;
 //	}
-//	
+ }
+	
 
    
