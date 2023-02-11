@@ -98,7 +98,7 @@ public class ManagerController {
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(false);
 			
-			addStyle(boutton_gestion_commandes, "#cd2e2e");
+			addStyle(boutton_gestion_commandes, "#34a39c");
 			
 			removeStyleBtn(boutton_gestionmission, boutton_suivi);
 		}
@@ -109,7 +109,7 @@ public class ManagerController {
 			page_ajout_mission.setVisible(true);
 			suivi.setVisible(false);
 			
-			addStyle(boutton_gestionmission, "#cd2e2e");
+			addStyle(boutton_gestionmission, "#34a39c");
 			removeStyleBtn(boutton_gestion_commandes, boutton_suivi);
 		}
 		
@@ -121,7 +121,7 @@ public class ManagerController {
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(true);
 			
-			addStyle(boutton_suivi, "#cd2e2e");
+			addStyle(boutton_suivi, "#34a39c");
 			removeStyleBtn(boutton_gestion_commandes,boutton_gestionmission );
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
