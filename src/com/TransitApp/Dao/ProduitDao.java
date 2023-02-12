@@ -184,7 +184,7 @@ public class ProduitDao implements IProduitDao {
 			Produit produit;
 
 			prepare = connect.prepareStatement(sql);
-
+			
 			result = prepare.executeQuery();
 			while (result.next()) {		
 				produit = new Produit(

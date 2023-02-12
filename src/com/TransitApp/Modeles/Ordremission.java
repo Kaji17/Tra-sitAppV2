@@ -1,5 +1,5 @@
 package com.TransitApp.Modeles;
-// Generated 11 févr. 2023, 19:25:20 by Hibernate Tools 4.3.6.Final
+// Generated 12 févr. 2023, 10:07:19 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name = "ordremission", catalog = "transitbd")
 public class Ordremission implements java.io.Serializable {
 
-	private String idordremission;
+	private Integer idordremission;
 	private int idtransporteur;
 	private String idcommandeclient;
 	private String numeroordremission;
@@ -35,8 +35,9 @@ public class Ordremission implements java.io.Serializable {
 		this.idcommandeclient = idcommandeclient;
 	}
 
-	public Ordremission(int idtransporteur, String idcommandeclient, String numeroordremission, Date datedebut,
+	public Ordremission(int idordremission,int idtransporteur, String idcommandeclient, String numeroordremission, Date datedebut,
 			Date datefin, String statue, String rapport) {
+		this.idordremission = idordremission;
 		this.idtransporteur = idtransporteur;
 		this.idcommandeclient = idcommandeclient;
 		this.numeroordremission = numeroordremission;
@@ -46,22 +47,16 @@ public class Ordremission implements java.io.Serializable {
 		this.rapport = rapport;
 	}
 
-	public Ordremission(int int1, int int2, String string, String string2, java.sql.Date date, java.sql.Date date2,
-			String string3, String string4) {
-		// TODO Auto-generated constructor stub
-	}
-
-	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "IDORDREMISSION", unique = true, nullable = false)
-	public String getIdordremission() {
+	public Integer getIdordremission() {
 		return this.idordremission;
 	}
 
-	public void setIdordremission(String string) {
-		this.idordremission = string;
+	public void setIdordremission(Integer idordremission) {
+		this.idordremission = idordremission;
 	}
 
 	@Column(name = "IDTRANSPORTEUR", nullable = false)
@@ -97,8 +92,8 @@ public class Ordremission implements java.io.Serializable {
 		return this.datedebut;
 	}
 
-	public void setDatedebut(Date string) {
-		this.datedebut = string;
+	public void setDatedebut(Date datedebut) {
+		this.datedebut = datedebut;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -107,8 +102,8 @@ public class Ordremission implements java.io.Serializable {
 		return this.datefin;
 	}
 
-	public void setDatefin(Date string) {
-		this.datefin = string;
+	public void setDatefin(Date datefin) {
+		this.datefin = datefin;
 	}
 
 	@Column(name = "STATUE", length = 20)
@@ -128,14 +123,5 @@ public class Ordremission implements java.io.Serializable {
 	public void setRapport(String rapport) {
 		this.rapport = rapport;
 	}
-
-	public Ordremission[] getAllOrdremission() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
-	
 
 }

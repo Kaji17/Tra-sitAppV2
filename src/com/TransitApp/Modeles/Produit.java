@@ -1,5 +1,5 @@
 package com.TransitApp.Modeles;
-// Generated 11 févr. 2023, 19:25:20 by Hibernate Tools 4.3.6.Final
+// Generated 12 févr. 2023, 10:07:19 by Hibernate Tools 4.3.6.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -39,8 +39,8 @@ public class Produit implements java.io.Serializable {
 		this.numeroproduit = numeroproduit;
 		this.quantite = quantite;
 	}
-	
-	public Produit(int idproduit, int idfournisseur, int idcategorie, String nomproduit, Float prixunitaire, Float poids,
+
+	public Produit(int idproduit,int idfournisseur, int idcategorie, String nomproduit, Float prixunitaire, Float poids,
 			String poidunitemesurecode, String numeroproduit, String description, Date dateajout, int quantite) {
 		this.idproduit = idproduit;
 		this.idfournisseur = idfournisseur;
