@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name = "ordremission", catalog = "transitbd")
 public class Ordremission implements java.io.Serializable {
 
-	private Integer idordremission;
+	private String idordremission;
 	private int idtransporteur;
 	private String idcommandeclient;
 	private String numeroordremission;
@@ -46,16 +46,22 @@ public class Ordremission implements java.io.Serializable {
 		this.rapport = rapport;
 	}
 
+	public Ordremission(int int1, int int2, String string, String string2, java.sql.Date date, java.sql.Date date2,
+			String string3, String string4) {
+		// TODO Auto-generated constructor stub
+	}
+
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "IDORDREMISSION", unique = true, nullable = false)
-	public Integer getIdordremission() {
+	public String getIdordremission() {
 		return this.idordremission;
 	}
 
-	public void setIdordremission(Integer idordremission) {
-		this.idordremission = idordremission;
+	public void setIdordremission(String string) {
+		this.idordremission = string;
 	}
 
 	@Column(name = "IDTRANSPORTEUR", nullable = false)
@@ -91,8 +97,8 @@ public class Ordremission implements java.io.Serializable {
 		return this.datedebut;
 	}
 
-	public void setDatedebut(Date datedebut) {
-		this.datedebut = datedebut;
+	public void setDatedebut(Date string) {
+		this.datedebut = string;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -101,8 +107,8 @@ public class Ordremission implements java.io.Serializable {
 		return this.datefin;
 	}
 
-	public void setDatefin(Date datefin) {
-		this.datefin = datefin;
+	public void setDatefin(Date string) {
+		this.datefin = string;
 	}
 
 	@Column(name = "STATUE", length = 20)
@@ -122,5 +128,14 @@ public class Ordremission implements java.io.Serializable {
 	public void setRapport(String rapport) {
 		this.rapport = rapport;
 	}
+
+	public Ordremission[] getAllOrdremission() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+	
 
 }

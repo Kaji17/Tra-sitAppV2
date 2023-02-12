@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.AutoCompleteTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -63,7 +61,7 @@
             </Button>
             <AnchorPane prefHeight="39.0" prefWidth="888.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="40.0" prefWidth="824.0">
+                  <HBox alignment="CENTER" layoutX="23.0" layoutY="-6.0" prefHeight="40.0" prefWidth="824.0">
                      <children>
                         <ImageView fitHeight="38.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -91,25 +89,6 @@
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="232.0" style="-fx-background-color: #3c3b3b;" stylesheets="@../Ressources/Styles/manager.css" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
             <Label alignment="CENTER" prefHeight="39.0" prefWidth="192.0" text="Bienvenue" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="21.0" />
@@ -130,7 +109,7 @@
             </Line>
             <Button fx:id="boutton_gestion_commandes" mnemonicParsing="false" onAction="#switchForm" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des commandes" textFill="WHITE">
                <VBox.margin>
-                  <Insets top="60.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -149,17 +128,29 @@
                   </ImageView>
                </graphic>
                <VBox.margin>
-                  <Insets top="60.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </Button>
             <Button fx:id="boutton_suivi" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="197.0" style="-fx-background-color: suivi des commandes;" stylesheets="@../Ressources/Styles/manager.css" text="suivi des commandes" textFill="WHITE">
                <VBox.margin>
-                  <Insets top="60.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Ressources/Images/icons8-distance2-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="adduser" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" prefWidth="196.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des utilisateurs" textFill="#f8f8f8">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/2.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -212,15 +203,15 @@
                <children>
                   <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="272.0" prefWidth="737.0">
                      <children>
-                        <TextField layoutX="43.0" prefHeight="30.0" prefWidth="267.0" promptText="chercher" />
+                        <TextField fx:id="chercher" layoutX="43.0" prefHeight="30.0" prefWidth="267.0" promptText="chercher" />
                         <TableView layoutX="21.0" layoutY="46.0" prefHeight="225.0" prefWidth="708.0" stylesheets="@../Ressources/Styles/manager.css">
                           <columns>
-                            <TableColumn text="IDMISSION" />
-                            <TableColumn minWidth="9.0" prefWidth="97.0" text="IDCOMMANDE" />
-                              <TableColumn prefWidth="202.0" text="LIEU DE LIVRAISON" />
-                              <TableColumn prefWidth="139.0" text="DEBUT DE LA MISSION" />
-                              <TableColumn prefWidth="114.0" text="FIN DE LA MISSION" />
-                              <TableColumn prefWidth="74.0" text="STATUT" />
+                            <TableColumn prefWidth="90.0" text="IDMISSION" />
+                            <TableColumn minWidth="9.0" prefWidth="103.0" text="IDCOMMANDE" />
+                              <TableColumn prefWidth="132.0" text="LIEU DE LIVRAISON" />
+                              <TableColumn prefWidth="141.0" text="DEBUT DE LA MISSION" />
+                              <TableColumn prefWidth="124.0" text="FIN DE LA MISSION" />
+                              <TableColumn prefWidth="116.0" text="STATUT" />
                           </columns>
                         </TableView>
                      </children>
@@ -231,15 +222,18 @@
                   <Label layoutX="267.0" layoutY="380.0" text="DATE DE DEBUT" textFill="WHITE" />
                   <Label layoutX="538.0" layoutY="380.0" text="DATE DE FIN" textFill="WHITE" />
                   <Label layoutX="551.0" layoutY="317.0" text="STATUT" textFill="WHITE" />
-                  <TextField layoutX="100.0" layoutY="313.0" />
-                  <TextField layoutX="389.0" layoutY="313.0" />
-                  <TextField layoutX="364.0" layoutY="376.0" />
-                  <ChoiceBox layoutX="117.0" layoutY="368.0" prefWidth="150.0" />
-                  <ChoiceBox layoutX="612.0" layoutY="313.0" prefHeight="26.0" prefWidth="120.0" />
-                  <TextField layoutX="612.0" layoutY="377.0" prefHeight="23.0" prefWidth="124.0" />
+                  <TextField fx:id="text_idmission" layoutX="100.0" layoutY="313.0" />
+                  <TextField fx:id="text_lieu" layoutX="389.0" layoutY="313.0" />
+                  <TextField fx:id="text_datefin" layoutX="612.0" layoutY="377.0" prefHeight="23.0" prefWidth="124.0" />
                   <Button layoutX="373.0" layoutY="448.0" mnemonicParsing="false" style="-fx-background-color: #cd2e2e;" styleClass="boutton_supprimer" stylesheets="@../Ressources/Styles/manager.css" text="supprimer" textFill="WHITE" />
                   <Button layoutX="487.0" layoutY="448.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: #a9cd27;" text="modifier" textFill="WHITE" />
                   <Button layoutX="600.0" layoutY="448.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: #5db5e8;" text="ajouter" textFill="WHITE" />
+                  <TextField fx:id="idtransporteur" layoutX="118.0" layoutY="412.0" />
+                  <Label layoutX="20.0" layoutY="416.0" text="idtransporteur :" textFill="#f2eeee" />
+                  <TextField fx:id="statut" layoutX="606.0" layoutY="313.0" prefHeight="20.0" prefWidth="137.0" />
+                  <TextField fx:id="textidcommande" layoutX="109.0" layoutY="368.0" />
+                  <TextField fx:id="nummission" layoutX="100.0" layoutY="451.0" />
+                  <AutoCompleteTextField fx:id="text_datedebut" layoutX="365.0" layoutY="376.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="suivi" layoutX="6.0" layoutY="4.0" prefHeight="496.0" prefWidth="745.0" visible="false">
@@ -257,6 +251,14 @@
                         <TableColumn prefWidth="139.0" text="RAPPORT6" />
                      </columns>
                   </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ajoutuser" prefHeight="506.0" prefWidth="750.0" visible="false">
+               <children>
+                  <TextField layoutX="220.0" layoutY="95.0" prefHeight="32.0" prefWidth="254.0" promptText="user name" />
+                  <TextField layoutX="219.0" layoutY="201.0" prefHeight="36.0" prefWidth="255.0" promptText="password" />
+                  <ChoiceBox layoutX="219.0" layoutY="309.0" prefHeight="32.0" prefWidth="256.0" />
+                  <Button layoutX="219.0" layoutY="406.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="255.0" text="ajouter" />
                </children>
             </AnchorPane>
          </children>
