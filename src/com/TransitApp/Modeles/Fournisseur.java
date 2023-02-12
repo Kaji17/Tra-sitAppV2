@@ -1,5 +1,5 @@
 package com.TransitApp.Modeles;
-// Generated 7 févr. 2023, 23:03:37 by Hibernate Tools 4.3.6.Final
+// Generated 11 févr. 2023, 19:25:20 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,19 +27,8 @@ public class Fournisseur implements java.io.Serializable {
 	public Fournisseur() {
 	}
 
-	public Fournisseur(String nomfournisseur, String adressefournisseur, String villefournisseur, String cpfournisseur,
+	public Fournisseur(int idfournisseur,String nomfournisseur, String adressefournisseur, String villefournisseur, String cpfournisseur,
 			String emailfournisseur, String telephonefournisseur, String paysfournisseur) {
-		this.nomfournisseur = nomfournisseur;
-		this.adressefournisseur = adressefournisseur;
-		this.villefournisseur = villefournisseur;
-		this.cpfournisseur = cpfournisseur;
-		this.emailfournisseur = emailfournisseur;
-		this.telephonefournisseur = telephonefournisseur;
-		this.paysfournisseur = paysfournisseur;
-	}
-
-	public Fournisseur(int idfournisseur, String nomfournisseur, String adressefournisseur, String villefournisseur,
-			String cpfournisseur, String emailfournisseur, String telephonefournisseur, String paysfournisseur) {
 		this.idfournisseur = idfournisseur;
 		this.nomfournisseur = nomfournisseur;
 		this.adressefournisseur = adressefournisseur;
@@ -49,6 +38,7 @@ public class Fournisseur implements java.io.Serializable {
 		this.telephonefournisseur = telephonefournisseur;
 		this.paysfournisseur = paysfournisseur;
 	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 

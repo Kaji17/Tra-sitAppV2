@@ -1,5 +1,5 @@
 package com.TransitApp.Modeles;
-// Generated 7 févr. 2023, 23:03:37 by Hibernate Tools 4.3.6.Final
+// Generated 11 févr. 2023, 19:25:20 by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,8 @@ public class Entrepot implements java.io.Serializable {
 	public Entrepot() {
 	}
 
-	public Entrepot(String nomentrepot, String numeroentrepot, Float capacitstockage, String unitemesurcapacite) {
+	public Entrepot(int identrepot,String nomentrepot, String numeroentrepot, Float capacitstockage, String unitemesurcapacite) {
+		this.identrepot = identrepot;
 		this.nomentrepot = nomentrepot;
 		this.numeroentrepot = numeroentrepot;
 		this.capacitstockage = capacitstockage;

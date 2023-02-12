@@ -1,5 +1,5 @@
 .bgBlack{
-	-fx-background-color:  #1b1a1a;
+	-fx-background-color:  #ffff;
 	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 6, 0, 0, 0);
 	-fx-background-radius: 10px;
 }
@@ -14,7 +14,7 @@
 	-fx-background-color: transparent;
 	-fx-padding:0px;
 	-fx-border-width: 2px;
-	-fx-border-color:   #cd2e2e;
+	-fx-border-color:   #ffbf3c;
 	-fx-border-radius: 8px;	
 }
 .table-view .table-column{
@@ -22,7 +22,7 @@
 	
 }
 .table-view .column-header-background{
-	-fx-background-color: #cd2e2e;
+	-fx-background-color: #ffbf3c;
 	-fx-background-radius: 8px 8px 0px 0px;
 	-fx-background-inset: 0 0 0 0;
 }

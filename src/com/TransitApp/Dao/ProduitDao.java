@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -185,9 +186,20 @@ public class ProduitDao implements IProduitDao {
 			prepare = connect.prepareStatement(sql);
 
 			result = prepare.executeQuery();
-
-			while (result.next()) {
-				produit = new Produit(result.getString("nomproduit"), result.getFloat("prixunitaire"), result.getFloat("poids"), result.getString("poidunitemesurecode"), result.getString("numeroproduit"), result.getString("description"), result.getInt("idcategorie"), result.getInt("idproduit"));
+			while (result.next()) {		
+				produit = new Produit(
+						result.getInt("idproduit"), 
+						result.getInt("idfournisseur"), 
+						result.getInt("idcategorie"), 
+						result.getString("nomproduit"),
+						result.getFloat("prixunitaire"),
+						result.getFloat("poids"),
+						result.getString("poidunitemesurecode"),
+						result.getString("numeroproduit"),
+						result.getString("description"),
+						result.getDate("dateajout"),
+						result.getInt("quantite")
+						);
 				listProduit.add(produit);
 			}
 

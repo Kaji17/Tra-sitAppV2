@@ -21,6 +21,11 @@ public class Contenir1Id implements java.io.Serializable {
 		this.idcommandefourn = idcommandefourn;
 	}
 
+	public Contenir1Id(int idproduit) {
+		this.idproduit = idproduit;
+		
+	}
+
 	@Column(name = "IDPRODUIT", nullable = false)
 	public int getIdproduit() {
 		return this.idproduit;

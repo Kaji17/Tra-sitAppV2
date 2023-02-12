@@ -27,9 +27,8 @@ public class Contenir1 implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Contenir1(Contenir1Id id, String idcommandefournisseur, Integer quantitearticle, Float cout) {
+	public Contenir1(Contenir1Id id, Integer quantitearticle, Float cout) {
 		this.id = id;
-		this.idcommandefournisseur = idcommandefournisseur;
 		this.quantitearticle = quantitearticle;
 		this.cout = cout;
 	}

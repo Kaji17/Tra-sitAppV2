@@ -1,0 +1,35 @@
+.buttonLogin{
+	-fx-cursor: hand;
+	-fx-background-color: #017ca1;
+	-fx-background-radius: 10;
+}
+.buttonLogin:hover{
+	-fx-background-color: #0aa4d2;
+}
+
+.buttonAdd{
+	-fx-background-color: #2d7755;
+	-fx-background-radius: 30;
+	-fx-cursor: hand;
+}
+.buttonAdd:hover{
+	-fx-background-color: #3a986b;
+}
+
+.buttonDelete{
+	-fx-background-color:  #cd2e2e;
+	-fx-background-radius: 30;
+	-fx-cursor: hand;
+}
+.buttonDelete:hover{
+	-fx-background-color: #d95353;
+}
+
+.buttonUpdate{
+	-fx-background-color:  #017ca1;
+	-fx-background-radius: 30;
+	-fx-cursor: hand;
+}
+.buttonUpdate:hover{
+	-fx-background-color: #01a3d1;
+}
