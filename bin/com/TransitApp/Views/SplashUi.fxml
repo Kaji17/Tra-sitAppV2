@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.SplashUiController">
+   <children>
+      <VBox alignment="CENTER" spacing="5.0" style="-fx-background-color: transparent;">
+         <children>
+            <ImageView fitHeight="415.0" fitWidth="533.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+               <image>
+                  <Image url="@../Ressources/Images/chargement3.gif" />
+               </image></ImageView>
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding></VBox>
+   </children>
+</AnchorPane>
