@@ -227,7 +227,7 @@
                   <TextField fx:id="text_datefin" layoutX="612.0" layoutY="377.0" prefHeight="23.0" prefWidth="124.0" />
                   <Button layoutX="373.0" layoutY="448.0" mnemonicParsing="false" style="-fx-background-color: #cd2e2e;" styleClass="boutton_supprimer" stylesheets="@../Ressources/Styles/manager.css" text="supprimer" textFill="WHITE" />
                   <Button layoutX="487.0" layoutY="448.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: #a9cd27;" text="modifier" textFill="WHITE" />
-                  <Button layoutX="600.0" layoutY="448.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: #5db5e8;" text="ajouter" textFill="WHITE" />
+                  <Button fx:id="ajouter" layoutX="600.0" layoutY="448.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: #5db5e8;" text="ajouter" textFill="WHITE" />
                   <TextField fx:id="idtransporteur" layoutX="118.0" layoutY="412.0" />
                   <Label layoutX="20.0" layoutY="416.0" text="idtransporteur :" textFill="#f2eeee" />
                   <TextField fx:id="statut" layoutX="606.0" layoutY="313.0" prefHeight="20.0" prefWidth="137.0" />
