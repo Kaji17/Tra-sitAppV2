@@ -13,12 +13,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.TransitApp.Dao.AdminDao;
 import com.TransitApp.Dao.FournisseurDao;
+import com.TransitApp.Dao.IAdminDao;
 import com.TransitApp.Dao.IFournisseurDao;
 import com.TransitApp.Dao.IOrdremissionDao;
 import com.TransitApp.Dao.OrdremissionDao;
+import com.TransitApp.Modeles.Admin;
+import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Modeles.Ordremission;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,10 +36,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -47,6 +55,11 @@ public class ManagerController {
 	  @FXML
 	    private TextField text_moyenpaiement;
 
+	  @FXML
+	    private ComboBox<?> combabox;
+	  
+	  private String[] Role = { "Manager", "Transport", "Respo_Reapro" };
+	  
 	    @FXML
 	    private TextField text_produit;
 
@@ -81,8 +94,7 @@ public class ManagerController {
 	    @FXML
 	    private TextField password;
 	    
-	    @FXML
-	    private ChoiceBox<?> role;
+	 
 	    
 	    @FXML
 	    private Button suppuser;
@@ -148,6 +160,8 @@ public class ManagerController {
     
     @FXML
     private Button adduser;
+    
+   
 
     @FXML
     private AnchorPane choisir_nom;
@@ -199,7 +213,12 @@ public class ManagerController {
     @FXML
     private TextField statut;
     
+    @FXML
+    private TextField role;
+    
     IOrdremissionDao ordremissionDao = new OrdremissionDao();
+    
+    IAdminDao adminDao = new AdminDao();
   
     
     @FXML
@@ -208,10 +227,41 @@ public class ManagerController {
     @FXML
     private TableColumn<?, ?> rapport;
     
+    @FXML
+    private Button gestionuser;
+    
+    @FXML
+    private TableView<Admin> tablrau_user;
+    
+    
+   
+    
   
 
     @FXML
     private TableColumn<?, ?> idmission;
+    
+    @FXML
+    private TableColumn<?, ?> user_name;
+    
+    @FXML
+    private TableColumn<?, ?> mot_de_passe;
+    
+    @FXML
+    private TableColumn<?, ?> roles;
+    
+    private ObservableList<Admin> addAdminList;
+    
+	public void addRoleComboBox() {
+		List<String> RoleList = new ArrayList<>();
+
+		for (String data : Role) {
+			RoleList.add(data);
+		}
+
+		ObservableList oblist = FXCollections.observableArrayList(RoleList);
+		combabox.setItems(oblist);
+	}
 
 
     public void close() {
@@ -257,7 +307,17 @@ public class ManagerController {
 			ajoutuser.setVisible(false);
 			
 			addStyle(boutton_gestionmission, "#34a39c");
-			removeStyleBtn(boutton_gestion_commandes, boutton_suivi,adduser);
+			removeStyleBtn(boutton_gestion_commandes, boutton_suivi,gestionuser);
+		}
+		
+		else if (event.getSource() == gestionuser) {
+			page_ajout_commande.setVisible(false);
+			page_ajout_mission.setVisible(false);
+			suivi.setVisible(false);
+			ajoutuser.setVisible(true);
+			
+			addStyle(gestionuser, "#34a39c");
+			removeStyleBtn(boutton_gestion_commandes, boutton_suivi,boutton_gestionmission);
 		}
 		
 	
@@ -270,7 +330,7 @@ public class ManagerController {
 			ajoutuser.setVisible(false);
 			
 			addStyle(boutton_suivi, "#34a39c");
-			removeStyleBtn(boutton_gestion_commandes,boutton_gestionmission,adduser );
+			removeStyleBtn(boutton_gestion_commandes,boutton_gestionmission,gestionuser );
 
 //			Ajouter un couleur transparent au backgroud des trois button passer en parametre
 			
@@ -283,6 +343,7 @@ public class ManagerController {
 			btn1.setStyle("-fx-background-color: transparent");
 			btn2.setStyle("-fx-background-color: transparent");
 			btn3.setStyle("-fx-background-color: transparent");
+			
 			
 	}
 		
@@ -363,6 +424,155 @@ public class ManagerController {
 			
 
 		}
+			
+			//ADD USER
+			
+			public void ajouuser() {
+				Alert alert;
+				Admin admin = new Admin();
+				if ( username.getText().isEmpty() || password.getText().isEmpty()
+						|| role.getText().isEmpty()  ) {
+					alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Message");
+					alert.setHeaderText(null);
+					alert.setContentText("Remplissez tous les champs s'il vous plait ");
+					alert.showAndWait();
+				} else {
+					Boolean verif = false;
+					
+					if (verif == true) {
+						alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Error Message");
+						alert.setHeaderText(null);
+						alert.setContentText(
+								"L'utilisateur: " + username.getText() + " exite déja. Entrer un autre username");
+						alert.showAndWait();
+					} else {
+						
+						admin.setLogin(username.getText());
+		                admin.setPassword(password.getText());
+						admin.setRole(role.getText());
+						
+					
+						
+
+						adminDao.saveAdmin(admin);
+						System.out.println("===Enregistremment Effectuer");
+
+						alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Sucess Save");
+						alert.setHeaderText(null);
+						alert.setContentText("utilisateur: " +username.getText() + " enregistrer avec success");
+						alert.showAndWait();
+						clearuser();
+						userShowList();
+					
+					}
+					
+					System.out.println(verif);
+				}
+			}
+			
+			public void deleteUSER() {
+				Alert alert;
+				if (username.getText().isEmpty()) {
+					alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Message");
+					alert.setHeaderText(null);
+					alert.setContentText("Selectionner ou entrer un nom de fournisseur");
+					Optional<ButtonType> option = alert.showAndWait();
+				} else {
+					// Vérifie l'existance d'un fournisseur
+					Boolean verif = false;
+					int id = 0;
+					for (Admin e : adminDao.getAllAdmin()) {
+						if (e.getLogin().equalsIgnoreCase(username.getText())) {
+							verif = true;
+							id = e.getIdadmin();
+						}
+					}
+					if (verif == true) {
+						alert = new Alert(AlertType.CONFIRMATION);
+						alert.setTitle("CONFIRMATION MESSAGE");
+						alert.setHeaderText(null);
+						alert.setContentText("Êtes vous sures de vouloir supprimer l'utilisateur: " + username.getText()
+								+ " ? Cette action est irreversible");
+						Optional<ButtonType> option = alert.showAndWait();
+						if (option.get().equals(ButtonType.OK)) {
+							adminDao.deleteAdmin(id);
+							clearuser();
+							userShowList();
+							
+						}
+					} else {
+						alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Error Message");
+						alert.setHeaderText(null);
+						alert.setContentText("L'utilisateur: " + username.getText() + " n'existe pas ");
+						alert.showAndWait();
+						return;
+					}
+				}
+
+			}
+			
+			public void updateuser() {
+				Alert alert;
+				if (username.getText().isEmpty() || password.getText().isEmpty()
+						|| role.getText().isEmpty()) {
+					alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Message");
+					alert.setHeaderText(null);
+					alert.setContentText("Remplissez tous les champs s'il vous plait ");
+					alert.showAndWait();
+				} else {
+					alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("CONFIRMATION MESSAGE");
+					alert.setHeaderText(null);
+					alert.setContentText("Êtes vous sures de vouloir modifier les Informations utilisateur: "
+							+ username.getText() + " ? Cette action est irreversible");
+					Optional<ButtonType> option = alert.showAndWait();
+					if (option.get().equals(ButtonType.OK)) {
+						for (Admin e : adminDao.getAllAdmin()) {
+							if (e.getLogin().equals(username.getText())) {
+								e.setLogin(username.getText());
+								e.setPassword(password.getText());
+								e.setRole(role.getText());
+								
+								adminDao.updateAdmin(e);
+							}
+						}
+
+						alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Sucess Modification");
+						alert.setHeaderText(null);
+						alert.setContentText("utilisateur: " + username.getText() + " enregistrer avec success");
+						alert.showAndWait();
+						clearuser();
+						userShowList();
+						
+					}
+				}
+
+			}
+			
+			public void userShowList() {
+				addAdminList = adminDao.addAdminList();
+
+				user_name.setCellValueFactory(new PropertyValueFactory<>("login"));
+				mot_de_passe.setCellValueFactory(new PropertyValueFactory<>("password"));
+				roles.setCellValueFactory(new PropertyValueFactory<>("role"));
+
+
+				tablrau_user.setItems(addAdminList);
+			}
+			
+			public void clearuser() {
+				username.setText("");
+				password.setText("");
+				role.setText("");}
 		
-		}
+}
+
+
 

@@ -4,14 +4,18 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.TransitApp.Modeles.Admin;
+import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Util.HibernateUtil;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -193,6 +197,33 @@ public class AdminDao implements IAdminDao {
 			error.printStackTrace();
 		}
     }
+
+	@Override
+	public ObservableList<Admin> addAdminList() {
+		ObservableList<Admin> listAdmins = FXCollections.observableArrayList();
+
+		String sql = "SELECT * FROM admin ";
+
+		connect = Database.connectDb();
+
+		try {
+
+			Admin admin;
+
+			prepare = connect.prepareStatement(sql);
+
+			result = prepare.executeQuery();
+
+			while (result.next()) {
+				admin = new Admin(result.getInt("idadmin"), result.getString("login"), result.getString("password"), result.getString("role"));
+				listAdmins.add(admin);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listAdmins;
 	
 	/*
 	 * public List<Student > recupererCommandeByDateAndMenu(String idMenu , Date
@@ -211,4 +242,4 @@ public class AdminDao implements IAdminDao {
     
     
     
-}
+}}

@@ -25,7 +25,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="1293.0" style="-fx-background-color: #fffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.RespoReaproController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="1293.0" style="-fx-background-color: #fffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.RespoReaproController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="979.0" style="-fx-background-color: #ffff; -fx-border-color: black; -fx-border-width: 1;" BorderPane.alignment="CENTER">
          <children>
@@ -199,7 +199,7 @@
    <center>
       <AnchorPane prefHeight="660.0" prefWidth="1050.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
+            <AnchorPane fx:id="PageGestionArticle" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
                <children>
                   <AnchorPane layoutY="-15.0" prefHeight="598.0" prefWidth="1024.0">
                      <children>
@@ -425,7 +425,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PageGestionFournisseur" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
+            <AnchorPane fx:id="PageGestionFournisseur" layoutX="16.0" layoutY="15.0" prefHeight="593.0" prefWidth="1017.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                <children>
                   <AnchorPane layoutX="404.0" layoutY="21.0" prefHeight="579.0" prefWidth="540.0" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                      <children>

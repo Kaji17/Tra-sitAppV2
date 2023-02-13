@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.TransitApp.Modeles.Admin;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
 public interface IAdminDao {
@@ -19,5 +20,7 @@ public interface IAdminDao {
 	void deleteAdmin(int id);
 	
 	void Login(String fxml, Button button);
+
+	ObservableList<Admin> addAdminList();
 
 }

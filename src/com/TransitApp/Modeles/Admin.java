@@ -23,7 +23,8 @@ public class Admin implements java.io.Serializable {
 	public Admin() {
 	}
 
-	public Admin(String login, String password, String role) {
+	public Admin(int idamin, String login, String password, String role) {
+		this.idadmin= idadmin;
 		this.login = login;
 		this.password = password;
 		this.role = role;
