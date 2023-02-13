@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -21,9 +20,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1059.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.ManagerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1190.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.ManagerController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="979.0" style="-fx-background-color: #c6c4c4;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1120.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
                <graphic>
@@ -89,7 +88,7 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="232.0" style="-fx-background-color: #1b9FD2;" stylesheets="@../Ressources/Styles/manager.css" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="267.0" style="-fx-background-color: #017ca1;" stylesheets="@../Ressources/Styles/manager.css" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="39.0" prefWidth="192.0" text="Bienvenue" textAlignment="CENTER" textFill="WHITE">
                <font>
@@ -120,6 +119,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Button>
             <Button fx:id="boutton_gestionmission" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des ordres de mission" textFill="WHITE">
                <graphic>
@@ -132,6 +134,9 @@
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>
+               <font>
+                  <Font size="10.0" />
+               </font>
             </Button>
             <Button fx:id="boutton_suivi" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="197.0" style="-fx-background-color: suivi des commandes;" stylesheets="@../Ressources/Styles/manager.css" text="suivi des commandes" textFill="WHITE">
                <VBox.margin>
@@ -144,6 +149,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Button>
             <Button fx:id="adduser" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" prefWidth="196.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des utilisateurs" textFill="#f8f8f8">
                <VBox.margin>
@@ -156,6 +164,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Button>
             <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="48.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="DECONNEXION" textFill="#34a39c">
                <graphic>
@@ -184,65 +195,92 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="page_ajout_commande" layoutY="7.0" prefHeight="496.0" prefWidth="747.0" visible="false">
+            <AnchorPane fx:id="page_ajout_commande" layoutY="7.0" prefHeight="632.0" prefWidth="831.0">
                <children>
-                  <AnchorPane fx:id="choisir_nom" layoutX="6.0" layoutY="1.0" prefHeight="495.0" prefWidth="746.0">
+                  <AnchorPane fx:id="choisir_nom" layoutX="6.0" layoutY="1.0" prefHeight="631.0" prefWidth="832.0">
                      <children>
-                        <Label layoutX="36.0" layoutY="307.0" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #fffff;" text="IDCOMMANDE :" textFill="WHITE" />
-                        <TextField fx:id="entrer_id" layoutX="143.0" layoutY="308.0" style="-fx-background-color: #ffffff;" />
-                        <Label layoutX="26.0" layoutY="351.0" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #fffff;" text="NOM DU CLIENT :" textFill="WHITE" />
-                        <TextField fx:id="entrer_nom" layoutX="143.0" layoutY="351.0" style="-fx-background-color: #ffffff;" />
-                        <Label layoutX="320.0" layoutY="308.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="NOM DU PRODUIT :" textFill="WHITE" />
-                        <ChoiceBox layoutX="441.0" layoutY="308.0" prefWidth="150.0" />
-                        <Label layoutX="363.0" layoutY="351.0" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #fffff;" text="QUANTITE :" textFill="WHITE" />
-                        <ChoiceBox fx:id="choisirquantite" layoutX="441.0" layoutY="351.0" prefWidth="150.0" />
-                        <Label layoutX="47.0" layoutY="401.0" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #fffff;" text="DESCRIPTION :" textFill="WHITE" />
-                        <TextArea fx:id="entrerDescription" layoutX="143.0" layoutY="391.0" prefHeight="46.0" prefWidth="218.0" />
+                        <TextField fx:id="text_produit" layoutX="84.0" layoutY="346.0" promptText="nom du produit" />
+                        <TextField fx:id="text_quantité" layoutX="327.0" layoutY="346.0" promptText="quantité" />
+                        <TextField fx:id="textdevise" layoutX="553.0" layoutY="346.0" promptText="devise" />
+                        <TextField fx:id="text_moyenpaiement" layoutX="84.0" layoutY="402.0" promptText="moyen de paiement" />
+                        <DatePicker fx:id="dcreation" layoutX="320.0" layoutY="402.0" promptText="date de création" />
+                        <Button fx:id="addComboBoxFournisseur" layoutX="653.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonAdd" stylesheets="@../Ressources/Styles/button.css" text="ADD" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="ButtonModifyProduit" layoutX="476.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="ButtonDeleteProduit" layoutX="327.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="11.0" layoutY="11.0" prefHeight="249.0" prefWidth="746.0">
                      <children>
                         <TextField fx:id="recherchecommande" layoutX="21.0" layoutY="14.0" prefHeight="37.0" prefWidth="327.0" promptText="chercher" style="-fx-background-color: white;" />
-                        <TableView layoutX="14.0" layoutY="64.0" prefHeight="217.0" prefWidth="727.0" styleClass="tableau" stylesheets="@../Ressources/Styles/manager.css">
+                        <TableView layoutX="21.0" layoutY="58.0" prefHeight="226.0" prefWidth="799.0" styleClass="tableau" stylesheets="@../Ressources/Styles/manager.css">
                           <columns>
-                            <TableColumn fx:id="idcommande" prefWidth="128.0" text="IDCOMMANDDE" />
-                            <TableColumn fx:id="nomclient" prefWidth="149.0" text="NOM DU CLIENT" />
-                              <TableColumn fx:id="nomproduit" prefWidth="155.0" text="NOM DU PRODUIT" />
-                              <TableColumn fx:id="quantité" prefWidth="153.0" text="QUANTITE" />
-                              <TableColumn fx:id="description" prefWidth="153.0" text="DESCRIPTION" />
+                            <TableColumn fx:id="idcommande" prefWidth="112.0" text="IDCOMMANDDE" />
+                            <TableColumn fx:id="datecréation" prefWidth="119.0" text="DATE CREATION " />
+                              <TableColumn fx:id="nomproduit" prefWidth="137.0" text="NOM DU PRODUIT" />
+                              <TableColumn fx:id="quantité" prefWidth="123.0" text="QUANTITE" />
+                              <TableColumn fx:id="devise" prefWidth="76.0" text="DEVISE" />
+                              <TableColumn fx:id="moyenpaiement" prefWidth="229.0" text="MOYEN DE PAIEMENT" />
                           </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="supprimer" layoutX="383.0" layoutY="458.0" mnemonicParsing="false" style="-fx-background-color: #cd2e2e;" styleClass="boutton_supprimer" stylesheets="@../Ressources/Styles/manager.css" text="supprimer" textFill="WHITE" />
-                  <Button layoutX="497.0" layoutY="458.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: #a9cd27;" text="modifier" textFill="WHITE" />
-                  <Button layoutX="610.0" layoutY="458.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: #5db5e8;" text="ajouter" textFill="WHITE" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="page_ajout_mission" layoutX="7.0" prefHeight="503.0" prefWidth="813.0">
+            <AnchorPane fx:id="page_ajout_mission" layoutX="-8.0" layoutY="10.0" prefHeight="503.0" prefWidth="813.0" visible="false">
                <children>
-                  <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="272.0" prefWidth="737.0">
+                  <AnchorPane layoutX="-56.0" prefHeight="272.0" prefWidth="737.0">
                      <children>
-                        <TextField fx:id="chercher" layoutX="43.0" prefHeight="30.0" prefWidth="267.0" promptText="chercher" />
-                        <TableView layoutX="21.0" layoutY="46.0" prefHeight="225.0" prefWidth="708.0" stylesheets="@../Ressources/Styles/manager.css">
+                        <TextField fx:id="chercher" layoutX="87.0" layoutY="-1.0" prefHeight="30.0" prefWidth="267.0" promptText="chercher" />
+                        <TableView layoutX="111.0" layoutY="46.0" prefHeight="237.0" prefWidth="898.0" stylesheets="@../Ressources/Styles/manager.css">
                           <columns>
-                            <TableColumn prefWidth="90.0" text="IDMISSION" />
-                            <TableColumn minWidth="9.0" prefWidth="103.0" text="IDCOMMANDE" />
-                              <TableColumn prefWidth="132.0" text="LIEU DE LIVRAISON" />
-                              <TableColumn prefWidth="141.0" text="DEBUT DE LA MISSION" />
-                              <TableColumn prefWidth="124.0" text="FIN DE LA MISSION" />
-                              <TableColumn prefWidth="116.0" text="STATUT" />
+                            <TableColumn fx:id="idmission" prefWidth="90.0" text="IDMISSION" />
+                            <TableColumn fx:id="idcomande" minWidth="9.0" prefWidth="103.0" text="IDCOMMANDE" />
+                              <TableColumn fx:id="RAPPORT" prefWidth="84.0" text="RAPPORT" />
+                              <TableColumn fx:id="debut" prefWidth="169.0" text="DEBUT DE LA MISSION" />
+                              <TableColumn fx:id="fin" prefWidth="137.0" text="FIN DE LA MISSION" />
+                              <TableColumn fx:id="STAT" minWidth="0.0" prefWidth="91.0" text="STATUT" />
+                              <TableColumn fx:id="mission" prefWidth="130.0" text="NUMERO MISSION" />
+                              <TableColumn fx:id="transporteur" prefWidth="136.0" text="IDTRANSPORTEUR" />
                           </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <TextField fx:id="text_lieu" layoutX="238.0" layoutY="313.0" promptText="lieu" />
                   <TextField fx:id="idtransporteur" layoutX="238.0" layoutY="364.0" promptText="idtransporteur" />
-                  <TextField fx:id="statut" layoutX="449.0" layoutY="313.0" prefHeight="25.0" prefWidth="115.0" promptText="statut" />
+                  <TextField fx:id="statut" layoutX="238.0" layoutY="313.0" prefHeight="25.0" prefWidth="115.0" promptText="statut" />
                   <TextField fx:id="textidcommande" layoutX="44.0" layoutY="364.0" promptText="idcommande" />
                   <TextField fx:id="nummission" layoutX="413.0" layoutY="364.0" promptText="nummission" />
-                  <DatePicker layoutX="57.0" layoutY="412.0" prefHeight="25.0" prefWidth="151.0" />
-                  <DatePicker fx:id="datedebut" layoutX="589.0" layoutY="364.0" prefHeight="25.0" prefWidth="144.0" />
+                  <DatePicker fx:id="datefin" layoutX="412.0" layoutY="313.0" prefHeight="25.0" prefWidth="151.0" promptText="date de début" />
+                  <DatePicker fx:id="datedebut" layoutX="589.0" layoutY="364.0" prefHeight="25.0" prefWidth="144.0" promptText="date de fin" />
                   <Button fx:id="ButtonModifymission" layoutX="517.0" layoutY="488.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
                      <effect>
                         <InnerShadow />
@@ -265,44 +303,77 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <TextField fx:id="text_lieu" layoutX="44.0" layoutY="313.0" promptText="rapport" />
+                  <Button fx:id="ButtonDeletemission" layoutX="357.0" layoutY="488.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="suivi" layoutX="6.0" layoutY="4.0" prefHeight="496.0" prefWidth="745.0" visible="false">
+            <AnchorPane fx:id="suivi" layoutX="5.0" prefHeight="635.0" prefWidth="949.0" visible="false">
                <children>
                   <TextField layoutX="26.0" layoutY="37.0" prefHeight="32.0" prefWidth="370.0" promptText="chercher  mission" />
                   <AnchorPane layoutX="5.0" layoutY="81.0" prefHeight="329.0" prefWidth="737.0" />
-                  <TableView layoutX="21.0" layoutY="124.0" prefHeight="293.0" prefWidth="685.0" stylesheets="@../Ressources/Styles/manager.css">
+                  <TableView layoutX="22.0" layoutY="122.0" prefHeight="387.0" prefWidth="834.0" stylesheets="@../Ressources/Styles/manager.css">
                      <columns>
                         <TableColumn prefWidth="85.0" text="IDMISSION" />
                         <TableColumn prefWidth="90.0" text="RAPPORT1" />
                         <TableColumn prefWidth="77.0" text="RAPPORT2" />
-                        <TableColumn prefWidth="99.0" text="RAPPORT3" />
-                        <TableColumn prefWidth="103.0" text="RAPPORT4" />
-                        <TableColumn prefWidth="87.0" text="RAPPORT5" />
-                        <TableColumn prefWidth="139.0" text="RAPPORT6" />
+                        <TableColumn prefWidth="133.0" text="RAPPORT3" />
+                        <TableColumn prefWidth="124.0" text="RAPPORT4" />
+                        <TableColumn prefWidth="165.0" text="RAPPORT5" />
+                        <TableColumn prefWidth="173.0" text="RAPPORT6" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="ajoutuser" prefHeight="506.0" prefWidth="750.0" visible="false">
+            <AnchorPane fx:id="ajoutuser" layoutX="2.0" layoutY="4.0" prefHeight="639.0" prefWidth="834.0" visible="false">
                <children>
-                  <TextField layoutX="220.0" layoutY="95.0" prefHeight="32.0" prefWidth="254.0" promptText="user name" />
-                  <TextField layoutX="219.0" layoutY="201.0" prefHeight="36.0" prefWidth="255.0" promptText="password" />
-                  <ChoiceBox layoutX="219.0" layoutY="309.0" prefHeight="32.0" prefWidth="256.0" />
-                  <Button layoutX="219.0" layoutY="406.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="255.0" text="ajouter" />
+                  <TextField fx:id="username" layoutX="220.0" layoutY="123.0" prefHeight="32.0" prefWidth="254.0" promptText="user name" />
+                  <TextField fx:id="password" layoutX="220.0" layoutY="256.0" prefHeight="36.0" prefWidth="255.0" promptText="password" />
+                  <ChoiceBox fx:id="role" layoutX="219.0" layoutY="381.0" prefHeight="32.0" prefWidth="256.0" />
+                  <Button fx:id="suppuser" layoutX="368.0" layoutY="504.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="modifuser" layoutX="528.0" layoutY="504.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="ajouuser" layoutX="703.0" layoutY="506.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonAdd" stylesheets="@../Ressources/Styles/button.css" text="ADD" textFill="WHITE">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </AnchorPane>
-            <Button fx:id="ButtonDeletemission" layoutX="364.0" layoutY="486.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
-               <effect>
-                  <InnerShadow />
-               </effect>
-               <font>
-                  <Font name="Broadway" size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </AnchorPane>
    </center>

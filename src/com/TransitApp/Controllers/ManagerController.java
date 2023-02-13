@@ -39,8 +39,58 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import java.util.Date;
+import java.text.DateFormat;
 
 public class ManagerController {
+	
+	  @FXML
+	    private TextField text_moyenpaiement;
+
+	    @FXML
+	    private TextField text_produit;
+
+	    @FXML
+	    private TextField text_quantité;
+
+	    @FXML
+	    private TextField textdevise;
+
+	    @FXML
+	    private TableColumn<?, ?> datecréation;
+	    
+	    @FXML
+	    private DatePicker dcreation;
+	    
+	    @FXML
+	    private TableColumn<?, ?> devise;
+	    
+	    @FXML
+	    private TableColumn<?, ?> idcomande;
+	    
+	    @FXML
+	    private TableColumn<?, ?> moyenpaiement;
+	    
+
+	    @FXML
+	    private Button ajouuser;
+	    
+	    @FXML
+	    private Button modifuser;
+	    
+	    @FXML
+	    private TextField password;
+	    
+	    @FXML
+	    private ChoiceBox<?> role;
+	    
+	    @FXML
+	    private Button suppuser;
+	    
+	    @FXML
+	    private TextField username;
+
+
 	
 	  @FXML
 	    private DatePicker datedebut;
@@ -156,7 +206,13 @@ public class ManagerController {
     private AnchorPane suivi;
 
     @FXML
-    private Button supprimer;
+    private TableColumn<?, ?> rapport;
+    
+  
+
+    @FXML
+    private TableColumn<?, ?> idmission;
+
 
     public void close() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -234,7 +290,8 @@ public class ManagerController {
 			Alert alert;
 			Ordremission ordremission = new Ordremission();
 			if ( textidcommande.getText().isEmpty() || nummission.getText().isEmpty()
-					|| idtransporteur.getText().isEmpty()  || statut.getText().isEmpty()) {
+					|| idtransporteur.getText().isEmpty()  || statut.getText().isEmpty() || text_lieu.getText().isEmpty()||  
+				     datedebut.getValue()==null|| datefin.getValue()==null) {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
 				alert.setHeaderText(null);
@@ -242,11 +299,7 @@ public class ManagerController {
 				alert.showAndWait();
 			} else {
 				Boolean verif = false;
-				for (Ordremission e : ordremissionDao.getAllOrdremission()) {
-					if (e.getNumeroordremission().equalsIgnoreCase(nummission.getText())) {
-						verif = true;
-					}
-				}
+				
 				if (verif == true) {
 					alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Error Message");
@@ -259,6 +312,9 @@ public class ManagerController {
 					ordremission.setRapport(statut.getText());
 					ordremission.setIdcommandeclient(textidcommande.getText());
 					ordremission.setNumeroordremission(nummission.getText());
+					ordremission.setRapport(text_lieu.getText());
+					ordremission.setDatedebut(datedebut.getValue());
+					ordremission.setDatefin(datefin.getValue());
 				
 					ordremission.setStatue(statut.getText());
 
