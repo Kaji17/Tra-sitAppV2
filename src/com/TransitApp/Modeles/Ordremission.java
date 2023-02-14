@@ -101,11 +101,14 @@ public class Ordremission implements java.io.Serializable {
 	public Date getDatefin() {
 		return this.datefin;
 	}
-
+	
+	@Temporal(TemporalType.DATE)
+	
 	public void setDatefin(Date datefin) {
 		this.datefin = datefin;
 	}
 
+	
 	@Column(name = "STATUE", length = 20)
 	public String getStatue() {
 		return this.statue;

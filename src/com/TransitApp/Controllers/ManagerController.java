@@ -252,6 +252,11 @@ public class ManagerController {
     
     private ObservableList<Admin> addAdminList;
     
+    private ObservableList<Ordremission> addOdremissionList;
+    
+    @FXML
+    private TableView<Ordremission> tableau_mission;
+    
 	public void addRoleComboBox() {
 		List<String> RoleList = new ArrayList<>();
 
@@ -283,20 +288,14 @@ public class ManagerController {
 			suivi.setVisible(false);
 			ajoutuser.setVisible(false);
 			
+			
+			
 			addStyle(boutton_gestion_commandes, "#34a39c");
 			
-			removeStyleBtn(boutton_gestionmission, boutton_suivi,adduser);
+			removeStyleBtn(boutton_gestionmission, boutton_suivi,gestionuser);
 		}
 		
-		else if (event.getSource() == adduser) {
-			page_ajout_commande.setVisible(false);
-			page_ajout_mission.setVisible(false);
-			suivi.setVisible(false);
-			ajoutuser.setVisible(true);
-			
-			addStyle(adduser, "#34a39c");
-			removeStyleBtn(boutton_gestion_commandes,boutton_gestionmission,boutton_suivi);
-			}
+	
 	
 			
 	 
@@ -315,6 +314,7 @@ public class ManagerController {
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(false);
 			ajoutuser.setVisible(true);
+			
 			
 			addStyle(gestionuser, "#34a39c");
 			removeStyleBtn(boutton_gestion_commandes, boutton_suivi,boutton_gestionmission);
@@ -352,7 +352,7 @@ public class ManagerController {
 			Ordremission ordremission = new Ordremission();
 			if ( textidcommande.getText().isEmpty() || nummission.getText().isEmpty()
 					|| idtransporteur.getText().isEmpty()  || statut.getText().isEmpty() || text_lieu.getText().isEmpty()||  
-				     datedebut.getValue()==null|| datefin.getValue()==null) {
+				     datedebut.getValue().toString().isEmpty()|| datefin.getValue().toString().isEmpty()) {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
 				alert.setHeaderText(null);
@@ -366,7 +366,7 @@ public class ManagerController {
 					alert.setTitle("Error Message");
 					alert.setHeaderText(null);
 					alert.setContentText(
-							"La mission: " + text_idmission.getText() + " exite déja. Entrer un autre id de mission");
+							"La mission   exite déja. Entrer un autre id de mission");
 					alert.showAndWait();
 				} else {
 					ordremission.setIdtransporteur(Integer.parseInt(idtransporteur.getText()));
@@ -374,8 +374,8 @@ public class ManagerController {
 					ordremission.setIdcommandeclient(textidcommande.getText());
 					ordremission.setNumeroordremission(nummission.getText());
 					ordremission.setRapport(text_lieu.getText());
-					ordremission.setDatedebut(datedebut.getValue());
-					ordremission.setDatefin(datefin.getValue());
+					ordremission.setDatedebut(datedebut.getValue().toString());
+					ordremission.setDatefin(datefin.getValue().toString());
 				
 					ordremission.setStatue(statut.getText());
 
@@ -385,14 +385,32 @@ public class ManagerController {
 					alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Sucess Save");
 					alert.setHeaderText(null);
-					alert.setContentText("mission: " + text_idmission.getText() + " enregistrer avec success");
-					
+					alert.setContentText("mission  enregistrer avec success");
+					alert.showAndWait();
+					missionShowList();
 				
 				}
 				
 				System.out.println(verif);
 			}
 		}
+		
+		public void missionShowList() {
+			addOdremissionList = ordremissionDao.addOrdremissionList();
+			
+			idcomande.setCellValueFactory(new PropertyValueFactory<>("commandeclient"));
+			
+
+
+			tableau_mission.setItems(addOdremissionList);
+		}
+		
+		public void clearmission() {
+			username.setText("");
+			password.setText("");
+			role.setText("");}
+		
+		
 			public void logout() {
 				try {
 					Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -465,10 +483,10 @@ public class ManagerController {
 						alert.setContentText("utilisateur: " +username.getText() + " enregistrer avec success");
 						alert.showAndWait();
 						clearuser();
-						userShowList();
+					
 					
 					}
-					
+					userShowList();
 					System.out.println(verif);
 				}
 			}
@@ -571,8 +589,27 @@ public class ManagerController {
 				username.setText("");
 				password.setText("");
 				role.setText("");}
+			
+			public void userSelected() {
+				Admin admin = tablrau_user.getSelectionModel().getSelectedItem();
+
+				Integer num = tablrau_user.getSelectionModel().getSelectedIndex();
+
+				if (num - 1 < -1) {
+					return;
+				}
+				roles.setText( admin.getRole());
+				user_name.setText(admin.getLogin());
+				mot_de_passe.setText(admin.getPassword());
+				
 		
 }
-
-
+			public void initialize(URL arg0, ResourceBundle arg1) {
+				userShowList();
+//				addComboBoxProduit();
+//				addComboBoxUniteMesure();
+//				addComboBoxDevice();
+			}
+}
+			
 

@@ -18,8 +18,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1190.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.ManagerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="1322.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TransitApp.Controllers.ManagerController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1120.0" BorderPane.alignment="CENTER">
          <children>
@@ -63,11 +64,6 @@
                <children>
                   <HBox alignment="CENTER" layoutX="23.0" layoutY="-6.0" prefHeight="40.0" prefWidth="824.0">
                      <children>
-                        <ImageView fitHeight="38.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Ressources/Images/icons8-container-truck-96.png" />
-                           </image>
-                        </ImageView>
                         <Label text="TransitApp">
                            <font>
                               <Font name="Vivaldi Italic" size="19.0" />
@@ -87,7 +83,7 @@
       </HBox>
    </top>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="267.0" style="-fx-background-color: #017ca1;" stylesheets="@../Ressources/Styles/manager.css" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="663.0" prefWidth="323.0" style="-fx-background-color: #017ca1;" stylesheets="@../Ressources/Styles/manager.css" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="39.0" prefWidth="192.0" text="Bienvenue" textAlignment="CENTER" textFill="WHITE">
                <font>
@@ -107,54 +103,9 @@
                   <Insets top="29.0" />
                </VBox.margin>
             </Line>
-            <Button fx:id="boutton_gestion_commandes" mnemonicParsing="false" onAction="#switchForm" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des commandes" textFill="WHITE">
+            <Button fx:id="gestionuser" mnemonicParsing="false" onAction="#switchForm" prefHeight="53.0" prefWidth="254.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des utilisateurs" textFill="#f8f8f8">
                <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Ressources/Images/icons8-buying-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="boutton_gestionmission" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des ordres de mission" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Ressources/Images/icons8-delivery-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Button>
-            <Button fx:id="boutton_suivi" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="197.0" style="-fx-background-color: suivi des commandes;" stylesheets="@../Ressources/Styles/manager.css" text="suivi des commandes" textFill="WHITE">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Ressources/Images/icons8-distance2-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="gestionuser" mnemonicParsing="false" onAction="#switchForm" prefHeight="38.0" prefWidth="196.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des utilisateurs" textFill="#f8f8f8">
-               <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -164,7 +115,52 @@
                   </ImageView>
                </graphic>
                <font>
-                  <Font size="14.0" />
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="boutton_gestion_commandes" mnemonicParsing="false" onAction="#switchForm" prefHeight="76.0" prefWidth="296.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des commandes" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-buying-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="boutton_gestionmission" mnemonicParsing="false" onAction="#switchForm" prefHeight="82.0" prefWidth="312.0" style="-fx-background-color: transparent;" stylesheets="@../Ressources/Styles/manager.css" text="gestion des ordres de mission" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-delivery-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="boutton_suivi" mnemonicParsing="false" onAction="#switchForm" prefHeight="68.0" prefWidth="250.0" style="-fx-background-color: suivi des commandes;" stylesheets="@../Ressources/Styles/manager.css" text="suivi des commandes" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Ressources/Images/icons8-distance2-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="18.0" />
                </font>
             </Button>
             <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="48.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="DECONNEXION" textFill="#34a39c">
@@ -182,7 +178,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </Button>
          </children>
@@ -192,11 +188,11 @@
       </VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="644.0" prefWidth="998.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="page_ajout_commande" layoutY="7.0" prefHeight="632.0" prefWidth="831.0" visible="false">
+            <AnchorPane fx:id="page_ajout_commande" layoutX="5.0" layoutY="25.0" prefHeight="585.0" prefWidth="981.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
                <children>
-                  <AnchorPane fx:id="choisir_nom" layoutX="6.0" layoutY="1.0" prefHeight="631.0" prefWidth="832.0">
+                  <AnchorPane fx:id="choisir_nom" layoutX="14.0" layoutY="-7.0" prefHeight="524.0" prefWidth="979.0">
                      <children>
                         <TextField fx:id="text_produit" layoutX="84.0" layoutY="346.0" promptText="nom du produit" />
                         <TextField fx:id="text_quantité" layoutX="327.0" layoutY="346.0" promptText="quantité" />
@@ -238,7 +234,7 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="11.0" layoutY="11.0" prefHeight="249.0" prefWidth="746.0">
+                  <AnchorPane layoutX="20.0" layoutY="35.0" prefHeight="260.0" prefWidth="811.0">
                      <children>
                         <TextField fx:id="recherchecommande" layoutX="21.0" layoutY="14.0" prefHeight="37.0" prefWidth="327.0" promptText="chercher" style="-fx-background-color: white;" />
                         <TableView layoutX="21.0" layoutY="58.0" prefHeight="226.0" prefWidth="799.0" styleClass="tableau" stylesheets="@../Ressources/Styles/manager.css">
@@ -255,12 +251,11 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="page_ajout_mission" layoutX="-8.0" layoutY="10.0" prefHeight="503.0" prefWidth="813.0">
+            <AnchorPane fx:id="page_ajout_mission" layoutX="-8.0" layoutY="10.0" prefHeight="503.0" prefWidth="813.0" visible="false">
                <children>
                   <AnchorPane layoutX="-56.0" prefHeight="272.0" prefWidth="737.0">
                      <children>
-                        <TextField fx:id="chercher" layoutX="87.0" layoutY="-1.0" prefHeight="30.0" prefWidth="267.0" promptText="chercher" />
-                        <TableView layoutX="111.0" layoutY="46.0" prefHeight="237.0" prefWidth="898.0" stylesheets="@../Ressources/Styles/manager.css">
+                        <TableView fx:id="tableau_mission" layoutX="87.0" layoutY="65.0" prefHeight="218.0" prefWidth="936.0" stylesheets="@../Ressources/Styles/manager.css">
                           <columns>
                             <TableColumn fx:id="idmission" prefWidth="90.0" text="IDMISSION" />
                             <TableColumn fx:id="idcomande" minWidth="9.0" prefWidth="103.0" text="IDCOMMANDE" />
@@ -274,12 +269,12 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <TextField fx:id="idtransporteur" layoutX="238.0" layoutY="364.0" promptText="idtransporteur" />
-                  <TextField fx:id="statut" layoutX="238.0" layoutY="313.0" prefHeight="25.0" prefWidth="115.0" promptText="statut" />
-                  <TextField fx:id="textidcommande" layoutX="44.0" layoutY="364.0" promptText="idcommande" />
-                  <TextField fx:id="nummission" layoutX="413.0" layoutY="364.0" promptText="nummission" />
-                  <DatePicker fx:id="datefin" layoutX="412.0" layoutY="313.0" prefHeight="25.0" prefWidth="151.0" promptText="date de début" />
-                  <DatePicker fx:id="datedebut" layoutX="589.0" layoutY="364.0" prefHeight="25.0" prefWidth="144.0" promptText="date de fin" />
+                  <TextField fx:id="idtransporteur" layoutX="238.0" layoutY="399.0" promptText="idtransporteur" />
+                  <TextField fx:id="statut" layoutX="238.0" layoutY="338.0" prefHeight="25.0" prefWidth="115.0" promptText="statut" />
+                  <TextField fx:id="textidcommande" layoutX="44.0" layoutY="399.0" promptText="idcommande" />
+                  <TextField fx:id="nummission" layoutX="413.0" layoutY="399.0" promptText="nummission" />
+                  <DatePicker fx:id="datefin" layoutX="412.0" layoutY="338.0" prefHeight="25.0" prefWidth="151.0" promptText="date de début" />
+                  <DatePicker fx:id="datedebut" layoutX="592.0" layoutY="399.0" prefHeight="25.0" prefWidth="144.0" promptText="date de fin" />
                   <Button fx:id="ButtonModifymission" layoutX="517.0" layoutY="488.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
                      <effect>
                         <InnerShadow />
@@ -302,7 +297,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField fx:id="text_lieu" layoutX="44.0" layoutY="313.0" promptText="rapport" />
+                  <TextField fx:id="text_lieu" layoutX="44.0" layoutY="338.0" promptText="rapport" />
                   <Button fx:id="ButtonDeletemission" layoutX="357.0" layoutY="488.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                      <effect>
                         <InnerShadow />
@@ -333,10 +328,10 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="ajoutuser" layoutX="2.0" layoutY="4.0" prefHeight="639.0" prefWidth="834.0" visible="false">
+            <AnchorPane fx:id="ajoutuser" layoutX="2.0" layoutY="4.0" prefHeight="639.0" prefWidth="834.0">
                <children>
-                  <TextField fx:id="username" layoutX="53.0" layoutY="152.0" prefHeight="32.0" prefWidth="254.0" promptText="user" />
-                  <TextField fx:id="password" layoutX="53.0" layoutY="239.0" prefHeight="36.0" prefWidth="255.0" promptText="password" />
+                  <TextField fx:id="username" layoutX="53.0" layoutY="159.0" prefHeight="32.0" prefWidth="254.0" promptText="nom de  l'utilisateur" />
+                  <TextField fx:id="password" layoutX="51.0" layoutY="265.0" prefHeight="36.0" prefWidth="255.0" promptText="mot de passe" />
                   <Button fx:id="suppuser" layoutX="368.0" layoutY="504.0" mnemonicParsing="false" onAction="#deleteUSER" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                      <effect>
                         <InnerShadow />
@@ -370,7 +365,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField fx:id="role" layoutX="52.0" layoutY="334.0" prefHeight="38.0" prefWidth="256.0" promptText="role" />
+                  <TextField fx:id="role" layoutX="52.0" layoutY="373.0" prefHeight="38.0" prefWidth="256.0" promptText="role" />
                   <TableView fx:id="tablrau_user" layoutX="374.0" layoutY="57.0" prefHeight="400.0" prefWidth="523.0" stylesheets="@../Ressources/Styles/manager.css">
                     <columns>
                       <TableColumn fx:id="user_name" prefWidth="155.0" text="USER_NAME" />
@@ -378,6 +373,11 @@
                         <TableColumn fx:id="roles" prefWidth="187.0" text="ROLE" />
                     </columns>
                   </TableView>
+                  <Text fill="#ffbf3c" layoutX="72.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UTILISATEURS" wrappingWidth="213.4609375">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
          </children>

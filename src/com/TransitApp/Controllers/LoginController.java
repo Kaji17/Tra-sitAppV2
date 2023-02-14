@@ -55,7 +55,7 @@ public class LoginController implements Initializable {
 
 	private ResultSet result;
 
-	private String[] Role = { "Manager", "Transporteur", "Respo_Reapro" };
+	private String[] Role = { "Respo_Reapro", "Manager", "Transporteur" };
 
 	@FXML
 	private AnchorPane CardView;

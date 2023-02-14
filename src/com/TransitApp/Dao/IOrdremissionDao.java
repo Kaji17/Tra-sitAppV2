@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.TransitApp.Modeles.Ordremission;
 
+import javafx.collections.ObservableList;
+
 public interface IOrdremissionDao {
 	
 	void saveOrdremission(Ordremission ordremission);
@@ -19,4 +21,6 @@ public interface IOrdremissionDao {
 	List<Ordremission> getAllOrdremission();
 
 	List<Ordremission> rechercher(String nom);
+	
+	ObservableList<Ordremission> addOrdremissionList();
 }

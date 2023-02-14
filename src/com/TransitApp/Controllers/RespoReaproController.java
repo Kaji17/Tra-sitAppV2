@@ -528,7 +528,7 @@ public class RespoReaproController implements Initializable {
 	/**
 	 * 
 	 * Méthode permettant de modifier les fournisseur en BD
-	 * 
+	 * 	²
 	 * @param event ActionEvent
 	 * @return void
 	 * @author kaji17
