@@ -35,8 +35,9 @@ public class Transporteur implements java.io.Serializable {
 		this.idadmin = idadmin;
 	}
 
-	public Transporteur(int idadmin, String nomtransporteur, String prenomtrnsporteur, String civilite,
+	public Transporteur(int idtransporteur,int idadmin, String nomtransporteur, String prenomtrnsporteur, String civilite,
 			Date datedebutembauche, Date datefinembauche, Float salaire, String fonction) {
+		this.idtransporteur = idtransporteur;
 		this.idadmin = idadmin;
 		this.nomtransporteur = nomtransporteur;
 		this.prenomtrnsporteur = prenomtrnsporteur;

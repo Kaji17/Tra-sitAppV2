@@ -1,29 +1,48 @@
 package com.TransitApp.Dao;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-import com.TransitApp.Modeles.Ordremission;
+import com.TransitApp.Modeles.Transporteur;
 import com.sati.util.HibernateUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class OrdremissionDao implements IOrdremissionDao{
-	
+public class TransporteurDao implements ITransporteurDao {
 	private Connection connect;
 
 	private PreparedStatement prepare;
 
 	private ResultSet result;
+	
+	
+
+	private double x;
+
+	private double y;
 	 // save Student
     // get All Students
     // get Student By Id
@@ -33,14 +52,14 @@ public class OrdremissionDao implements IOrdremissionDao{
     /* (non-Javadoc)
      * @see net.javaguides.hibernate.dao.IStudentDao#saveStudent(net.javaguides.hibernate.model.Student)*/
     @Override
-    public void saveOrdremission(Ordremission ordremission) {
+    public void saveTransporteur(Transporteur transporteur) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.save(ordremission);
+            session.save(transporteur);
 
             // commit the transaction
             transaction.commit();
@@ -55,14 +74,14 @@ public class OrdremissionDao implements IOrdremissionDao{
      * @see net.javaguides.hibernate.dao.IStudentDao#updateStudent(net.javaguides.hibernate.model.Student)
      */
     @Override
-    public void updateOrdremission(Ordremission ordremission) {
+    public void updateTransporteur(Transporteur transporteur) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // save student object
-            session.saveOrUpdate(ordremission);
+            session.saveOrUpdate(transporteur);
 
             // commit the transaction
             transaction.commit();
@@ -77,16 +96,16 @@ public class OrdremissionDao implements IOrdremissionDao{
      * @see net.javaguides.hibernate.dao.IStudentDao#getStudentById(long)
      */
     @Override
-    public Ordremission getOrdremissionById(int id) {
+    public Transporteur getTransporteurById(int id) {
         Transaction transaction = null;
-        Ordremission ordremission = null;
+        Transporteur transporteur = null;
         try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			    // start the transaction
 			    transaction = session.beginTransaction();
 
 			    // get student object
-			    ordremission= session.byId(Ordremission.class).getReference(id);
+			    transporteur= session.byId(Transporteur.class).getReference(id);
 			     // or student = session.get(Student.class, id);
 			    //or student = session.load(Student.class, id);
 			   //or commit the transaction
@@ -99,7 +118,7 @@ public class OrdremissionDao implements IOrdremissionDao{
 		}
         
         
-        return ordremission;
+        return transporteur;
     }
 
     /* (non-Javadoc)
@@ -107,15 +126,15 @@ public class OrdremissionDao implements IOrdremissionDao{
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Ordremission> getAllOrdremission() {
+    public List<Transporteur> getAllTransporteur() {
         Transaction transaction = null;
-        List < Ordremission > ordremission = null;
+        List < Transporteur > transporteur = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // get students
-            ordremission = session.createQuery("from Ordremission").list();
+            transporteur = session.createQuery("from Transporteur").list();
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -124,23 +143,23 @@ public class OrdremissionDao implements IOrdremissionDao{
                 transaction.rollback();
             }
         }
-        return ordremission;
+        return transporteur;
     }
 
     /* (non-Javadoc)
      * @see net.javaguides.hibernate.dao.IStudentDao#deleteStudent(long)
      */
     @Override
-    public void deleteOrdremission(int id) {
+    public void deleteTransporteur(int id) {
         Transaction transaction = null;
-        Ordremission ordremission = null;
+        Transporteur transporteur = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
-            ordremission = session.get(Ordremission.class, id);
+            transporteur= session.get(Transporteur.class, id);
             // get student object
-            session.delete(ordremission);
+            session.delete(transporteur);
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -152,16 +171,16 @@ public class OrdremissionDao implements IOrdremissionDao{
     }
 
 	@Override
-	public List<Ordremission> rechercher(String nom) {
+	public List<Transporteur> rechercher(String nom) {
 		Transaction transaction = null;
-        List < Ordremission > ordremission = null;
+        List < Transporteur > transporteur = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction
             transaction = session.beginTransaction();
 
             // get students
            // students = session.createQuery("from Student").list();
-            ordremission = session.createSQLQuery(nom).addEntity(getClass()).list();
+            transporteur = session.createSQLQuery(nom).addEntity(getClass()).list();
             //student = session.load(Student.class, id);
             // commit the transaction
             transaction.commit();
@@ -185,36 +204,105 @@ public class OrdremissionDao implements IOrdremissionDao{
 	}
 	
 	
-	public ObservableList<Ordremission> addOrdremissionList() {
+	public void Login(String fxml, Button button) {
+    	try {
+			Parent root;
+			root = FXMLLoader.load(getClass().getResource(fxml));
 
-		ObservableList<Ordremission> listOrdremission = FXCollections.observableArrayList();
+			Stage stage = new Stage();
 
-		String sql = "SELECT * FROM ordremission";
+			Scene scene = new Scene(root);
+
+			button.getScene().getWindow().hide();
+			
+			
+			
+			// Permet de faire bouger la fenetre et d'éviter de la redimensionner
+			root.setOnMousePressed((MouseEvent event) -> {
+				x = event.getSceneX();
+				y = event.getSceneY();
+			});
+
+			root.setOnMouseDragged((MouseEvent event) -> {
+				stage.setX(event.getScreenX() - x);
+				stage.setY(event.getScreenY() - y);
+			});
+
+			stage.setScene(scene);
+			stage.initStyle(StageStyle.TRANSPARENT);
+
+			stage.show();
+		} catch (IOException error) {
+			// TODO Auto-generated catch block
+			error.printStackTrace();
+		}
+    }
+
+	
+	
+	public ObservableList<Transporteur> addTransporteurList() {
+
+		ObservableList<Transporteur> listTransporteur = FXCollections.observableArrayList();
+
+		String sql = "SELECT * FROM transporteur";
 
 		 connect = Database.connectDb();
 
 		try {
 
-			Ordremission ordremission;
+			Transporteur transporteur;
 
 			prepare = connect.prepareStatement(sql);
 
 			result = prepare.executeQuery();
 
 			while (result.next()) {
-				ordremission = new Ordremission(result.getInt("idordremission"),result.getInt("idtransporteur"), result.getString("idcommandeclient"),result.getString("numeroordremission"), result.getDate("datedebut"), result.getDate("datefin"), result.getString("statue"),result.getString("rapport"));
-				listOrdremission.add(ordremission);
+				transporteur = new Transporteur(result.getInt("idtransporteur"),result.getInt("idadmin"),result.getString("nomtransporteur"),result.getString("prenomtrnsporteur"), result.getString("civilite"), result.getDate("datedebutembauche"), result.getDate("datefinembauche"),result.getFloat("salaire"),result.getString("fonction"));
+				listTransporteur.add(transporteur);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return listOrdremission;
+		return listTransporteur;
 	}
 
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
