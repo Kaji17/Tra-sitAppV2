@@ -11,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.TransitApp.Modeles.Admin;
-import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Util.HibernateUtil;
 
 import javafx.collections.FXCollections;

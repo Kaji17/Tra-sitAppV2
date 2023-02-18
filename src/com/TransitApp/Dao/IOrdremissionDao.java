@@ -18,7 +18,7 @@ public interface IOrdremissionDao {
 
 	void deleteOrdremission(int id);
 
-	List<Ordremission> getAllOrdremission();
+	List < Ordremission > getAllOrdremission();
 
 	List<Ordremission> rechercher(String nom);
 	

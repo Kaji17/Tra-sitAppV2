@@ -31,8 +31,11 @@ import javafx.stage.StageStyle;
 public class ProduitDao implements IProduitDao {
 
 	private Connection connect;
+			
 
+			
 	private PreparedStatement prepare;
+	
 
 	private ResultSet result;
 

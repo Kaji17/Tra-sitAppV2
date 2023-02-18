@@ -239,7 +239,7 @@
             <AnchorPane fx:id="pageGestionconducteurs" layoutX="18.0" prefHeight="583.0" prefWidth="918.0">
                <children>
                   <TextField fx:id="chercher_conducteur" layoutX="50.0" layoutY="36.0" prefHeight="34.0" prefWidth="284.0" promptText="chercher un conducteur" />
-                  <TableView fx:id="tableau_conducteur" layoutX="50.0" layoutY="78.0" prefHeight="224.0" prefWidth="804.0" stylesheets="@../Ressources/Styles/manager.css">
+                  <TableView fx:id="tableau_conducteur" layoutX="50.0" layoutY="78.0" onMouseClicked="#transportSelected" prefHeight="224.0" prefWidth="804.0" stylesheets="@../Ressources/Styles/manager.css">
                     <columns>
                       <TableColumn fx:id="idtransporteur" prefWidth="75.0" text="IDTRANSPORTEUR" />
                       <TableColumn fx:id="id_admin" prefWidth="75.0" text="IDADMIN" />
@@ -255,10 +255,9 @@
                   <TextField fx:id="text_nom" layoutX="259.0" layoutY="327.0" promptText="Nom du transorteur" />
                   <TextField fx:id="text_prenom" layoutX="492.0" layoutY="327.0" promptText="prenom du transporteur" />
                   <TextField fx:id="text_civilité" layoutX="711.0" layoutY="327.0" promptText="Civilité" />
-                  <DatePicker fx:id="text_datefin" layoutX="50.0" layoutY="409.0" promptText="date fin " />
-                  <TextField fx:id="text_salaire" layoutX="259.0" layoutY="409.0" promptText="salaire" />
-                  <TextField fx:id="text_fonction" layoutX="492.0" layoutY="409.0" promptText="fonction" />
-                  <Button fx:id="ButtonDeletetransporteur" layoutX="380.0" layoutY="481.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                  <TextField fx:id="text_salaire" layoutX="50.0" layoutY="409.0" promptText="salaire" />
+                  <TextField fx:id="text_fonction" layoutX="259.0" layoutY="409.0" promptText="fonction" />
+                  <Button fx:id="ButtonDeletetransporteur" layoutX="380.0" layoutY="481.0" mnemonicParsing="false" onAction="#deletetransport" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                      <effect>
                         <InnerShadow />
                      </effect>

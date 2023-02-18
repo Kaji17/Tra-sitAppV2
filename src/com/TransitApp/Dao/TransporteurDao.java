@@ -15,7 +15,7 @@ import org.hibernate.Transaction;
 
 
 import com.TransitApp.Modeles.Transporteur;
-import com.sati.util.HibernateUtil;
+import com.TransitApp.Util.HibernateUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

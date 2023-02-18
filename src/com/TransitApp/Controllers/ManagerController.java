@@ -12,6 +12,7 @@ import com.TransitApp.Dao.IAdminDao;
 import com.TransitApp.Dao.IOrdremissionDao;
 import com.TransitApp.Dao.OrdremissionDao;
 import com.TransitApp.Modeles.Admin;
+import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Modeles.Ordremission;
 
 import javafx.collections.FXCollections;
@@ -72,6 +73,12 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private DatePicker dcreation;
+	
+    @FXML
+    private TableColumn<?, ?> RAPPORT;
+    
+    @FXML
+    private TableColumn<?, ?> debut;
 
 	@FXML
 	private TableColumn<?, ?> devise;
@@ -97,6 +104,8 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TextField username;
 
+	  @FXML
+	    private TextField rapport_TXT;
 	@FXML
 	private DatePicker datedebut;
 
@@ -168,6 +177,9 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TextField entrer_nom;
+	
+	@FXML
+    private TableColumn<?, ?> fin;
 
 	@FXML
 	private TableColumn<?, ?> idcommande;
@@ -208,8 +220,10 @@ public class ManagerController implements Initializable {
 	@FXML
 	private AnchorPane suivi;
 
-	@FXML
-	private TableColumn<?, ?> rapport;
+	  @FXML
+	    private TableColumn<?, ?> STAT;
+	  
+	  
 
 	@FXML
 	private Button gestionuser;
@@ -228,6 +242,15 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TableColumn<?, ?> roles;
+	
+    @FXML
+    private Button ButtonDeletemission;
+
+    @FXML
+    private TableColumn<?, ?> mission;
+    
+    @FXML
+    private TableColumn<?, ?> transporteur;
 
 	private ObservableList<Admin> addAdminList;
 
@@ -326,7 +349,7 @@ public class ManagerController implements Initializable {
 		Alert alert;
 		Ordremission ordremission = new Ordremission();
 		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || idtransporteur.getText().isEmpty()
-				|| statut.getText().isEmpty() || text_lieu.getText().isEmpty()) {
+				|| statut.getText().isEmpty() || rapport_TXT.getText().isEmpty()) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -334,7 +357,7 @@ public class ManagerController implements Initializable {
 			alert.showAndWait();
 		} else {
 			Boolean verif = false;
-
+			
 			if (verif == true) {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
@@ -346,7 +369,7 @@ public class ManagerController implements Initializable {
 				ordremission.setRapport(statut.getText());
 				ordremission.setIdcommandeclient(textidcommande.getText());
 				ordremission.setNumeroordremission(nummission.getText());
-				ordremission.setRapport(text_lieu.getText());
+				ordremission.setRapport(rapport_TXT.getText());
 
 				Date date = new Date();
 				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -364,26 +387,129 @@ public class ManagerController implements Initializable {
 				alert.setContentText("mission  enregistrer avec success");
 				alert.showAndWait();
 				missionShowList();
+				clearmission();
 
 			}
+			missionShowList();
 
 			System.out.println(verif);
+			}}
+	
+	public void deletemission() {
+		Alert alert;
+		if (nummission.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Selectionner ou entrer un numero de mission");
+			Optional<ButtonType> option = alert.showAndWait();
+		} else {
+			// Vérifie l'existance d'un fournisseur
+			Boolean verif = false;
+			int id = 0;
+			for (Ordremission e : ordremissionDao.getAllOrdremission()) {
+				if (e.getNumeroordremission().equalsIgnoreCase(nummission.getText())) {
+					verif = true;
+					id = e.getIdordremission();
+				}
+			}
+			if (verif == true) {
+				alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("CONFIRMATION MESSAGE");
+				alert.setHeaderText(null);
+				alert.setContentText("Êtes vous sures de vouloir supprimer la mission: " + nummission.getText()
+						+ " ? Cette action est irreversible");
+				Optional<ButtonType> option = alert.showAndWait();
+				if (option.get().equals(ButtonType.OK)) {
+					ordremissionDao.deleteOrdremission(id);
+					missionShowList();
+					clearmission();
+
+				}
+			} else {
+				alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Message");
+				alert.setHeaderText(null);
+				alert.setContentText("La mission: " + nummission.getText() + " n'existe pas ");
+				alert.showAndWait();
+				return;
+			}
 		}
+
+		
 	}
+	public void clearmission() {
+		idtransporteur.setText("");
+		statut.setText("");
+		textidcommande.setText("");
+		nummission.setText("");
+		rapport_TXT.setText("");
+		
+	}
+	
+	
+
+	
+	
+	public void updatemission() {
+		Alert alert;
+		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || idtransporteur.getText().isEmpty()
+				|| statut.getText().isEmpty() || rapport_TXT.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Remplissez tous les champs s'il vous plait ");
+			alert.showAndWait();
+		} else {
+			alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("CONFIRMATION MESSAGE");
+			alert.setHeaderText(null);
+			alert.setContentText("Êtes vous sures de vouloir modifier les Informations de la mission: "
+					+ nummission.getText() + " ? Cette action est irreversible");
+			Optional<ButtonType> option = alert.showAndWait();
+			if (option.get().equals(ButtonType.OK)) {
+				for (Ordremission e : ordremissionDao.getAllOrdremission()) {
+					if (e.getNumeroordremission().equals(nummission)) {
+						e.setIdcommandeclient(textidcommande.getText());
+						e.setNumeroordremission(nummission.getText());
+						e.setRapport(rapport_TXT.getText());
+						e.setIdtransporteur(Integer.parseInt(idtransporteur.getText()));
+						
+
+						ordremissionDao.updateOrdremission(e);
+					}
+				}
+
+				alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Sucess Modification");
+				alert.setHeaderText(null);
+				alert.setContentText("utilisateur: " + username.getText() + " enregistrer avec success");
+				alert.showAndWait();
+				missionShowList();
+				clearmission();
+
+			}
+		}
+
+	}
+
 
 	public void missionShowList() {
 		addOdremissionList = ordremissionDao.addOrdremissionList();
 
-		idcomande.setCellValueFactory(new PropertyValueFactory<>("commandeclient"));
+		idcomande.setCellValueFactory(new PropertyValueFactory<>("idcommandeclient"));
+		idmission.setCellValueFactory(new PropertyValueFactory<>("idordremission"));
+		RAPPORT.setCellValueFactory(new PropertyValueFactory<>("rapport"));
+		debut.setCellValueFactory(new PropertyValueFactory<>("datedebut"));
+		fin.setCellValueFactory(new PropertyValueFactory<>("datefin"));
+		STAT.setCellValueFactory(new PropertyValueFactory<>("statue"));
+		mission.setCellValueFactory(new PropertyValueFactory<>("numeroordremission"));
+		transporteur.setCellValueFactory(new PropertyValueFactory<>("idtransporteur"));
 
 		tableau_mission.setItems(addOdremissionList);
 	}
 
-	public void clearmission() {
-		username.setText("");
-		password.setText("");
-		role.setText("");
-	}
+	
 
 	public void logout() {
 		try {
@@ -572,10 +698,27 @@ public class ManagerController implements Initializable {
 		password.setText(admin.getPassword());
 
 	}
+	
+	public void missionSelected() {
+		Ordremission ordremission = tableau_mission.getSelectionModel().getSelectedItem();
+
+		Integer num = tableau_mission.getSelectionModel().getSelectedIndex();
+
+		if (num - 1 < -1) {
+			return;
+		}
+		textidcommande.setText(ordremission.getIdcommandeclient());
+		
+		rapport_TXT.setText(ordremission.getRapport());
+		nummission.setText(ordremission.getNumeroordremission());
+		statut.setText(ordremission.getStatue());
+
+	}
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		userShowList();
 		addRoleComboBox();
+		missionShowList();
 		
 //				addComboBoxProduit();
 //				addComboBoxUniteMesure();

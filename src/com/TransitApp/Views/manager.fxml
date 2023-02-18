@@ -252,11 +252,11 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="page_ajout_mission" layoutX="-8.0" layoutY="10.0" prefHeight="503.0" prefWidth="813.0" visible="false">
+            <AnchorPane fx:id="page_ajout_mission" layoutX="-8.0" layoutY="10.0" prefHeight="503.0" prefWidth="813.0">
                <children>
                   <AnchorPane layoutX="-56.0" prefHeight="272.0" prefWidth="737.0">
                      <children>
-                        <TableView fx:id="tableau_mission" layoutX="87.0" layoutY="65.0" prefHeight="218.0" prefWidth="936.0" stylesheets="@../Ressources/Styles/manager.css">
+                        <TableView fx:id="tableau_mission" layoutX="87.0" layoutY="65.0" onMouseClicked="#missionSelected" prefHeight="218.0" prefWidth="936.0" stylesheets="@../Ressources/Styles/manager.css">
                           <columns>
                             <TableColumn fx:id="idmission" prefWidth="90.0" text="IDMISSION" />
                             <TableColumn fx:id="idcomande" minWidth="9.0" prefWidth="103.0" text="IDCOMMANDE" />
@@ -274,7 +274,7 @@
                   <TextField fx:id="statut" layoutX="238.0" layoutY="338.0" prefHeight="25.0" prefWidth="115.0" promptText="statut" />
                   <TextField fx:id="textidcommande" layoutX="44.0" layoutY="399.0" promptText="idcommande" />
                   <TextField fx:id="nummission" layoutX="44.0" layoutY="338.0" promptText="nummission" />
-                  <Button fx:id="ButtonModifymission" layoutX="517.0" layoutY="488.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
+                  <Button fx:id="ButtonModifymission" layoutX="517.0" layoutY="488.0" mnemonicParsing="false" onAction="#updatemission" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
                      <effect>
                         <InnerShadow />
                      </effect>
@@ -296,8 +296,8 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField fx:id="text_lieu" layoutX="414.0" layoutY="399.0" promptText="rapport" />
-                  <Button fx:id="ButtonDeletemission" layoutX="357.0" layoutY="488.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                  <TextField fx:id="rapport_TXT" layoutX="414.0" layoutY="399.0" promptText="rapport" />
+                  <Button fx:id="ButtonDeletemission" layoutX="357.0" layoutY="488.0" mnemonicParsing="false" onAction="#deletemission" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                      <effect>
                         <InnerShadow />
                      </effect>
@@ -328,7 +328,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="ajoutuser" layoutX="2.0" layoutY="4.0" prefHeight="599.0" prefWidth="998.0">
+            <AnchorPane fx:id="ajoutuser" layoutX="2.0" layoutY="4.0" prefHeight="599.0" prefWidth="998.0" visible="false">
                <children>
                   <TextField fx:id="username" layoutX="53.0" layoutY="159.0" prefHeight="32.0" prefWidth="254.0" promptText="nom de  l'utilisateur" />
                   <TextField fx:id="password" layoutX="51.0" layoutY="265.0" prefHeight="36.0" prefWidth="255.0" promptText="mot de passe" />

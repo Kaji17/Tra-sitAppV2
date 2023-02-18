@@ -5,17 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.io.IOException;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 import com.TransitApp.Modeles.Ordremission;
-import com.sati.util.HibernateUtil;
+import com.TransitApp.Util.HibernateUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class OrdremissionDao implements IOrdremissionDao{
 	
@@ -107,7 +113,8 @@ public class OrdremissionDao implements IOrdremissionDao{
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Ordremission> getAllOrdremission() {
+    public List < Ordremission > getAllOrdremission(){
+		
         Transaction transaction = null;
         List < Ordremission > ordremission = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -115,9 +122,8 @@ public class OrdremissionDao implements IOrdremissionDao{
             transaction = session.beginTransaction();
 
             // get students
-            ordremission = session.createQuery("from Ordremission").list();
-            //student = session.load(Student.class, id);
-            // commit the transaction
+            ordremission = session.createQuery("from ordremission").list();
+        
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -131,7 +137,7 @@ public class OrdremissionDao implements IOrdremissionDao{
      * @see net.javaguides.hibernate.dao.IStudentDao#deleteStudent(long)
      */
     @Override
-    public void deleteOrdremission(int id) {
+    public	void deleteOrdremission(int id) {
         Transaction transaction = null;
         Ordremission ordremission = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
