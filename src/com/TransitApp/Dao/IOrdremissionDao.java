@@ -10,7 +10,7 @@ public interface IOrdremissionDao {
 	
 	void saveOrdremission(Ordremission ordremission);
 
-	void updateOrdremission(Ordremission ordremission);
+	
 
 	Ordremission getOrdremissionById(int id);
 
@@ -23,4 +23,6 @@ public interface IOrdremissionDao {
 	List<Ordremission> rechercher(String nom);
 	
 	ObservableList<Ordremission> addOrdremissionList();
+
+	void updateordremission(Ordremission ordremission);
 }

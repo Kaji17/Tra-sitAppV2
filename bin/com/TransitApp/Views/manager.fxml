@@ -270,10 +270,9 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <TextField fx:id="idtransporteur" layoutX="238.0" layoutY="399.0" promptText="idtransporteur" />
-                  <TextField fx:id="statut" layoutX="238.0" layoutY="338.0" prefHeight="25.0" prefWidth="115.0" promptText="statut" />
-                  <TextField fx:id="textidcommande" layoutX="44.0" layoutY="399.0" promptText="idcommande" />
-                  <TextField fx:id="nummission" layoutX="44.0" layoutY="338.0" promptText="nummission" />
+                  <TextField fx:id="statut" layoutX="337.0" layoutY="339.0" prefHeight="31.0" prefWidth="163.0" promptText="statut" />
+                  <TextField fx:id="textidcommande" layoutX="63.0" layoutY="398.0" prefHeight="30.0" prefWidth="184.0" promptText="idcommande" />
+                  <TextField fx:id="nummission" layoutX="63.0" layoutY="339.0" prefHeight="33.0" prefWidth="185.0" promptText="nummission" />
                   <Button fx:id="ButtonModifymission" layoutX="517.0" layoutY="488.0" mnemonicParsing="false" onAction="#updatemission" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
                      <effect>
                         <InnerShadow />
@@ -296,7 +295,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField fx:id="rapport_TXT" layoutX="414.0" layoutY="399.0" promptText="rapport" />
+                  <TextField fx:id="rapport_TXT" layoutX="337.0" layoutY="398.0" prefHeight="31.0" prefWidth="195.0" promptText="rapport" />
                   <Button fx:id="ButtonDeletemission" layoutX="357.0" layoutY="488.0" mnemonicParsing="false" onAction="#deletemission" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                      <effect>
                         <InnerShadow />
@@ -308,7 +307,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <ComboBox fx:id="comboboxTranspoteur" layoutX="413.0" layoutY="338.0" prefWidth="150.0" promptText="Transporteur" />
+                  <ComboBox fx:id="comboboxTranspoteur" layoutX="598.0" layoutY="339.0" onAction="#addComboBoxtransporteur" prefHeight="30.0" prefWidth="174.0" promptText="Transporteur" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="suivi" layoutX="5.0" prefHeight="635.0" prefWidth="949.0" visible="false">

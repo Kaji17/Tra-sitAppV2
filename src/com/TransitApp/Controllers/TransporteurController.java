@@ -1,15 +1,18 @@
 package com.TransitApp.Controllers;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-
+import com.TransitApp.Controllers.ManagerController;
 import com.TransitApp.Dao.ITransporteurDao;
 import com.TransitApp.Dao.TransporteurDao;
 import com.TransitApp.Modeles.Admin;
+import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Modeles.Transporteur;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -123,6 +127,8 @@ public class  TransporteurController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> salaire;
+    
+    
 
     @FXML
     private TableView<Transporteur> tableau_conducteur;
@@ -163,6 +169,10 @@ public class  TransporteurController implements Initializable {
     ITransporteurDao TransporteurDao = new TransporteurDao();
     
     private  ObservableList<Transporteur> addTransporteurList;
+    
+    ManagerController managerController= new ManagerController();
+    
+    
 
 
     @FXML
@@ -363,6 +373,7 @@ public class  TransporteurController implements Initializable {
 
 		}
 	
+		
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			
 			 transportshowList();

@@ -10,6 +10,7 @@ import java.io.IOException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.TransitApp.Modeles.Admin;
 import com.TransitApp.Modeles.Ordremission;
 import com.TransitApp.Util.HibernateUtil;
 
@@ -60,8 +61,9 @@ public class OrdremissionDao implements IOrdremissionDao{
     /* (non-Javadoc)
      * @see net.javaguides.hibernate.dao.IStudentDao#updateStudent(net.javaguides.hibernate.model.Student)
      */
+    
     @Override
-    public void updateOrdremission(Ordremission ordremission) {
+    public void updateordremission(Ordremission ordremission) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start the transaction

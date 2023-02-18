@@ -7,13 +7,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.TransitApp.Controllers.TransporteurController;
+
+import com.TransitApp.Modeles.Transporteur;
+
 import com.TransitApp.Dao.AdminDao;
 import com.TransitApp.Dao.IAdminDao;
 import com.TransitApp.Dao.IOrdremissionDao;
+import com.TransitApp.Dao.ITransporteurDao;
 import com.TransitApp.Dao.OrdremissionDao;
+import com.TransitApp.Dao.TransporteurDao;
 import com.TransitApp.Modeles.Admin;
+import com.TransitApp.Modeles.Contenir;
+import com.TransitApp.Modeles.Entrepot;
 import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Modeles.Ordremission;
+import com.TransitApp.Modeles.Transporteur;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,8 +59,12 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private Button addComboBoxordredemission;
+	
+	
 
 	private String[] Role = { "Manager", "Transporteur", "Respo_Reapro" };
+	
+	
 
 	@FXML
 	private TextField text_produit;
@@ -66,7 +79,7 @@ public class ManagerController implements Initializable {
 	private TableColumn<?, ?> datecréation;
 
 	@FXML
-	private ComboBox<?> comboboxTranspoteur;
+	public ComboBox<?> comboboxTranspoteur;
 
 	@FXML
 	private ComboBox<?> comboboxRole;
@@ -258,7 +271,12 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TableView<Ordremission> tableau_mission;
+	
+    ITransporteurDao TransporteurDao = new TransporteurDao();
 
+
+	
+	
 	public void addRoleComboBox() {
 		List<String> RoleList = new ArrayList<>();
 
@@ -269,6 +287,18 @@ public class ManagerController implements Initializable {
 		ObservableList oblist = FXCollections.observableArrayList(RoleList);
 		comboboxRole.setItems(oblist);
 	}
+	
+	public void addComboBoxtransporteur() {
+		List<String> trasporteurList = new ArrayList<>();
+
+		for (Transporteur data : TransporteurDao.getAllTransporteur()) {
+			trasporteurList.add(data.getNomtransporteur());
+		}
+
+		ObservableList oblist = FXCollections.observableArrayList(trasporteurList);
+		comboboxTranspoteur.setItems(oblist);
+	}
+	
 
 	public void close() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -348,7 +378,7 @@ public class ManagerController implements Initializable {
 	public void addOrdremission() {
 		Alert alert;
 		Ordremission ordremission = new Ordremission();
-		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || idtransporteur.getText().isEmpty()
+		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || comboboxTranspoteur.getSelectionModel().getSelectedItem() == null
 				|| statut.getText().isEmpty() || rapport_TXT.getText().isEmpty()) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
@@ -365,7 +395,6 @@ public class ManagerController implements Initializable {
 				alert.setContentText("La mission   exite déja. Entrer un autre id de mission");
 				alert.showAndWait();
 			} else {
-				ordremission.setIdtransporteur(Integer.parseInt(idtransporteur.getText()));
 				ordremission.setRapport(statut.getText());
 				ordremission.setIdcommandeclient(textidcommande.getText());
 				ordremission.setNumeroordremission(nummission.getText());
@@ -377,6 +406,16 @@ public class ManagerController implements Initializable {
 				ordremission.setDatefin(null);
 
 				ordremission.setStatue(statut.getText());
+				
+				int id1 = 0;
+				String val1 = (String) comboboxTranspoteur.getSelectionModel().getSelectedItem();
+				for (Transporteur e : TransporteurDao.getAllTransporteur()) {
+					if (e.getNomtransporteur().equalsIgnoreCase(val1)) {
+						id1 = e.getIdtransporteur();
+					}
+				}
+				ordremission.setIdtransporteur(id1);
+			;
 
 				ordremissionDao.saveOrdremission(ordremission);
 				System.out.println("===Enregistremment Effectuer");
@@ -423,14 +462,14 @@ public class ManagerController implements Initializable {
 				if (option.get().equals(ButtonType.OK)) {
 					ordremissionDao.deleteOrdremission(id);
 					missionShowList();
-					clearmission();
+					clearmission();					
 
 				}
 			} else {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
 				alert.setHeaderText(null);
-				alert.setContentText("La mission: " + nummission.getText() + " n'existe pas ");
+				alert.setContentText("Le transporteur: " + nummission.getText() + " n'existe pas ");
 				alert.showAndWait();
 				return;
 			}
@@ -476,7 +515,7 @@ public class ManagerController implements Initializable {
 						e.setIdtransporteur(Integer.parseInt(idtransporteur.getText()));
 						
 
-						ordremissionDao.updateOrdremission(e);
+						ordremissionDao.updateordremission(e);
 					}
 				}
 
@@ -583,6 +622,8 @@ public class ManagerController implements Initializable {
 			System.out.println(verif);
 		}
 	}
+	
+	// SUPPRIMER UN UTILISATEUR
 
 	public void deleteUSER() {
 		Alert alert;
@@ -714,11 +755,14 @@ public class ManagerController implements Initializable {
 		statut.setText(ordremission.getStatue());
 
 	}
+	
+	
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		userShowList();
 		addRoleComboBox();
 		missionShowList();
+		addComboBoxtransporteur();
 		
 //				addComboBoxProduit();
 //				addComboBoxUniteMesure();
