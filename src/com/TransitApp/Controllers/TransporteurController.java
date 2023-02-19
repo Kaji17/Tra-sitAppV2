@@ -116,7 +116,7 @@ public class  TransporteurController implements Initializable {
     private Button logoutBtn;
 
     @FXML
-    private TableView<?> missions_rapport;
+    private TableView<Ordremission> missions_rapport;
 
     @FXML
     private TableColumn<?, ?> nom_transporteur;
@@ -185,6 +185,8 @@ public class  TransporteurController implements Initializable {
     private  ObservableList<Transporteur> addTransporteurList;
     
     ManagerController managerController= new ManagerController();
+    
+
     
     
 
@@ -322,7 +324,7 @@ public class  TransporteurController implements Initializable {
 			for (Transporteur e : TransporteurDao.getAllTransporteur()) {
 				if (e.getNomtransporteur().equalsIgnoreCase(text_nom.getText())) {
 					verif = true;
-					id = e.getIdadmin();
+					id = e.getIdtransporteur();
 				}
 			}
 			if (verif == true) {
@@ -333,6 +335,7 @@ public class  TransporteurController implements Initializable {
 						+ " ? Cette action est irreversible");
 				Optional<ButtonType> option = alert.showAndWait();
 				if (option.get().equals(ButtonType.OK)) {
+					
 					TransporteurDao.deleteTransporteur(id);
 					transportshowList();
 					
@@ -349,6 +352,17 @@ public class  TransporteurController implements Initializable {
 		}
 
 		
+	}
+    
+    public  void  rapportshowList() { 
+		
+    	addOdremissionList = ordremissionDao.addOrdremissionList();
+
+    	idmission.setCellValueFactory(new PropertyValueFactory<>("Numeroordremission"));
+    	rapport.setCellValueFactory(new PropertyValueFactory<>("Rapport"));
+		
+
+		missions_rapport.setItems(addOdremissionList);
 	}
     
    
@@ -390,7 +404,7 @@ public class  TransporteurController implements Initializable {
 
 		}
 		
-		/*public void addComboBoxmission() {
+		public void addComboBoxmission() {
 			List<String> missionList = new ArrayList<>();
 
 			for (Ordremission data : ordremissionDao.getAllOrdremission()) {
@@ -399,12 +413,12 @@ public class  TransporteurController implements Initializable {
 
 			ObservableList oblist = FXCollections.observableArrayList(missionList);
 			comboboxmission.setItems(oblist);
-		}*/
+		}
 	
 		public void addrapport() {
 			Alert alert;
 			Ordremission ordremission = new Ordremission();
-			if (text_id_mission.getText().isEmpty() || text_rapport.getText().isEmpty() ) {
+			if (text_rapport.getText().isEmpty() || comboboxmission.getSelectionModel().getSelectedItem() == null ) {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
 				alert.setHeaderText(null);
@@ -415,11 +429,13 @@ public class  TransporteurController implements Initializable {
 				alert.setTitle("CONFIRMATION MESSAGE");
 				alert.setHeaderText(null);
 				alert.setContentText("Êtes vous sures de vouloir modifier les Informations de la mission: "
-						+ text_id_mission.getText() + " ? Cette action est irreversible");
+						+ comboboxmission.getSelectionModel().getSelectedItem() + " ? Cette action est irreversible");
 				Optional<ButtonType> option = alert.showAndWait();
 				if (option.get().equals(ButtonType.OK)) {
 					for (Ordremission e : ordremissionDao.getAllOrdremission()) {
-						if (e.getNumeroordremission().equals(text_id_mission)) {
+						if (e.getNumeroordremission().equals(comboboxmission.getSelectionModel().getSelectedItem())) {
+							
+						
 							e.setRapport(text_rapport.getText());
 							
 							
@@ -431,8 +447,9 @@ public class  TransporteurController implements Initializable {
 					alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Sucess Modification");
 					alert.setHeaderText(null);
-					alert.setContentText("utilisateur: " + text_id_mission.getText() + " enregistrer avec success");
+					alert.setContentText("le rapport de la mission: " + comboboxmission.getSelectionModel().getSelectedItem() + " enregistrer avec success");
 					alert.showAndWait();
+					 rapportshowList();
 					
 
 				}
@@ -446,6 +463,8 @@ public class  TransporteurController implements Initializable {
 			
 			 transportshowList();
 			 transportSelected();
+			 addComboBoxmission();
+			 rapportshowList();
 			
 			
 		}

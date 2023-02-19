@@ -488,7 +488,7 @@ public class ManagerController implements Initializable {
 		
 	}
 	public void clearmission() {
-		idtransporteur.setText("");
+		
 		statut.setText("");
 		textidcommande.setText("");
 		nummission.setText("");
@@ -502,7 +502,7 @@ public class ManagerController implements Initializable {
 	
 	public void updatemission() {
 		Alert alert;
-		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || idtransporteur.getText().isEmpty()
+		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || comboboxTranspoteur.getSelectionModel().getSelectedItem() == null
 				|| statut.getText().isEmpty() || rapport_TXT.getText().isEmpty()) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
@@ -518,11 +518,23 @@ public class ManagerController implements Initializable {
 			Optional<ButtonType> option = alert.showAndWait();
 			if (option.get().equals(ButtonType.OK)) {
 				for (Ordremission e : ordremissionDao.getAllOrdremission()) {
-					if (e.getNumeroordremission().equals(nummission)) {
+					if (e.getNumeroordremission().equalsIgnoreCase(nummission.getText())) {
 						e.setIdcommandeclient(textidcommande.getText());
 						e.setNumeroordremission(nummission.getText());
 						e.setRapport(rapport_TXT.getText());
-						e.setIdtransporteur(Integer.parseInt(idtransporteur.getText()));
+						e.setStatue(statut.getText());
+						
+						int id1 = 0;
+						String val1 = (String) comboboxTranspoteur.getSelectionModel().getSelectedItem();
+						for (Transporteur a : TransporteurDao.getAllTransporteur()) {
+							if (a.getNomtransporteur().equalsIgnoreCase(val1)) {
+								id1 = a.getIdtransporteur();
+							}
+						}
+						e.setIdtransporteur(id1);
+						
+						
+					
 						
 
 						ordremissionDao.updateordremission(e);
@@ -535,7 +547,7 @@ public class ManagerController implements Initializable {
 				alert.setContentText("utilisateur: " + username.getText() + " enregistrer avec success");
 				alert.showAndWait();
 				missionShowList();
-				clearmission();
+			
 
 			}
 		}

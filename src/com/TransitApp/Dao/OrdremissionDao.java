@@ -124,7 +124,7 @@ public class OrdremissionDao implements IOrdremissionDao{
             transaction = session.beginTransaction();
 
             // get students
-            ordremission = session.createQuery("from ordremission").list();
+            ordremission = session.createQuery("from Ordremission").list();
         
             transaction.commit();
         } catch (Exception e) {
