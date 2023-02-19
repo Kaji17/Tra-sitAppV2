@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import com.TransitApp.Controllers.ManagerController;
+import com.TransitApp.Dao.IOrdremissionDao;
 import com.TransitApp.Dao.ITransporteurDao;
+import com.TransitApp.Dao.OrdremissionDao;
 import com.TransitApp.Dao.TransporteurDao;
 import com.TransitApp.Modeles.Admin;
 import com.TransitApp.Modeles.Fournisseur;
+import com.TransitApp.Modeles.Ordremission;
 import com.TransitApp.Modeles.Transporteur;
 
 import javafx.collections.FXCollections;
@@ -46,6 +49,8 @@ public class  TransporteurController implements Initializable {
 
     @FXML
     private Button ButtonDeletetransporteur;
+    
+    IOrdremissionDao ordremissionDao = new OrdremissionDao();
 
     @FXML
     private Button ButtonGestionconducteurs;
@@ -153,6 +158,9 @@ public class  TransporteurController implements Initializable {
 
     @FXML
     private TextField text_nom;
+    
+	private ObservableList<Ordremission> addOdremissionList;
+
 
     @FXML
     private TextField text_prenom;
@@ -162,6 +170,12 @@ public class  TransporteurController implements Initializable {
 
     @FXML
     private TextField text_salaire;
+    
+    @FXML
+    private TextField text_id_mission;
+    
+    @FXML
+    private ComboBox<?> comboboxmission;
     
     @FXML
     private TextField text_idadmin;
@@ -336,6 +350,9 @@ public class  TransporteurController implements Initializable {
 
 		
 	}
+    
+   
+    
 
 		
 		
@@ -372,12 +389,65 @@ public class  TransporteurController implements Initializable {
 			
 
 		}
+		
+		/*public void addComboBoxmission() {
+			List<String> missionList = new ArrayList<>();
+
+			for (Ordremission data : ordremissionDao.getAllOrdremission()) {
+				missionList.add(data.getNumeroordremission());
+			}
+
+			ObservableList oblist = FXCollections.observableArrayList(missionList);
+			comboboxmission.setItems(oblist);
+		}*/
 	
+		public void addrapport() {
+			Alert alert;
+			Ordremission ordremission = new Ordremission();
+			if (text_id_mission.getText().isEmpty() || text_rapport.getText().isEmpty() ) {
+				alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Message");
+				alert.setHeaderText(null);
+				alert.setContentText("Remplissez tous les champs s'il vous plait ");
+				alert.showAndWait();
+			} else {
+				alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("CONFIRMATION MESSAGE");
+				alert.setHeaderText(null);
+				alert.setContentText("Êtes vous sures de vouloir modifier les Informations de la mission: "
+						+ text_id_mission.getText() + " ? Cette action est irreversible");
+				Optional<ButtonType> option = alert.showAndWait();
+				if (option.get().equals(ButtonType.OK)) {
+					for (Ordremission e : ordremissionDao.getAllOrdremission()) {
+						if (e.getNumeroordremission().equals(text_id_mission)) {
+							e.setRapport(text_rapport.getText());
+							
+							
+
+							ordremissionDao.updateordremission(e);
+						}
+					}
+
+					alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Sucess Modification");
+					alert.setHeaderText(null);
+					alert.setContentText("utilisateur: " + text_id_mission.getText() + " enregistrer avec success");
+					alert.showAndWait();
+					
+
+				}
+			}
+
+		}
+		
+		
 		
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			
 			 transportshowList();
 			 transportSelected();
+			
+			
 		}
 		
 		

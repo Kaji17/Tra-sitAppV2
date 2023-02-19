@@ -139,6 +139,16 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TextField chercher;
+	
+    @FXML
+    private TableColumn<?, ?> col_idmission;
+
+    @FXML
+    private TableColumn<?, ?> col_mission;
+    
+    @FXML
+    private TableView<Ordremission> tableau_rapport;
+
 
 	@FXML
 	private TextField text_datedebut;
@@ -756,6 +766,14 @@ public class ManagerController implements Initializable {
 
 	}
 	
+	public void rapportShowList() {
+		addOdremissionList = ordremissionDao.addOrdremissionList();
+		
+		col_idmission.setCellValueFactory(new PropertyValueFactory<>("Numeroordremission"));
+		col_mission.setCellValueFactory(new PropertyValueFactory<>("Rapport"));
+		
+		tableau_rapport.setItems(addOdremissionList);
+	}
 	
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -763,6 +781,7 @@ public class ManagerController implements Initializable {
 		addRoleComboBox();
 		missionShowList();
 		addComboBoxtransporteur();
+		rapportShowList();
 		
 //				addComboBoxProduit();
 //				addComboBoxUniteMesure();
