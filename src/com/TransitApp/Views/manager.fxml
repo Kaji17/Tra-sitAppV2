@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -189,18 +188,13 @@
       </VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="644.0" prefWidth="998.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="635.0" prefWidth="905.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="page_ajout_commande" layoutX="5.0" layoutY="25.0" prefHeight="585.0" prefWidth="981.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css" visible="false">
+            <AnchorPane fx:id="page_ajout_commande" layoutX="5.0" layoutY="40.0" prefHeight="556.0" prefWidth="939.0" styleClass="bgBlack" stylesheets="@../Ressources/Styles/ContentNavigation.css">
                <children>
                   <AnchorPane fx:id="choisir_nom" layoutX="14.0" layoutY="-7.0" prefHeight="524.0" prefWidth="979.0">
                      <children>
-                        <TextField fx:id="text_produit" layoutX="84.0" layoutY="346.0" promptText="nom du produit" />
-                        <TextField fx:id="text_quantité" layoutX="327.0" layoutY="346.0" promptText="quantité" />
-                        <TextField fx:id="textdevise" layoutX="553.0" layoutY="346.0" promptText="devise" />
-                        <TextField fx:id="text_moyenpaiement" layoutX="84.0" layoutY="402.0" promptText="moyen de paiement" />
-                        <DatePicker fx:id="dcreation" layoutX="320.0" layoutY="402.0" promptText="date de création" />
-                        <Button fx:id="addComboBoxFournisseur" layoutX="653.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonAdd" stylesheets="@../Ressources/Styles/button.css" text="ADD" textFill="WHITE">
+                        <Button layoutX="160.0" layoutY="376.0" mnemonicParsing="false" onAction="#addLigneCmd" prefHeight="41.0" prefWidth="99.0" styleClass="buttonAdd" stylesheets="@../Ressources/Styles/button.css" text="ADD" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -211,7 +205,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="ButtonModifyProduit" layoutX="476.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
+                        <Button layoutX="75.0" layoutY="436.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="107.0" styleClass="buttonUpdate" stylesheets="@../Ressources/Styles/button.css" text="MODIFY" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -222,7 +216,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="ButtonDeleteProduit" layoutX="327.0" layoutY="497.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                        <Button layoutY="376.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                            <effect>
                               <InnerShadow />
                            </effect>
@@ -233,26 +227,48 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="20.0" layoutY="35.0" prefHeight="260.0" prefWidth="811.0">
-                     <children>
-                        <TextField fx:id="recherchecommande" layoutX="21.0" layoutY="14.0" prefHeight="37.0" prefWidth="327.0" promptText="chercher" style="-fx-background-color: white;" />
-                        <TableView layoutX="21.0" layoutY="58.0" prefHeight="226.0" prefWidth="799.0" styleClass="tableau" stylesheets="@../Ressources/Styles/manager.css">
+                        <ComboBox fx:id="comboBoxProduit" layoutX="33.0" layoutY="137.0" onAction="#addComboBoxProduit" prefHeight="33.0" prefWidth="174.0" promptText="Produits" />
+                        <TextField fx:id="text_quantité" layoutX="33.0" layoutY="193.0" prefHeight="33.0" prefWidth="174.0" promptText="quantité" />
+                        <TextField fx:id="textdevise" layoutX="33.0" layoutY="251.0" prefHeight="33.0" prefWidth="174.0" promptText="devise" />
+                        <TextField fx:id="text_moyenpaiement" layoutX="33.0" layoutY="302.0" prefHeight="33.0" prefWidth="174.0" promptText="moyen de paiement" />
+                        <TableView layoutX="276.0" layoutY="323.0" prefHeight="226.0" prefWidth="695.0" styleClass="tableau" stylesheets="@../Ressources/Styles/manager.css">
                           <columns>
-                            <TableColumn fx:id="idcommande" prefWidth="112.0" text="IDCOMMANDDE" />
-                            <TableColumn fx:id="datecréation" prefWidth="119.0" text="DATE CREATION " />
-                              <TableColumn fx:id="nomproduit" prefWidth="137.0" text="NOM DU PRODUIT" />
-                              <TableColumn fx:id="quantité" prefWidth="123.0" text="QUANTITE" />
-                              <TableColumn fx:id="devise" prefWidth="76.0" text="DEVISE" />
-                              <TableColumn fx:id="moyenpaiement" prefWidth="229.0" text="MOYEN DE PAIEMENT" />
+                            <TableColumn fx:id="idcommande" prefWidth="68.0" text="ID CMD" />
+                            <TableColumn fx:id="datecréation" prefWidth="112.0" text="DATE CREATION " />
+                              <TableColumn fx:id="nomproduit" prefWidth="121.0" text="NOM DU PRODUIT" />
+                              <TableColumn fx:id="quantité" prefWidth="110.0" text="QUANTITE" />
+                              <TableColumn fx:id="devise" prefWidth="57.0" text="DEVISE" />
+                              <TableColumn fx:id="moyenpaiement" prefWidth="137.0" text="MOYEN DE PAIEMENT" />
+                              <TableColumn prefWidth="88.0" text="COUT" />
                           </columns>
                         </TableView>
+                        <TextField fx:id="txtIdcmdClient" layoutX="33.0" layoutY="84.0" prefHeight="33.0" prefWidth="174.0" promptText="Id commande client" />
+                        <TableView fx:id="TableLigneCmd" layoutX="274.0" layoutY="17.0" prefHeight="200.0" prefWidth="696.0">
+                          <columns>
+                            <TableColumn fx:id="TableLigneCmd_col_IdCmd" prefWidth="75.0" text="ID CMD" />
+                              <TableColumn fx:id="TableLigneCmd_col_IdLigneCmd" prefWidth="121.0" text="ID LIGNE CMD" />
+                            <TableColumn fx:id="TableLigneCmd_col_Produit" prefWidth="111.0" text="PRODUIT" />
+                              <TableColumn fx:id="TableLigneCmd_col_Quantite" prefWidth="202.0" text="QUANTITE" />
+                              <TableColumn fx:id="TableLigneCmd_col_Cout" prefWidth="185.0" text="COUT" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="391.0" layoutY="254.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="99.0" styleClass="buttonAdd" stylesheets="@../Ressources/Styles/button.css" text="ADD" textFill="WHITE">
+                           <effect>
+                              <InnerShadow />
+                           </effect>
+                           <font>
+                              <Font name="Broadway" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <TextField fx:id="txtIdLignecmdClient" layoutX="33.0" layoutY="39.0" prefHeight="33.0" prefWidth="174.0" promptText="Id ligne commande client" />
                      </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="page_ajout_mission" layoutX="-8.0" layoutY="10.0" prefHeight="503.0" prefWidth="813.0">
+            <AnchorPane fx:id="page_ajout_mission" layoutX="-8.0" layoutY="10.0" prefHeight="503.0" prefWidth="813.0" visible="false">
                <children>
                   <AnchorPane layoutX="-56.0" prefHeight="272.0" prefWidth="737.0">
                      <children>
@@ -296,7 +312,7 @@
                      </cursor>
                   </Button>
                   <TextField fx:id="rapport_TXT" layoutX="337.0" layoutY="398.0" prefHeight="31.0" prefWidth="195.0" promptText="rapport" />
-                  <Button fx:id="ButtonDeletemission" layoutX="357.0" layoutY="488.0" mnemonicParsing="false" onAction="#deletemission" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
+                  <Button fx:id="ButtonDeletemission" layoutX="369.0" layoutY="495.0" mnemonicParsing="false" onAction="#deletemission" prefHeight="41.0" prefWidth="99.0" styleClass="buttonDelete" stylesheets="@../Ressources/Styles/button.css" text="DELETE" textFill="WHITE">
                      <effect>
                         <InnerShadow />
                      </effect>

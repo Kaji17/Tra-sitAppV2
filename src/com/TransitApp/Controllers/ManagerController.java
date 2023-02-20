@@ -13,15 +13,23 @@ import com.TransitApp.Modeles.Transporteur;
 
 import com.TransitApp.Dao.AdminDao;
 import com.TransitApp.Dao.IAdminDao;
+import com.TransitApp.Dao.ILigneCommandeClientDao;
 import com.TransitApp.Dao.IOrdremissionDao;
+import com.TransitApp.Dao.IProduitDao;
 import com.TransitApp.Dao.ITransporteurDao;
+import com.TransitApp.Dao.LigneCommandeClientDao;
 import com.TransitApp.Dao.OrdremissionDao;
+import com.TransitApp.Dao.ProduitDao;
 import com.TransitApp.Dao.TransporteurDao;
 import com.TransitApp.Modeles.Admin;
+import com.TransitApp.Modeles.Categorie;
 import com.TransitApp.Modeles.Contenir;
+import com.TransitApp.Modeles.Contenir2;
+import com.TransitApp.Modeles.Contenir2Id;
 import com.TransitApp.Modeles.Entrepot;
 import com.TransitApp.Modeles.Fournisseur;
 import com.TransitApp.Modeles.Ordremission;
+import com.TransitApp.Modeles.Produit;
 import com.TransitApp.Modeles.Transporteur;
 
 import javafx.collections.FXCollections;
@@ -59,12 +67,14 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private Button addComboBoxordredemission;
-	
-	
+
+	@FXML
+	private Button add_ligne_commande;
+
+	@FXML
+	private TextField txtIdcmdClient;
 
 	private String[] Role = { "Manager", "Transporteur", "Respo_Reapro" };
-	
-	
 
 	@FXML
 	private TextField text_produit;
@@ -86,12 +96,15 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private DatePicker dcreation;
-	
-    @FXML
-    private TableColumn<?, ?> RAPPORT;
-    
-    @FXML
-    private TableColumn<?, ?> debut;
+
+	@FXML
+	private TableColumn<?, ?> RAPPORT;
+
+	@FXML
+	private TableColumn<?, ?> debut;
+
+	@FXML
+	private ComboBox<?> comboBoxProduit;
 
 	@FXML
 	private TableColumn<?, ?> devise;
@@ -117,8 +130,8 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TextField username;
 
-	  @FXML
-	    private TextField rapport_TXT;
+	@FXML
+	private TextField rapport_TXT;
 	@FXML
 	private DatePicker datedebut;
 
@@ -139,16 +152,15 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TextField chercher;
-	
-    @FXML
-    private TableColumn<?, ?> col_idmission;
 
-    @FXML
-    private TableColumn<?, ?> col_mission;
-    
-    @FXML
-    private TableView<Ordremission> tableau_rapport;
+	@FXML
+	private TableColumn<?, ?> col_idmission;
 
+	@FXML
+	private TableColumn<?, ?> col_mission;
+
+	@FXML
+	private TableView<Ordremission> tableau_rapport;
 
 	@FXML
 	private TextField text_datedebut;
@@ -200,9 +212,9 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TextField entrer_nom;
-	
+
 	@FXML
-    private TableColumn<?, ?> fin;
+	private TableColumn<?, ?> fin;
 
 	@FXML
 	private TableColumn<?, ?> idcommande;
@@ -243,10 +255,8 @@ public class ManagerController implements Initializable {
 	@FXML
 	private AnchorPane suivi;
 
-	  @FXML
-	    private TableColumn<?, ?> STAT;
-	  
-	  
+	@FXML
+	private TableColumn<?, ?> STAT;
 
 	@FXML
 	private Button gestionuser;
@@ -265,15 +275,18 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TableColumn<?, ?> roles;
-	
-    @FXML
-    private Button ButtonDeletemission;
 
-    @FXML
-    private TableColumn<?, ?> mission;
-    
-    @FXML
-    private TableColumn<?, ?> transporteur;
+	@FXML
+	private Button ButtonDeletemission;
+
+	@FXML
+	private TableColumn<?, ?> mission;
+
+	@FXML
+	private TableColumn<?, ?> transporteur;
+
+	@FXML
+	private TextField txtIdLignecmdClient;
 
 	private ObservableList<Admin> addAdminList;
 
@@ -281,12 +294,45 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private TableView<Ordremission> tableau_mission;
-	
-    ITransporteurDao TransporteurDao = new TransporteurDao();
 
+	@FXML
+	private Button ButtonDeleteProduit;
 
-	
-	
+	@FXML
+	private Button ButtonModifyProduit;
+
+	@FXML
+	private Button ButtonModifymission;
+
+	@FXML
+	private TableView<Contenir2> TableLigneCmd;
+
+	@FXML
+	private TableColumn<?, ?> TableLigneCmd_col_Cout;
+
+	@FXML
+	private TableColumn<?, ?> TableLigneCmd_col_IdCmd;
+
+	@FXML
+	private TableColumn<?, ?> TableLigneCmd_col_IdLigneCmd;
+
+	@FXML
+	private TableColumn<?, ?> TableLigneCmd_col_Produit;
+
+	@FXML
+	private TableColumn<?, ?> TableLigneCmd_col_Quantite;
+
+	@FXML
+	private Button addComboBoxFournisseur;
+
+	ITransporteurDao TransporteurDao = new TransporteurDao();
+
+	IProduitDao produitDao = new ProduitDao();
+
+	ILigneCommandeClientDao lignecmdDao = new LigneCommandeClientDao();
+
+	private ObservableList<Contenir2> addLigneCmdClientsList;
+
 	public void addRoleComboBox() {
 		List<String> RoleList = new ArrayList<>();
 
@@ -297,7 +343,18 @@ public class ManagerController implements Initializable {
 		ObservableList oblist = FXCollections.observableArrayList(RoleList);
 		comboboxRole.setItems(oblist);
 	}
-	
+
+	public void addComboBoxProduit() {
+		List<String> ProduitList = new ArrayList<>();
+
+		for (Produit data : produitDao.getAllProduit()) {
+			ProduitList.add(data.getNomproduit());
+		}
+
+		ObservableList oblist = FXCollections.observableArrayList(ProduitList);
+		comboBoxProduit.setItems(oblist);
+	}
+
 	public void addComboBoxtransporteur() {
 		List<String> trasporteurList = new ArrayList<>();
 
@@ -308,7 +365,6 @@ public class ManagerController implements Initializable {
 		ObservableList oblist = FXCollections.observableArrayList(trasporteurList);
 		comboboxTranspoteur.setItems(oblist);
 	}
-	
 
 	public void close() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -329,6 +385,7 @@ public class ManagerController implements Initializable {
 			page_ajout_mission.setVisible(false);
 			suivi.setVisible(false);
 			ajoutuser.setVisible(false);
+			addComboBoxProduit();
 
 			addStyle(boutton_gestion_commandes, "#34a39c");
 
@@ -353,9 +410,7 @@ public class ManagerController implements Initializable {
 
 			addStyle(gestionuser, "#34a39c");
 			removeStyleBtn(boutton_gestion_commandes, boutton_suivi, boutton_gestionmission);
-			
-		
-			
+
 		}
 
 //			
@@ -388,8 +443,9 @@ public class ManagerController implements Initializable {
 	public void addOrdremission() {
 		Alert alert;
 		Ordremission ordremission = new Ordremission();
-		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || comboboxTranspoteur.getSelectionModel().getSelectedItem() == null
-				|| statut.getText().isEmpty() || rapport_TXT.getText().isEmpty()) {
+		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty()
+				|| comboboxTranspoteur.getSelectionModel().getSelectedItem() == null || statut.getText().isEmpty()
+				|| rapport_TXT.getText().isEmpty()) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -397,7 +453,7 @@ public class ManagerController implements Initializable {
 			alert.showAndWait();
 		} else {
 			Boolean verif = false;
-			
+
 			if (verif == true) {
 				alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Message");
@@ -416,7 +472,7 @@ public class ManagerController implements Initializable {
 				ordremission.setDatefin(null);
 
 				ordremission.setStatue(statut.getText());
-				
+
 				int id1 = 0;
 				String val1 = (String) comboboxTranspoteur.getSelectionModel().getSelectedItem();
 				for (Transporteur e : TransporteurDao.getAllTransporteur()) {
@@ -425,7 +481,7 @@ public class ManagerController implements Initializable {
 					}
 				}
 				ordremission.setIdtransporteur(id1);
-			;
+				;
 
 				ordremissionDao.saveOrdremission(ordremission);
 				System.out.println("===Enregistremment Effectuer");
@@ -442,8 +498,9 @@ public class ManagerController implements Initializable {
 			missionShowList();
 
 			System.out.println(verif);
-			}}
-	
+		}
+	}
+
 	public void deletemission() {
 		Alert alert;
 		if (nummission.getText().isEmpty()) {
@@ -472,7 +529,7 @@ public class ManagerController implements Initializable {
 				if (option.get().equals(ButtonType.OK)) {
 					ordremissionDao.deleteOrdremission(id);
 					missionShowList();
-					clearmission();					
+					clearmission();
 
 				}
 			} else {
@@ -485,25 +542,22 @@ public class ManagerController implements Initializable {
 			}
 		}
 
-		
 	}
+
 	public void clearmission() {
-		
+
 		statut.setText("");
 		textidcommande.setText("");
 		nummission.setText("");
 		rapport_TXT.setText("");
-		
-	}
-	
-	
 
-	
-	
+	}
+
 	public void updatemission() {
 		Alert alert;
-		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty() || comboboxTranspoteur.getSelectionModel().getSelectedItem() == null
-				|| statut.getText().isEmpty() || rapport_TXT.getText().isEmpty()) {
+		if (textidcommande.getText().isEmpty() || nummission.getText().isEmpty()
+				|| comboboxTranspoteur.getSelectionModel().getSelectedItem() == null || statut.getText().isEmpty()
+				|| rapport_TXT.getText().isEmpty()) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -523,7 +577,7 @@ public class ManagerController implements Initializable {
 						e.setNumeroordremission(nummission.getText());
 						e.setRapport(rapport_TXT.getText());
 						e.setStatue(statut.getText());
-						
+
 						int id1 = 0;
 						String val1 = (String) comboboxTranspoteur.getSelectionModel().getSelectedItem();
 						for (Transporteur a : TransporteurDao.getAllTransporteur()) {
@@ -532,10 +586,6 @@ public class ManagerController implements Initializable {
 							}
 						}
 						e.setIdtransporteur(id1);
-						
-						
-					
-						
 
 						ordremissionDao.updateordremission(e);
 					}
@@ -547,13 +597,11 @@ public class ManagerController implements Initializable {
 				alert.setContentText("utilisateur: " + username.getText() + " enregistrer avec success");
 				alert.showAndWait();
 				missionShowList();
-			
 
 			}
 		}
 
 	}
-
 
 	public void missionShowList() {
 		addOdremissionList = ordremissionDao.addOrdremissionList();
@@ -569,8 +617,6 @@ public class ManagerController implements Initializable {
 
 		tableau_mission.setItems(addOdremissionList);
 	}
-
-	
 
 	public void logout() {
 		try {
@@ -644,7 +690,7 @@ public class ManagerController implements Initializable {
 			System.out.println(verif);
 		}
 	}
-	
+
 	// SUPPRIMER UN UTILISATEUR
 
 	public void deleteUSER() {
@@ -688,7 +734,6 @@ public class ManagerController implements Initializable {
 			}
 		}
 
-		
 	}
 
 	/**
@@ -696,7 +741,8 @@ public class ManagerController implements Initializable {
 	 */
 	public void updateuser() {
 		Alert alert;
-		if (username.getText().isEmpty() || password.getText().isEmpty() ||  comboboxRole.getSelectionModel().getSelectedItem() == null) {
+		if (username.getText().isEmpty() || password.getText().isEmpty()
+				|| comboboxRole.getSelectionModel().getSelectedItem() == null) {
 			alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Message");
 			alert.setHeaderText(null);
@@ -761,7 +807,7 @@ public class ManagerController implements Initializable {
 		password.setText(admin.getPassword());
 
 	}
-	
+
 	public void missionSelected() {
 		Ordremission ordremission = tableau_mission.getSelectionModel().getSelectedItem();
 
@@ -771,30 +817,87 @@ public class ManagerController implements Initializable {
 			return;
 		}
 		textidcommande.setText(ordremission.getIdcommandeclient());
-		
+
 		rapport_TXT.setText(ordremission.getRapport());
 		nummission.setText(ordremission.getNumeroordremission());
 		statut.setText(ordremission.getStatue());
 
 	}
-	
+
 	public void rapportShowList() {
 		addOdremissionList = ordremissionDao.addOrdremissionList();
-		
+
 		col_idmission.setCellValueFactory(new PropertyValueFactory<>("Numeroordremission"));
 		col_mission.setCellValueFactory(new PropertyValueFactory<>("Rapport"));
-		
+
 		tableau_rapport.setItems(addOdremissionList);
 	}
-	
 
+	/**
+	 * Méthode servant à ajouter une ligne de commande client
+	 */
+	public void addLigneCmd() {
+		Alert alert;
+		Contenir2 ligneCmdClient = new Contenir2();
+		Contenir2Id id = new Contenir2Id();
+		if (txtIdcmdClient.getText().isEmpty() || text_quantité.getText().isEmpty()
+				|| comboBoxProduit.getSelectionModel().getSelectedItem() == null || textdevise.getText().isEmpty()
+				|| text_moyenpaiement.getText().isEmpty()) {
+			alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Message");
+			alert.setHeaderText(null);
+			alert.setContentText("Remplissez tous les champs s'il vous plait ");
+			alert.showAndWait();
+		} else {
+			int idProd = 0;
+			id.setIdcommandeclient(txtIdcmdClient.getText());
+			String val = (String) comboBoxProduit.getSelectionModel().getSelectedItem();
+			for (Produit e : produitDao.getAllProduit()) {
+				if (e.getNomproduit().equalsIgnoreCase(val)) {
+					idProd = e.getIdproduit();
+				}
+			}
+			id.setIdproduit(idProd);
+			
+			Produit prod = produitDao.getProduitById(idProd);
+			
+			Float cout = prod.getPrixunitaire() * Integer.parseInt(text_quantité.getText());
+
+			ligneCmdClient.setId(id);
+			ligneCmdClient.setIdlignecommande(txtIdLignecmdClient.getText());
+			ligneCmdClient.setQuantitearticle(Integer.parseInt(text_quantité.getText()));
+			ligneCmdClient.setCout(cout);
+			
+			lignecmdDao.saveLigneCommandeClient(ligneCmdClient);
+			System.out.println("===Enregistremment Effectuer");
+//			showLigneCmdClients();
+		}
+	
+	}
+
+	
+//	public void showLigneCmdClients() {
+//		addLigneCmdClientsList = lignecmdDao.addLigneCommandeClientList();
+//
+//		TableLigneCmd_col_IdCmd.setCellValueFactory(new PropertyValueFactory<>("idcommandeclient"));
+//		TableLigneCmd_col_IdLigneCmd.setCellValueFactory(new PropertyValueFactory<>("idlignecommande"));
+//		TableLigneCmd_col_Produit.setCellValueFactory(new PropertyValueFactory<>("idproduit"));
+//		TableLigneCmd_col_Quantite.setCellValueFactory(new PropertyValueFactory<>("quantitearticle"));
+//		TableLigneCmd_col_Cout.setCellValueFactory(new PropertyValueFactory<>("cout"));
+//
+//		TableLigneCmd.setItems(addLigneCmdClientsList);
+//		
+//	}
+	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		userShowList();
 		addRoleComboBox();
 		missionShowList();
 		addComboBoxtransporteur();
 		rapportShowList();
-		
+		addComboBoxProduit();
+//		showLigneCmdClients();
+
 //				addComboBoxProduit();
 //				addComboBoxUniteMesure();
 //				addComboBoxDevice();

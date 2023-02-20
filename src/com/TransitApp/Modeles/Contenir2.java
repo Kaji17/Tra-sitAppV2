@@ -35,6 +35,7 @@ public class Contenir2 implements java.io.Serializable {
 		this.cout = cout;
 	}
 
+
 	@EmbeddedId
 
 	@AttributeOverrides({
